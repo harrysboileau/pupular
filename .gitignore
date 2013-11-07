@@ -13,3 +13,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+db/schema.rb
+db/.DS_Store
+.DS_Store
+Gemfile.lock
