@@ -1,0 +1,49 @@
+.users_event
+  .add_friends
+    %h4
+      Add Friends to Walk
+    %table
+      %tr
+        %td Friend
+        %td
+      - current_dog.pals.each do |friend|
+        %tr
+          %td= friend.name
+          %td= button_to "+"
+  .event_details
+    #event_title
+      %strong
+        Title:
+      %p
+        = @event.title
+        = button_to "edit"
+    #event_type
+      %strong
+        type:
+      %p
+        = @event.type
+        = button_to "edit"
+    #event_place
+      %strong
+        Place:
+      %p
+        = @event.location
+        = button_to "edit"
+    #event_description
+      %strong
+        Description:
+      %p
+        = @event.description
+        = button_to "edit"
+    #event_start_time
+      %strong
+        Start Time:
+      %p
+        = @event.start_time
+        = button_to "edit"
+    #event_end_time
+      %strong
+        End Time:
+      %p
+        = @event.end_time
+        = button_to "edit"

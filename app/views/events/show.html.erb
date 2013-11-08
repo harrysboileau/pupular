@@ -1,21 +1,5 @@
 <% if params[:dog_id].to_i == current_dog.id  %>
-  <div class = "Add Friends" >
-    Add Friends To walk
-    <table>
-      <tr><td>Friend</td><td></td></tr>
-      <% current_dog.pals.each do |friend| %>
-      <tr>
-      <td><%= friend.name %></td><td><%= button_to "+" %></td>
-    </tr>
-    <% end %>
-  </table>
-  </div>
+  <%= render 'users_event' %>
+<% else %>
+  <%= render 'attendees_event' %>
 <% end %>
-<div class = "Event Details">
-<strong> Title: </strong> <p> <%= @event.title %><br/></p>
-<strong> Type: </strong> <p> <%= @event.type %><br/></p>
-<strong> Place: </strong> <p> <%= @event.location %><br/></p>
-<strong> Description: </strong> <p> <%= @event.description %><br/></p>
-<strong> Start Time: </strong> <p> <%= @event.start_time %><br/></p>
-<strong> End Time: </strong> <p> <%= @event.end_time %><br/></p>
-</div>
