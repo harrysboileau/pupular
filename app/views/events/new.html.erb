@@ -1,1 +1,6 @@
 Create a new event
+
+<%= form_for [current_dog, @event] do |f| %>
+<%= f.text_field :title, placeholder: "Event Title" %>
+<%= f.text_area :description, placeholder: "Event Description" %>
+<% end %>
