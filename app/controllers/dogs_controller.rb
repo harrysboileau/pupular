@@ -24,9 +24,14 @@ class DogsController < ApplicationController
   end
 
   def search
+    @dogs = Dog.all
   end
 
   def filter_search
+    p params
+    @search_term = params[:search][:search_term]
+    @dogs = Dog.where('name LIKE ?', "%#{@search_term}%").all
+
   end
 
   def add_friend
