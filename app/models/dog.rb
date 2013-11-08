@@ -1,7 +1,7 @@
 class Dog < ActiveRecord::Base
-  has_many :friendships, foreign_key: "dog_id", class_name: "Friendship"
+  has_many :friendships, foreign_key: "dog_id", class_name: "Friendship", dependent: :destroy
   has_many :pals, through: :friendships
-  has_many :pending_friendships, foreign_key: "dog_id", class_name: "PendingFriendship"
+  has_many :pending_friendships, foreign_key: "dog_id", class_name: "PendingFriendship", dependent: :destroy
   has_many :pending_pals, through: :pending_friendships
   has_one :profile
   has_many :sent_messages, foreign_key: "sender_id", class_name: "Message"
@@ -18,4 +18,16 @@ class Dog < ActiveRecord::Base
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   validates :password, length: { within: 6..12 }
   has_secure_password
+
+
+  def accept_pal(pending_friend_id)
+    request = self.pending_friendships.find_by_pending_friend_id(pending_friend_id)
+    request.approve!
+  end
+
+  def deny_pal(pending_friend_id)
+    request = self.pending_friendships.find_by_pending_friend_id(pending_friend_id)
+    request.destroy
+  end
+
 end
