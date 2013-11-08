@@ -1,9 +1,7 @@
 <div id="friend_requests">
- <% @dog.pending_friendships.each do |x| %>
- <%= x.pending_friend_id %>
- <% end %>
+ <%= link_to "Add Friend", add_friend_path(3)%>
 </div>
 
 <div id="current_events">
-
+  <%= link_to "Puppy Play Time, November 16th", dog_event_path(1,1) %>
 </div>
