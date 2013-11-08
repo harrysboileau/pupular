@@ -1,0 +1,6 @@
+.bottom_nav_bar
+  =link_to "home", search_path, id: "btm_br_home"
+  =link_to "message", dog_messages_path(current_dog), id: "btm_br_msg"
+  =link_to "event", new_dog_event_path(current_dog), id: "btm_br_evt"
+  =link_to "profile", dog_path(current_dog), id: "btm_br_prf"
+  =link_to "logout", signout_path, id: "btm_br_lgt"
