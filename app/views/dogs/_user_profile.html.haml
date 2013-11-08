@@ -1,0 +1,28 @@
+.users_profile
+  -if @dog.profile
+    -@profile = @dog.profile
+    #image
+      = image_tag("molar_bear.jpg", size: "200x200")
+    #name
+      %h3= @dog.name
+    #breed
+      %p= "Breed: #{@profile.breed}"
+      = button_to "update breed"
+    #location
+      %p= "Location: #{@profile.location}"
+      = button_to "update location"
+    #age
+      %p= "Age: #{@profile.age} years old"
+      = button_to "update age"
+    #size
+      %p= "Size: #{@profile.size}"
+      = button_to "update size"
+    #gender
+      %p= "Gender: #{@profile.gender}"
+      = button_to "update gender"
+    #spayed
+      %p= "Fixed?: #{@profile.spayed}"
+      = button_to "update spayed"
+  -else
+    %h4= "Please fill out your profile!"
+    = render 'welcome/index'

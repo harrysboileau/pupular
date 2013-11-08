@@ -1,0 +1,14 @@
+.friends_profile
+
+  -if @dog.profile
+    = image_tag("molar_bear.jpg", size: "200x200")
+    -@profile = @dog.profile
+    %h3= @dog.name
+    %p= "Breed: #{@profile.breed}"
+    %p= "Location: #{@profile.location}"
+    %p= "Age: #{@profile.age} years old"
+    %p= "Size: #{@profile.size}"
+    %p= "Gender: #{@profile.gender}"
+    %p= "Fixedx`?: #{@profile.spayed}"
+  -else
+    %h4= "Sorry #{@dog.name} hasn't filled out her profile yet"
