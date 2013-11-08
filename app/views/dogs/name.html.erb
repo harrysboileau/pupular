@@ -1,0 +1,10 @@
+<h2>Sign Up!</h2>
+
+<h4>Submit your dog info</h4>
+
+<%= form_for @dog do |f| %>
+<%= f.text_field :username, {placeholder: "Username"} %><br>
+<%= f.text_field :name, {placeholder: "Full Name"} %><br><br>
+<%= f.submit %>
+
+<% end %>

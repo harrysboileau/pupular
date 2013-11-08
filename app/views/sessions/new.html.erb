@@ -1,0 +1,17 @@
+Sign-In form
+
+<%= form_tag("/signin", method: "post") do %>
+
+<%= label_tag "Email or Username" %>
+<%= text_field_tag(:user_email) %>
+<br>
+<%= label_tag "Password" %>
+<%= password_field_tag(:password) %>
+<br>
+<%= label_tag "Password Confirmation" %>
+<%= password_field_tag(:password_confirmation) %>
+<br>
+<br>
+<%= submit_tag "Sign In" %>
+
+<% end %>
