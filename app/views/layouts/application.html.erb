@@ -7,8 +7,13 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <%# current_dog = nil %>
+  <% if current_dog %>
+<%= render "layouts/top_navigation" %>
+<%= render "layouts/bottom_navigation" %>
+  <% end %>
 <%= yield %>
+
 
 </body>
 </html>
