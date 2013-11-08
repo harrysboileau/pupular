@@ -1,0 +1,16 @@
+Create a new event
+
+<%= form_for [current_dog, @event] do |f| %>
+<%= f.text_field :type, placeholder: "Type (Walk or Hangout)" %><br>
+<%= f.text_field :title, placeholder: "Event Title" %><br>
+<%= f.text_field :location, placeholder: "Event Location" %><br>
+Start time:<%= f.datetime_select :start_time %><br/>
+End time:<%= f.datetime_select :end_time %><br/>
+
+<%= f.text_area :description, placeholder: "Event Description" %><br>
+<%= f.submit 'bark with me' %>
+<% end %>
+ 
+
+
+

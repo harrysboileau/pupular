@@ -18,6 +18,8 @@ class DogsController < ApplicationController
   end
 
   def doghouse
+    @dog = Dog.find(1)
+    @events = @dog.events
   end
 
   def show
