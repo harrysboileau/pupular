@@ -1,0 +1,28 @@
+body{
+  padding-top: 60px;
+}
+
+.bottom_nav_bar{
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  border-top: 2px solid black;
+  width: 100%;
+}
+
+.top_nav_bar{
+  position: fixed;
+  top: 0;
+  height: 50px;
+  border-bottom: 2px solid black;
+  width: 100%;
+}
+
+#top_br_sch{
+  float: right;
+  padding-right: 10px;
+}
+
+#top_br_logo{
+  float: left;
+}
