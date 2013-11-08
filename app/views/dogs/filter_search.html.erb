@@ -4,3 +4,7 @@
 <%= f.text_field :search_term %>
 <%= f.submit "Search" %>
 <% end %>
+
+<% @dogs.each do |dog| %>
+<%= dog.name %><br/>
+<% end %>
