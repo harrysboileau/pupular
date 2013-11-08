@@ -1,1 +1,10 @@
-my messages
+<%= link_to 'write a message', new_dog_message_path(1) %><br>
+
+<% @inbox.each do |x| %>
+Sender: <%= Dog.find(x.sender_id).name %><br>
+Subject:<%= x.subject %><br/>
+Message:<%= x.content %><br/>
+
+<% end %>
+
+
