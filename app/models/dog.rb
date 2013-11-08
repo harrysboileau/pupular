@@ -11,6 +11,11 @@ class Dog < ActiveRecord::Base
   has_many :event_attendances
   has_many :attended_events, through: :event_attendances
 
-  attr_accessible :email, :password, :username
+  attr_accessible :email, :password, :username, :name
+
+  validates_uniqueness_of :email, :username
+  validates_presence_of :email, :username, :password, :name
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
+  validates :password, length: { within: 6..12 }
   has_secure_password
 end
