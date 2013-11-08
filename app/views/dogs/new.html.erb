@@ -1,0 +1,11 @@
+<h2>Sign Up!<h2>
+
+<h4>Submit your human info</h4>
+
+<%= form_for @dog, {url: "/name", method: "post"} do |f| %>
+<%= f.text_field :email, {placeholder: "Email"} %><br>
+<%= f.password_field :password, {placeholder: "Password"} %><br>
+<%= f.password_field :password_confirmation, {placeholder: "Re-type password"} %><br><br>
+<%= f.submit %>
+
+<% end %>
