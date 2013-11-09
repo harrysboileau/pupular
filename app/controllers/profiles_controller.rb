@@ -5,13 +5,18 @@ class ProfilesController < ApplicationController
   end
 
   def create
+
     @profile = Profile.new(params[:profile])
-    current_dog.profile = @profile
-    if @profile.save!
-      redirect_to doghouse_path
-    else
-      render "new"
+    if @profile.not_empty?
+      begin
+        current_dog.profile = @profile
+      rescue
+        render "new"
+      else
+        redirect_to doghouse_path
+      end
     end
+    redirect_to doghouse_path
   end
 
   def edit

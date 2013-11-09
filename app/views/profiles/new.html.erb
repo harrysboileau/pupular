@@ -2,13 +2,30 @@ Make your profile or <%= link_to "skip", doghouse_path %>
 
 <%= form_for @profile do |f| %>
 
+<% if @profile.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+    <ul>
+    <% @profile.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= f.text_field :photo, {placeholder: "Placeholder for photos"} %><br>
 <%= f.text_field :breed, {placeholder: "Breed"} %><br>
 <%= f.text_field :location, {placeholder: "Location"} %><br>
 <%= f.number_field :age, {placeholder: "Age"} %><br>
-<%= f.text_field :size, {placeholder: "Size"} %><br>
-<%= f.text_field :gender, {placeholder: "Gender"} %> <br>
-<%= f.check_box :spayed %><br><br>
+
+<%= f.select :size, Profile.size_options, { prompt: "Select a size" } %><br>
+<%= f.select :gender, Profile.gender_options, { prompt: "Select a gender" } %><br>
+
+
+<%= f.label :spayed, "Fixed?" %>
+<%= f.radio_button :spayed, true %><%=f.label :spayed, "Yes" %>
+<%= f.radio_button :spayed, false %><%=f.label :spayed, "No" %><br>
 <%= f.submit "MAKE PROFILE" %>
 
 
