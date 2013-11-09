@@ -13,7 +13,6 @@ describe Profile do
     it { should validate_presence_of(:gender)}
     it { should ensure_inclusion_of(:gender).in_array(["male","female"]) }
     it { should validate_presence_of(:location)}
-    it { should validate_presence_of(:photo)}
     it { should validate_presence_of(:spayed)}
     it { should validate_presence_of(:size)}
     it { should ensure_inclusion_of(:size).in_array(["toy", "small", "medium", "large", "extra-large"]) }
