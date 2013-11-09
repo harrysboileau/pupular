@@ -1,6 +1,5 @@
-<%= @event.title %><br/>
-<%= @event.type %><br/>
-<%= @event.location %><br/>
-<%= @event.description %><br/>
-<%= @event.start_time %><br/>
-<%= @event.end_time %><br/>
+<% if params[:dog_id].to_i == current_dog.id  %>
+  <%= render 'users_event' %>
+<% else %>
+  <%= render 'attendees_event' %>
+<% end %>
