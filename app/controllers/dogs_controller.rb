@@ -38,7 +38,7 @@ class DogsController < ApplicationController
 
   def show
     @dog = Dog.find(params[:id])
-    if @dog.profile
+    if @dog.profile || @dog != current_dog 
       @profile = @dog.profile
     else
       redirect_to new_profile_path
@@ -51,9 +51,10 @@ class DogsController < ApplicationController
   end
 
   def filter_search
-    @search_term = params[:search][:search_term]
+    p params
+    @search_term = params[:search_term]
     @dogs = Dog.where('name LIKE ?', "%#{@search_term}%").all
-
+    render layout: false
   end
 
   def add_friend

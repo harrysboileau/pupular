@@ -1,0 +1,11 @@
+<div id="search">
+<%= form_for :search, url: search_path, html:{id: "search_form"} do |f| %>
+<%= link_to "->", "#", {id: "go_back"} %>
+
+<%= f.text_field :search_term, placeholder: "Search for dogs"  %>
+<% end %>
+
+<div id="results">
+</div>
+
+</div>

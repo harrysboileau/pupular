@@ -1,13 +1,14 @@
-<h1>Search Dogs</h1>
 
-<%= form_for :search, url: search_path do |f| %>
-<%= f.text_field :search_term %>
-<%= f.submit "Search" %>
-<% end %>
-
+<table id="search_item">
 <% @dogs.each do |dog| %>
-<%= image_tag dog.profile.image_url(:thumb) if dog.profile.image? %>
-<%= dog.name %><%= button_to "+", friend_request_path(dog.id) %>
-
-<br/>
+<tr>
+<% if dog.profile %>
+<td><%= image_tag dog.profile.image_url(:thumb) if dog.profile.image? %></td>
+<% else %>
+<td></td>
 <% end %>
+<td><%= link_to "#{dog.name}", dog_path(dog) %></td>
+<td><%= button_to "+", friend_request_path(dog.id), class: "button" %></td>
+</tr>
+<% end %>
+</table>

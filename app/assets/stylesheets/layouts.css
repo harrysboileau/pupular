@@ -75,6 +75,22 @@ textarea {height:10%;}
   background-color:#360066;
 }
 
+#search {
+  width:80%;
+  background-color:#474747;
+  height:100%;
+  position:absolute;
+  z-index:100000;
+  right:-80%;
+  display:none;
+
+}
+
+#search_form input {
+  width:85%;
+  float:right;
+}
+
 
 .bottom_nav_bar {
   /* IE10 Consumer Preview */ 

@@ -1,7 +1,7 @@
 .friends_profile
 
   -if @dog.profile
-    = image_tag("molar_bear.jpg", size: "200x200")
+    = image_tag @dog.profile.image_url(:profile) if @dog.profile.image?
     -@profile = @dog.profile
     %h3= @dog.name
     %p= "Breed: #{@profile.breed}"
