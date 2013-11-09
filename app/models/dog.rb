@@ -11,14 +11,11 @@ class Dog < ActiveRecord::Base
   has_many :event_attendances
   has_many :attended_events, through: :event_attendances
 
-  attr_accessible :email, :password, :username, :name
+  attr_accessible :email, :password, :username, :name, :password_confirmation
 
-  validates_uniqueness_of :email, :username
-  validates_presence_of :email, :username, :password, :name
-  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
-  validates :password, length: { within: 6..12 }
-  has_secure_password
-
+  validates_uniqueness_of :email#, :username
+  # validates_presence_of :email
+  # validates :password, presence: :true, length: {in: 6..20}, if: :validates_password?
 
   def accept_pal(pending_friend_id)
     request = self.pending_friendships.find_by_pending_friend_id(pending_friend_id)
@@ -29,5 +26,50 @@ class Dog < ActiveRecord::Base
     request = self.pending_friendships.find_by_pending_friend_id(pending_friend_id)
     request.destroy
   end
+
+  acts_as_authentic do |c|
+    # Proc.new do |dog|
+      # if dog.validates_password?
+      #   c.validates_length_of_password_field_options( { within: 6..20 })
+      #   c.validate_password_field = true
+      # else
+      #   c.validate_password_field = false
+      # end
+
+      # if dog.validates_username?
+      #   c.validates_login_field = true
+      # else
+      #   c.validates_login_field = false
+      # end
+    # end
+    c.validates_length_of_password_field_options( { within: 6..20 } )
+
+    c.merge_validates_confirmation_of_password_field_options({:unless => :validates_password?})
+    c.merge_validates_length_of_password_field_options({:unless => :validates_password?})
+    c.merge_validates_length_of_password_confirmation_field_options({:unless => :validates_password?})
+
+    c.merge_validates_length_of_login_field_options( { :unless => :validates_username? })
+    c.merge_validates_format_of_login_field_options( { :unless => :validates_username? })
+
+    c.crypto_provider = Authlogic::CryptoProviders::BCrypt
+  end
+
+  def is_registered?
+    return self.username != nil && self.name != nil
+  end
+
+  def self.find_by_username_or_email(login)
+    find_by_username(login) || find_by_email(login)
+  end
+
+  def validates_password?
+    return self.crypted_password != nil
+  end
+
+  def validates_username?
+    return (self.crypted_password != nil || self.email != nil) && username == nil
+  end
+
+  private
 
 end

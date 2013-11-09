@@ -5,16 +5,30 @@ class DogsController < ApplicationController
   end
 
   def savehuman
-    redirect_to name_path
+    @dog = Dog.new(params[:dog])
+    if @dog.save && DogSession.create(params[:dog])
+      redirect_to name_path
+    else
+      render "new"
+    end
   end
 
   def name
-    @dog = Dog.new
+    if current_dog
+      @dog = current_dog
+    else
+      @dog = Dog.new(email: "Something went wrong")
+    end
   end
 
   def create
-    # Save row in dogs table
-    redirect_to new_profile_path
+    @dog = current_dog
+
+    if @dog.update_attributes(params[:dog])
+      redirect_to new_profile_path
+    else
+      render "name"
+    end
   end
 
   def doghouse

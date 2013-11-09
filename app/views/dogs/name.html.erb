@@ -2,7 +2,22 @@
 
 <h4>Submit your dog info</h4>
 
-<%= form_for @dog do |f| %>
+<%= @dog.email if @dog.email %>
+<%= current_dog.email if current_dog %>
+
+<% if @dog.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dog.errors.count, "error") %> prohibited this dog from being saved:</h2>
+
+      <ul>
+      <% @dog.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= form_for @dog, {url: '/dogs', method: "post"} do |f| %>
 <%= f.text_field :username, {placeholder: "Username"} %><br>
 <%= f.text_field :name, {placeholder: "Full Name"} %><br><br>
 <%= f.submit %>
