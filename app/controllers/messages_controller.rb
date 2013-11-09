@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   def index
-    @dog = Dog.find(1)
+    @dog = current_dog
     @inbox = @dog.received_messages
   end
 
@@ -13,10 +13,10 @@ class MessagesController < ApplicationController
     p @receiver_name  
     @receiver = Dog.find_by_username(@receiver_name)
     p @receiver
-    @sender = Dog.find(1)
+    @sender = current_dog
 
     @receiver.received_messages << @sender.sent_messages.create(type:"Personal",subject:params[:message][:subject],content:params[:message][:content])
-    redirect_to doghouse_path(1)
+    redirect_to doghouse_path(current_dog)
   end
 
 
