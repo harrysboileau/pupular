@@ -1,5 +1,13 @@
+
 <div id="friend_requests">
  <%= link_to "Add Friend", add_friend_path(3)%>
+
+<% if DogSession.find %>
+ Dog logged in
+ <% else %>
+ No doggie
+ <% end %>
+
 </div>
 
 <div id="current_events">
