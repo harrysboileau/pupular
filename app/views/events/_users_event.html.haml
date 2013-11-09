@@ -1,15 +1,5 @@
 .users_event
-  .add_friends
-    %h4
-      Add Friends to Walk
-    %table
-      %tr
-        %td Friend
-        %td
-      - current_dog.pals.each do |friend|
-        %tr
-          %td= friend.name
-          %td= button_to "+"
+  = render 'add_friend_table'
   .event_details
     #event_title
       %strong
