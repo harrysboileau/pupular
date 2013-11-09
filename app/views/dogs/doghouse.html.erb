@@ -1,14 +1,10 @@
 
 <div id="friend_requests">
- <%= link_to "Add Friend", add_friend_path(3)%>
-
-<% if DogSession.find %>
- Dog logged in
- <% else %>
- No doggie
- <% end %>
-
+   <% current_dog.pending_pals.each do |pal| %>
+  <%= pal.name %>  <%= button_to "accept", add_friend_path(pal.id) %> <%= button_to "reject", reject_friend_path(pal.id) %>
+  <% end %>
 </div>
+
 
 <div id="current_events">
   Upcoming Events:<br>

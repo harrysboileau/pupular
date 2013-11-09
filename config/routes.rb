@@ -17,6 +17,7 @@ Pupular::Application.routes.draw do
   post '/search' => 'dogs#filter_search'
 
   post '/add_friend/:pending_pal_id' => 'dogs#add_friend', as: :add_friend
+  post '/reject_friend/:pending_pal_id' => 'dogs#reject_friend', as: :reject_friend
   resources :sessions, only: [:new, :create, :destroy]
   match '/signin' => 'sessions#new', as: :signin
   match '/signout' => 'sessions#destroy', as: :signout
