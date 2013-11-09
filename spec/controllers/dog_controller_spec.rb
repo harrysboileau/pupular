@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe DogController do
+describe DogsController do
 
 end

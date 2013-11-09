@@ -15,10 +15,12 @@ Pupular::Application.routes.draw do
 
   get '/search' => 'dogs#search'
   post '/search' => 'dogs#filter_search'
+
   post '/add_friend/:pending_pal_id' => 'dogs#add_friend', as: :add_friend
-  get '/signin' => 'sessions#new'
-  post '/signin' => 'sessions#create'
-  post '/signout' => 'sessions#signout'
+
+  resources :sessions, only: [:new, :create, :destroy]
+  match '/signin' => 'sessions#new', as: :signin
+  match '/signout' => 'sessions#destroy', as: :signout
   root :to => 'welcome#index'
 
 end

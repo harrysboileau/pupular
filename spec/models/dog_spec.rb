@@ -18,12 +18,12 @@ describe Dog do
     it { should validate_presence_of(:email)}
     it { should validate_uniqueness_of(:email) }
     it { should_not allow_value("zack").for(:email) }
-    it { should validate_presence_of(:username)}
+    # it { should validate_presence_of(:username)}
     it { should validate_uniqueness_of(:username) }
     it { should validate_presence_of(:password)}
     it { should_not allow_value("passw").for(:password)}
-    it { should_not allow_value("passwordpassw").for(:password)}
-    it { should validate_presence_of(:name)}
+    it { should_not allow_value("passwordpasswordpassword").for(:password)}
+    # it { should validate_presence_of(:name)}
   end
 
   context "methods" do
@@ -68,5 +68,6 @@ describe Dog do
       expect(dog.pending_friendships).to_not include(@pending_friendship)
     end
   end
+
 end
 end

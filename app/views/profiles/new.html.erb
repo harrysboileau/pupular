@@ -1,1 +1,15 @@
 Make your profile or <%= link_to "skip", doghouse_path %>
+
+<%= form_for @profile do |f| %>
+
+<%= f.text_field :photo, {placeholder: "Placeholder for photos"} %><br>
+<%= f.text_field :breed, {placeholder: "Breed"} %><br>
+<%= f.text_field :location, {placeholder: "Location"} %><br>
+<%= f.number_field :age, {placeholder: "Age"} %><br>
+<%= f.text_field :size, {placeholder: "Size"} %><br>
+<%= f.text_field :gender, {placeholder: "Gender"} %> <br>
+<%= f.check_box :spayed %><br><br>
+<%= f.submit "MAKE PROFILE" %>
+
+
+<% end %>
