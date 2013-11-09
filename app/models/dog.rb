@@ -11,7 +11,7 @@ class Dog < ActiveRecord::Base
   has_many :event_attendances
   has_many :attended_events, through: :event_attendances
 
-  attr_accessible :email, :password, :username, :name, :password_confirmation
+  attr_accessible :email, :password, :username, :name, :password_confirmation, :image
 
   def accept_pal(pending_friend_id)
     request = self.pending_friendships.find_by_pending_friend_id(pending_friend_id)
