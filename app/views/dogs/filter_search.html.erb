@@ -6,5 +6,6 @@
 <% end %>
 
 <% @dogs.each do |dog| %>
-<%= dog.name %><br/>
+<%= dog.name %><%= button_to "+", friend_request_path(dog.id) %>
+<br/>
 <% end %>

@@ -45,13 +45,24 @@ class DogsController < ApplicationController
   end
 
   def filter_search
-    p params
     @search_term = params[:search][:search_term]
     @dogs = Dog.where('name LIKE ?', "%#{@search_term}%").all
 
   end
 
   def add_friend
+    current_dog.accept_pal(params[:pending_pal_id])
+    redirect_to doghouse_path(current_dog)
   end
 
+  def reject_friend
+    current_dog.deny_pal(params[:pending_pal_id])
+    redirect_to doghouse_path(current_dog)
+  end
+
+  def friend_request
+    Dog.find(params[:pending_pal_id]).pending_pals << current_dog
+    binding.pry
+    redirect_to search_path
+  end
 end
