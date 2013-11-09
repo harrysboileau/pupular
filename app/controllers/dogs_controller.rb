@@ -54,4 +54,9 @@ class DogsController < ApplicationController
   def add_friend
   end
 
+  def friend_request
+    Dog.find(params[:pending_pal_id]).pending_pals << current_dog
+    binding.pry
+    redirect_to search_path
+  end
 end
