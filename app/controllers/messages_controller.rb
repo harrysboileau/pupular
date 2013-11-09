@@ -9,10 +9,14 @@ class MessagesController < ApplicationController
   end
 
   def create
+    @receiver_name = params[:message][:dog_id]
+    p @receiver_name  
+    @receiver = Dog.find_by_username(@receiver_name)
+    p @receiver
+    @sender = Dog.find(1)
 
-    p params
-    # dog2.received_messages << dog.sent_messages.create(type:"Automated",subject:"get with it",content:"get at it")
-    # redirect_to doghouse_path(1)
+    @receiver.received_messages << @sender.sent_messages.create(type:"Personal",subject:params[:message][:subject],content:params[:message][:content])
+    redirect_to doghouse_path(1)
   end
 
 
