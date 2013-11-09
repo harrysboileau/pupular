@@ -13,10 +13,6 @@ class Dog < ActiveRecord::Base
 
   attr_accessible :email, :password, :username, :name, :password_confirmation
 
-  validates_uniqueness_of :email#, :username
-  # validates_presence_of :email
-  # validates :password, presence: :true, length: {in: 6..20}, if: :validates_password?
-
   def accept_pal(pending_friend_id)
     request = self.pending_friendships.find_by_pending_friend_id(pending_friend_id)
     request.approve!
@@ -28,20 +24,6 @@ class Dog < ActiveRecord::Base
   end
 
   acts_as_authentic do |c|
-    # Proc.new do |dog|
-      # if dog.validates_password?
-      #   c.validates_length_of_password_field_options( { within: 6..20 })
-      #   c.validate_password_field = true
-      # else
-      #   c.validate_password_field = false
-      # end
-
-      # if dog.validates_username?
-      #   c.validates_login_field = true
-      # else
-      #   c.validates_login_field = false
-      # end
-    # end
     c.validates_length_of_password_field_options( { within: 6..20 } )
 
     c.merge_validates_confirmation_of_password_field_options({:unless => :validates_password?})

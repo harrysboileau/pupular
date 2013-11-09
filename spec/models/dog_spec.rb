@@ -53,6 +53,19 @@ describe Dog do
   end
 
   context "methods" do
+    describe "#is_registered?" do
+      before(:each) do
+        @dog = dog
+      end
+
+      it "will return appropriate values" do
+        dog1 = Dog.find(@dog.id)
+        expect(dog1.is_registered?).to eq(true)
+        dog2 = Dog.create(attributes_for(:dog, username: nil, name: nil))
+        expect(dog2.is_registered?).to eq(false)
+      end
+    end
+
     describe "#accept_pal" do
       before(:each) do
         @dog = dog
