@@ -1,17 +1,29 @@
 Sign-In form
 
-<%= form_tag("/signin", method: "post") do %>
+<%= form_for :dog_session, { url: "/sessions", method: "post" } do |f| %>
 
-<%= label_tag "Email or Username" %>
-<%= text_field_tag(:user_email) %>
+<% if @dog_session.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@dog_session.errors.count, "error") %> prohibited this dog from being saved:</h2>
+
+      <ul>
+      <% @dog_session.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.label "Email or Username" %>
+<%= f.text_field :username %>
 <br>
-<%= label_tag "Password" %>
-<%= password_field_tag(:password) %>
+<%= f.label "Password" %>
+<%= f.password_field (:password) %>
 <br>
-<%= label_tag "Password Confirmation" %>
-<%= password_field_tag(:password_confirmation) %>
+<%= f.label "Password Confirmation" %>
+<%= f.password_field (:password_confirmation) %>
 <br>
 <br>
-<%= submit_tag "Sign In" %>
+<%= f.submit "Sign In" %>
 
 <% end %>
