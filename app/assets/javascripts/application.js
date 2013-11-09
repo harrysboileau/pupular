@@ -13,3 +13,26 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+$(document).ready(function() {
+  $('#search_form').on("keyup", function(e) {
+      e.preventDefault();
+      console.log("chill");
+      var data = { search_term: $('#search_search_term').val()};
+  
+      $.post('/search', data, function(response) {
+          $("#results").html(response);
+      });
+  });
+
+
+  $("#top_br_sch").click(function(e) {
+    e.preventDefault();
+    $("#search").show()
+    $("#search").animate({right:'0'});
+  })
+
+  $("#go_back").click(function(e) {
+    e.preventDefault();
+    $("#search").animate({right:'-80%'})
+  })
+});

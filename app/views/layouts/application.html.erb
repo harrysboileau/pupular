@@ -10,6 +10,12 @@
 
   <% if current_dog && current_dog.is_registered? %>
     <%= render "layouts/top_navigation" %>
+    <%= render "layouts/search" %>
+  
+
+
+
+
   <% end %>
   <div class="container">
     <%= yield %>
