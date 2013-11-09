@@ -8,14 +8,23 @@ class ProfilesController < ApplicationController
 
     @profile = Profile.new(params[:profile])
     if @profile.not_empty?
-      begin
-        current_dog.profile = @profile
-      rescue
-        render "new"
+      if current_dog.profile = @profile
       else
-        redirect_to doghouse_path
+        render "new"
       end
     end
+    # if @profile.not_empty?
+    #   begin
+    #     current_dog.profile = @profile
+    #   rescue
+    #     render "new"
+    #   else
+    #     redirect_to doghouse_path
+    #   end
+    # else
+
+    # redirect_to doghouse_path
+    # end
     redirect_to doghouse_path
   end
 

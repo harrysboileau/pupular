@@ -6,6 +6,8 @@
 <% end %>
 
 <% @dogs.each do |dog| %>
+<%= image_tag dog.profile.image_url(:thumb) if dog.profile.image? %>
 <%= dog.name %><%= button_to "+", friend_request_path(dog.id) %>
+
 <br/>
 <% end %>
