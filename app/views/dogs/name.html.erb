@@ -2,9 +2,7 @@
 
 <h4>Submit your dog info</h4>
 
-<%= @dog.email if @dog.email %>
-<%= current_dog.email if current_dog %>
-
+<%= form_for @dog, {url: '/dogs', method: "post"} do |f| %>
 <% if @dog.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@dog.errors.count, "error") %> prohibited this dog from being saved:</h2>
@@ -17,7 +15,6 @@
     </div>
   <% end %>
 
-<%= form_for @dog, {url: '/dogs', method: "post"} do |f| %>
 <%= f.text_field :username, {placeholder: "Username"} %><br>
 <%= f.text_field :name, {placeholder: "Full Name"} %><br><br>
 <%= f.submit %>

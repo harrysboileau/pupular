@@ -1,14 +1,26 @@
 
 <div id="friend_requests">
-   <% current_dog.pending_pals.each do |pal| %>
-  <%= pal.name %>  <%= button_to "accept", add_friend_path(pal.id) %> <%= button_to "reject", reject_friend_path(pal.id) %>
+  <% if current_dog.pending_pals != [] %>
+    <% current_dog.pending_pals.each do |pal| %>
+      <%= pal.name %>  <%= button_to "accept", add_friend_path(pal.id) %> <%= button_to "reject", reject_friend_path(pal.id) %>
+    <% end %>
+  <% else %>
+  <div class="instruction">
+    Instructions on adding friends
+  </div>
   <% end %>
 </div>
 
 
 <div id="current_events">
   Upcoming Events:<br>
-  <% @events.each do |x| %>
-  <%= link_to x.title, dog_event_path(current_dog,x.id) %><br>
+  <% if @events != [] %>
+    <% @events.each do |x| %>
+      <%= link_to x.title, dog_event_path(current_dog,x.id) %><br>
+    <% end %>
+  <% else%>
+  <div class="instructions">
+    Instructions on creating events
+  </div>
   <% end %>
 </div>
