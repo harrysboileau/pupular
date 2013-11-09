@@ -1,28 +1,98 @@
-body{
-  padding-top: 60px;
+ body {
+  padding:0px;
+  margin:0px;
+  font:arial;
+  text-align:center;
+    font-size:30px;
+
+ }
+
+ input,textarea {padding:20px;font-size:30px;width:50%;}
+textarea {height:10%;}
+.container {
+  padding-top:120px;
+  margin:auto;
+  padding-bottom:200px;
 }
 
 .bottom_nav_bar{
   position: fixed;
   bottom: 0;
-  height: 50px;
-  border-top: 2px solid black;
+  height: 150px;
   width: 100%;
+
+}
+
+.bottom_nav_bar ul {
+  margin:0px;
+  padding:0px;
+  text-decoration:none;
+}
+
+.bottom_nav_bar ul li {
+  display:inline-block;
+  float:left;
+  text-align:center;
+  line-height:150px;
+  width:20%;
+  outline:1px solid #360066;
+}
+.bottom_nav_bar ul li:hover {
+  background-color:#360066;
+}
+
+.bottom_nav_bar ul li a {
+  text-decoration:none;
+  font-size:30px;
+  display:inline-block;
+  width:100%;
+  color:white;
+
 }
 
 .top_nav_bar{
   position: fixed;
   top: 0;
-  height: 50px;
-  border-bottom: 2px solid black;
+  height: 100px;
   width: 100%;
+  color:white;
+  line-height:100px;
 }
 
 #top_br_sch{
   float: right;
-  padding-right: 10px;
+  background-color:grey;
+  width:100px;
+  height:100px;
+
 }
 
 #top_br_logo{
   float: left;
+}
+
+.top_nav_bar {
+  background-color:#360066;
+}
+
+
+.bottom_nav_bar {
+  /* IE10 Consumer Preview */ 
+background-image: -ms-linear-gradient(top, #4E0094 0%, #360066 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(top, #4E0094 0%, #360066 100%);
+
+/* Opera */ 
+background-image: -o-linear-gradient(top, #4E0094 0%, #360066 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #4E0094), color-stop(1, #360066));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(top, #4E0094 0%, #360066 100%);
+
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to bottom, #4E0094 0%, #360066 100%);
+
 }
