@@ -8,11 +8,15 @@
 </head>
 <body>
 
-  <% if current_dog %>
-<%= render "layouts/top_navigation" %>
-<%= render "layouts/bottom_navigation" %>
+  <% if current_dog && current_dog.is_registered? %>
+    <%= render "layouts/top_navigation" %>
   <% end %>
-<%= yield %>
+  <div class="container">
+    <%= yield %>
+  </div>
+  <% if current_dog && current_dog.is_registered? %>
+    <%= render "layouts/bottom_navigation" %>
+  <% end %>
 
 
 </body>
