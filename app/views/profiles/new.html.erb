@@ -1,6 +1,6 @@
 Make your profile or <%= link_to "skip", doghouse_path %>
-
-<%= form_for @profile do |f| %>
+<%= current_dog.profile %>
+<%= form_for @profile, :html => {:multipart => true} do |f| %>
 
 <% if @profile.errors.any? %>
   <div id="error_explanation">
@@ -14,7 +14,7 @@ Make your profile or <%= link_to "skip", doghouse_path %>
   </div>
 <% end %>
 
-<%= f.text_field :photo, {placeholder: "Placeholder for photos"} %><br>
+<%= f.file_field :image %><br>
 <%= f.text_field :breed, {placeholder: "Breed"} %><br>
 <%= f.text_field :location, {placeholder: "Location"} %><br>
 <%= f.number_field :age, {placeholder: "Age"} %><br>

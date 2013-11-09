@@ -1,6 +1,6 @@
 .users_profile
   #image
-    = image_tag("molar_bear.jpg", size: "200x200")
+    = image_tag current_dog.profile.image_url(:profile) if current_dog.profile.image?
   #name
     %h3= @dog.name
   #breed
