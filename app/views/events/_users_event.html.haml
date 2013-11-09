@@ -1,49 +1,45 @@
 .users_event
-  .add_friends
-    %h4
-      Add Friends to Walk
-    %table
-      %tr
-        %td Friend
-        %td
-      - current_dog.pals.each do |friend|
-        %tr
-          %td= friend.name
-          %td= button_to "+"
+  = render 'add_friend_table'
   .event_details
     #event_title
       %strong
         Title:
       %p
-        = @event.title
-        = button_to "edit"
+        .field
+          .value= @event.title
+          = button_to "edit", {}, {class: "title", id: "#{current_dog.id}", name: "#{params[:id]}"}
     #event_type
       %strong
         type:
       %p
-        = @event.type
-        = button_to "edit"
+        .field
+          .value= @event.type
+          = button_to "edit", {}, {class: "type", id: "#{current_dog.id}", name: "#{params[:id]}"}
     #event_place
       %strong
         Place:
       %p
-        = @event.location
-        = button_to "edit"
+        .field
+          .value= @event.location
+          = button_to "edit", {}, {class: "location", id: "#{current_dog.id}", name: "#{params[:id]}"}
     #event_description
       %strong
         Description:
       %p
-        = @event.description
-        = button_to "edit"
+        .field
+          .value= @event.description
+          = button_to "edit", {}, {class: "description", id: "#{current_dog.id}", name: "#{params[:id]}"}
     #event_start_time
       %strong
         Start Time:
       %p
-        = @event.start_time
-        = button_to "edit"
+        .field
+          .value= @event.start_time
+          = button_to "edit", {}, {class: "start_time", id: "#{current_dog.id}", name: "#{params[:id]}"}
     #event_end_time
       %strong
         End Time:
       %p
-        = @event.end_time
-        = button_to "edit"
+        .field
+          .value= @event.end_time
+          = button_to "edit", {}, {class: "end_time", id: "#{current_dog.id}", name: "#{params[:id]}"}
