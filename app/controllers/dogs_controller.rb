@@ -32,12 +32,18 @@ class DogsController < ApplicationController
   end
 
   def doghouse
-    @dog = Dog.find(1)
+    @dog = current_dog
     @events = @dog.events
   end
 
   def show
     @dog = Dog.find(params[:id])
+    if @dog.profile
+      @profile = @dog.profile
+    else
+      redirect_to new_profile_path
+    end
+
   end
 
   def search
@@ -62,7 +68,6 @@ class DogsController < ApplicationController
 
   def friend_request
     Dog.find(params[:pending_pal_id]).pending_pals << current_dog
-    binding.pry
     redirect_to search_path
   end
 end
