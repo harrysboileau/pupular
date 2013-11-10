@@ -6,21 +6,24 @@
     <% end %>
   <% else %>
   <div class="instruction">
-    Instructions on adding friends
+    <h3>Welcome to Pupular!</h3>
+    <p> To start searching and requesting puppy pals,<br>
+     touch the magnifying glass in the top right corner</p>
   </div>
   <% end %>
 </div>
 
 
-<div id="current_events">
-  Upcoming Events:<br>
+<div id="current_events"> 
   <% if @events != [] %>
+  Upcoming Events:<br>
     <% @events.each do |x| %>
       <%= link_to x.title, dog_event_path(current_dog,x.id) %><br>
     <% end %>
   <% else%>
   <div class="instructions">
-    Instructions on creating events
+    <p>To create a hangout or walk,<br>
+     touch the paw button below</p>
   </div>
   <% end %>
 </div>
