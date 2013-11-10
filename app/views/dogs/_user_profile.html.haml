@@ -19,7 +19,8 @@
   #profile_age
     %p
       Age:
-      %span#value= "#{@profile.age} years old"
+      %span#value= "#{@profile.age}"
+      %span#not_value  years old
     = button_to "update age", {}, { class: "age", id: "#{current_dog.profile.id}", style: "display: none" }
   #profile_size
     %p
