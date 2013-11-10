@@ -1,11 +1,11 @@
 .add_friends
   %h4
-    Add Friends to Walk
-  %table
-    %tr
-      %td Friend
-      %td
-    - current_dog.pals.each do |friend|
-      %tr
-        %td= friend.name
-        %td= button_to "+"
+    Add Friends to Event
+  = form_tag "/error", id: "event_friends_search" do
+    = text_field_tag(:event_friends_search_input)
+    = submit_tag :event_friends_search_button, { value: "+", id: "event_friends_search_button" }
+  %br
+  #adding_friends_error
+  %ul#friends_list
+
+  %button.invite_friends{id: @event.id} Invite Pals
