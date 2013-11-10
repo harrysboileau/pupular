@@ -36,15 +36,4 @@ class MessagesController < ApplicationController
     @message.destroy
     redirect_to dog_messages_path
   end
-
 end
-
-
-
-
-
-
-
-
-
-
