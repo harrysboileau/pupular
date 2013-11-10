@@ -5,7 +5,7 @@ Pupular::Application.routes.draw do
     resources :messages
   end
 
-  resources :profiles, :only => [:new, :create, :edit]
+  resources :profiles, :only => [:new, :create, :edit, :update]
 
 
   post '/name' => 'dogs#savehuman'
