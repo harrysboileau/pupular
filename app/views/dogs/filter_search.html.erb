@@ -8,7 +8,15 @@
 <td></td>
 <% end %>
 <td><%= link_to "#{dog.name}", dog_path(dog) %></td>
-<td><%= button_to "+", friend_request_path(dog.id), class: "button" %></td>
+<td id="#{dog.id}">
+       <% if @sent_requests.include?(dog.username)%>
+       SENT
+       <% elsif @friends.include?(dog.username) %>
+       FRIEND
+       <% else %>
+       <%= button_to "+", friend_request_path(dog.id), class: "add_friend_button", id: dog.id %>
+       <% end %>
+<td>
 </tr>
 <% end %>
 </table>
