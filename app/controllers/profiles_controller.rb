@@ -28,7 +28,15 @@ class ProfilesController < ApplicationController
     redirect_to doghouse_path
   end
 
-  def edit
+  def update
+    @profile = Profile.find(params[:id])
+    @profile.send((params["value"].first[0]+"=").to_sym, params["value"].first[1])
+    @profile.save
+    if request.xhr?
+      render :json => { value: params["value"].first[1] }
+    else
+      redirect_to dog_path(current_dog)
+    end
   end
 
 end

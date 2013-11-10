@@ -1,23 +1,31 @@
 .users_profile
-  #image
+  #profile_image
     = image_tag current_dog.profile.image_url(:profile) if current_dog.profile.image?
-  #name
+    #value
+    = button_to "change photo", {}, { class: "photo", id: "#{current_dog.profile.id}" }
+  #profile_name
     %h3= @dog.name
-  #breed
-    %p= "Breed: #{@profile.breed}"
-    = button_to "update breed"
-  #location
-    %p= "Location: #{@profile.location}"
-    = button_to "update location"
-  #age
-    %p= "Age: #{@profile.age} years old"
-    = button_to "update age"
-  #size
-    %p= "Size: #{@profile.size}"
-    = button_to "update size"
-  #gender
-    %p= "Gender: #{@profile.gender}"
-    = button_to "update gender"
-  #spayed
-    %p= "Fixed?: #{@profile.spayed}"
-    = button_to "update spayed"
+  #profile_breed
+    %p Breed:
+    #value= "#{@profile.breed}"
+    = button_to "update breed", {}, { class: "breed", id: "#{current_dog.profile.id}" }
+  #profile_location
+    %p Location:
+    #value= "#{@profile.location}"
+    = button_to "update location", {}, { class: "dogs_location", id: "#{current_dog.profile.id}" }
+  #profile_age
+    %p Age:
+    #value= "#{@profile.age} years old"
+    = button_to "update age", {}, { class: "age", id: "#{current_dog.profile.id}" }
+  #profile_size
+    %p Size:
+    #value= "#{@profile.size}"
+    = button_to "update size", {}, { class: "size", id: "#{current_dog.profile.id}" }
+  #profile_gender
+    %p Gender:
+    #value= "#{@profile.gender}"
+    = button_to "update gender", {}, { class: "gender", id: "#{current_dog.profile.id}" }
+  #profile_spayed
+    %p Fixed?:
+    #value= "#{@profile.spayed}"
+    = button_to "update spayed", {}, { class: "spayed", id: "#{current_dog.profile.id}" }
