@@ -1,0 +1,14 @@
+Reply to a message:
+
+<%= form_for :message, url:dog_messages_path(current_dog) do |f| %>
+<%= f.text_field :subject, placeholder: "Message Subject", value: "re: #{@message_to_reply.subject}"  %><br>
+<%= f.text_field :dog_id, placeholder: "Who's the message to?", value: "#{@dog_username_to_reply}"  %><br>
+<%= f.text_area :content, placeholder: "What would you like to say?", value: "#{@dog_username_to_reply} wrote: #{@message_to_reply.content}" %><br>
+<%= f.submit 'throw a bone' %>
+<% end %>
+
+
+
+
+
+
