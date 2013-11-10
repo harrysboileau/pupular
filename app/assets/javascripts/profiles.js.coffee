@@ -1,6 +1,9 @@
 editProfileField = (location, name, value) ->
     location.replaceWith(editProfileTextField(name, value))
 
+editProfileFile = (location, name, value) ->
+  location.replaceWith(editProfileFileField(name))
+
 editProfileSelect = (location, name) ->
     console.log(name)
     value = pickSelections(name)
@@ -43,6 +46,9 @@ renderProfileUpdate = (response, location) ->
 editProfileTextField = (name, value) ->
     "<form><input type='text' name='#{name}' value='#{value}'><input type='submit' value='update'></form>"
 
+editProfileFileField  = (name) ->
+  "<form><input type='file' name='#{name}'><input type='submit' value='update'></form>"
+
 editProfileDropdownBox = (name, values) ->
     options = renderSelections(values)
     "<form><select name='#{name}'>#{options}</select><input type='submit' value='update'></form>"
@@ -56,13 +62,17 @@ newProfileTrait = (value) ->
     "<div id='value'>#{value.value}</div>"
 
 $ ->
-    $('input.photo').on "click", (event) ->
+    $('input.edit_all_profile').on "click", (event) ->
+      event.preventDefault();
+      editAllFields
+
+    $('input.image').on "click", (event) ->
         event.preventDefault()
         button = this
         profile_id = this.id
         attribute = this.className
         $(this).toggle()
-        editProfileField($('#profile_image #value'), "#{attribute}", $('#profile_image_url #value').text())
+        editProfileFile($('#profile_image #value'), "#{attribute}", $('#profile_image_url #value').text())
         listenForProfileSubmit('#profile_image', attribute, profile_id, button)
 
     $('input.breed').on "click", (event) ->

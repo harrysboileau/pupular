@@ -29,11 +29,17 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    binding.pry
     @profile = Profile.find(params[:id])
     @profile.send((params["value"].first[0]+"=").to_sym, params["value"].first[1])
     @profile.save
+    binding.pry
     if request.xhr?
-      render :json => { value: params["value"].first[1] }
+      if params["value"].first[0] == "image"
+        render :json => { value: "Success" }
+      else
+        render :json => { value: params["value"].first[1] }
+      end
     else
       redirect_to dog_path(current_dog)
     end
