@@ -23,6 +23,8 @@ Pupular::Application.routes.draw do
   match '/signout' => 'sessions#destroy', as: :signout
   post '/friend_request/:pending_pal_id' => 'dogs#friend_request', as: :friend_request
   post '/load_friends' => 'dogs#load_friends'
+  post '/verify_friend' => 'dogs#verify_friend'
+  post '/add_friends_to_event' => 'dogs#add_friends_to_event'
   root :to => 'welcome#index'
 
 end

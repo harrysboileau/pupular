@@ -3,3 +3,9 @@
     Add Friends to Event
   = form_tag "/error", id: "event_friends_search" do
     = text_field_tag(:event_friends_search_input)
+    = submit_tag :event_friends_search_button, { value: "+", id: "event_friends_search_button" }
+  %br
+  #adding_friends_error
+  %ul#friends_list
+
+  %button.invite_friends{id: @event.id} Invite Pals

@@ -53,7 +53,6 @@ class DogsController < ApplicationController
   def filter_search
     @sent_requests = current_dog.outstanding_requests.map{ |req| Dog.find(req.dog_id).username }
     @friends = current_dog.pals.map{ |pal| pal.username }
-    @sent_requests
     @search_term = params[:search_term]
     @dogs = Dog.where('name LIKE ?', "%#{@search_term}%").all
     render layout: false
@@ -80,4 +79,25 @@ class DogsController < ApplicationController
   def load_friends
     render json: { friends: current_dog.pals.map { |pal| pal.name } }
   end
+
+  def verify_friend
+    pal_to_check = Dog.find_by_name(params[:friend_name])
+    event = Event.find(params[:event_id])
+    if event.attendees.include?(pal_to_check)
+      render json: { verification: "already_attending"}
+    elsif current_dog_pals_names.include?(params[:friend_name])
+      render json: { verification: "friend"}
+    else
+      render json: { verification: "not_friend"}
+    end
+  end
+
+  def add_friends_to_event
+    event = Event.find(params[:event_id])
+    params[:friends_to_add].each do |pal_name|
+      event.attendees << Dog.find_by_name(pal_name)
+    end
+    render nothing: true
+  end
+
 end

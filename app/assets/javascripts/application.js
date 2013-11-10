@@ -16,10 +16,15 @@
 //= require_tree .
 var friends_loaded = false;
 var friends = [];
+var friends_to_add = [];
+
+function inviteFriendsToEventError(errorMessage) {
+  $("#adding_friends_error").text(errorMessage);
+}
+
 $(document).ready(function() {
   $('#search_form').on("keyup", function(e) {
       e.preventDefault();
-      console.log("chill");
       var data = { search_term: $('#search_search_term').val()};
 
       $.post('/search', data, function(response) {
@@ -46,6 +51,46 @@ $(document).ready(function() {
     }
   });
 
+  $(document).on("click", "#event_friends_search_button", function(e){
+    e.preventDefault();
+    var form = this.parentNode;
+    var friend_input = $(form).find("#event_friends_search_input").val();
+    var event_id = $(".invite_friends").attr("id");
+    console.log(event_id);
+    if( $.inArray(friend_input, friends_to_add) == -1 )
+    {
+      $.post("/verify_friend", {"friend_name": friend_input, "event_id": event_id}, function(response){
+        if(response.verification == "friend")
+        {
+          friends_to_add.push(friend_input);
+          $("#friends_list").append("<li>" + friend_input + "</li>");
+        }
+        else if (response.verification == "not_friend")
+        {
+          inviteFriendsToEventError("That's not one of your friends!");
+        }
+        else if (response.verification == "already_attending")
+        {
+          inviteFriendsToEventError("This friend was already invited!");
+        }
+        else
+        {
+          inviteFriendsToEventError("Something went wrong!");
+        }
+      });
+    }
+    else
+    {
+      inviteFriendsToEventError("You already added that friend!");
+    }
+
+  });
+
+  $(document).on("click", ".invite_friends", function(e){
+    e.preventDefault();
+    $.post("/add_friends_to_event", {"friends_to_add" : friends_to_add, "event_id" : this.id });
+  });
+
   // $('#event_friends_search_input').on("keyup", function(e) {
   //     e.preventDefault();
   //     console.log("chill");
@@ -66,6 +111,7 @@ $(document).ready(function() {
   $("#go_back").click(function(e) {
     e.preventDefault();
     $("#search").animate({right:'-80%'})
+    // IntervalTime thing it $("#search").hide();
   })
 
 

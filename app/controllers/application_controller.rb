@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
     return @current_dog if defined?(@current_dog)
     @current_dog = current_dog_session && current_dog_session.record
   end
+
+  def current_dog_pals_names
+    current_dog.pals.map { |pal| pal.name }
+  end
 end
