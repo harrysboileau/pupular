@@ -4,7 +4,14 @@
 Sender: <%= Dog.find(x.sender_id).name %><br>
 Subject:<%= x.subject %><br/>
 Message:<%= x.content %><br/>
+<%= link_to "Reply to Message", new_dog_message_path(message_id: x.id) %>
+<%= button_to "Delete Message", dog_message_path(x.sender_id, x.id), { method: :delete } %>
 
 <% end %>
+
+
+
+
+
 
 
