@@ -1,23 +1,70 @@
 editProfileField = (location, name, value) ->
     location.replaceWith(editProfileTextField(name, value))
 
-editProfileSelect = (location, name) ->
-    console.log(name)
-    value = pickSelections(name)
-    console.log(value)
-    location.replaceWith(editProfileDropdownBox(name, value))
+massEditProfileField = (location, name, value) ->
+    location.replaceWith(renderProfileTextField(name, value))
+
+editProfileFile = (location, name, value) ->
+  location.replaceWith(editProfileFileField(name))
+
+massEditProfileFile = (location, name, value) ->
+  location.replaceWith(renderProfileFileField(name))
+
+editProfileSelect = (location, name, value) ->
+    selections = pickSelections(name)
+    location.replaceWith(editProfileDropdownBox(name, selections, value))
+
+massEditProfileSelect = (location, name, value) ->
+    selections = pickSelections(name)
+    location.replaceWith(renderProfileDropdownBox(name, selections, value))
 
 pickSelections = (name) ->
-      console.log(name)
       return ["Toy", "Small", "Medium", "Large", "Extra-large"] if name == "size"
       return ["Male", "Female"] if name == "gender"
-      return ["Yes", "No"] if name == "spayed"
+      return [true, false] if name == "spayed"
 
 listenForProfileSubmit = (location, key, profile_id, button) ->
     $("#{location} form").on 'submit', (event) ->
         event.preventDefault()
         $(button).toggle()
         submitProfile(key, this.firstChild.value, profile_id, this)
+
+listenForMassSubmit = (profile_id) ->
+    $("form#mass_profile").on 'submit', (event) ->
+        event.preventDefault()
+        data = {}
+        data["value"] = getData()
+        submitMassProfileData(data, profile_id)
+
+submitMassProfileData = (data, id) ->
+    $.ajax
+        url: "/profiles/#{id}"
+        data: data
+        type: 'PUT'
+        dataType: "json"
+        success: (response) ->
+          massRenderResponse(response)
+
+massRenderResponse = (object) ->
+    $('input#image').replaceWith(newProfileTrait({"success": "success"}, "success"))
+    $('input#breed').replaceWith(newProfileTrait(object, 'breed'))
+    $('input#location').replaceWith(newProfileTrait(object, 'location'))
+    $('input#age').replaceWith(newProfileTrait(object, 'age'))
+    $('select#size').replaceWith(newProfileTrait(object, 'size'))
+    $('select#gender').replaceWith(newProfileTrait(object, 'gender'))
+    $('select#gender').replaceWith(newProfileTrait(object, 'fixed'))
+
+
+getData = ->
+    profileData =
+        image: $('input#image').val()
+        breed: $('input#breed').val()
+        location: $('input#location').val()
+        age: $('input#age').val()
+        size: $('select#size').val()
+        gender: $('select#gender').val()
+        spayed: $('select#gender').val()
+
 
 submitProfile = (key, value, profile_id, location) ->
     data = {}
@@ -27,42 +74,76 @@ submitProfile = (key, value, profile_id, location) ->
     updateProfileAttribute(pass_value, profile_id, location)
 
 updateProfileAttribute = (value, profile_id, location) ->
-    console.log($(location))
     $.ajax
         url: "/profiles/#{profile_id}"
         data: value
         type: 'PUT'
         dataType: "json"
         success: (response) ->
-          renderProfileUpdate(response, location)
+          updateProfilePage(response, location)
 
-
-renderProfileUpdate = (response, location) ->
-    $(location).replaceWith(newProfileTrait(response))
+updateProfilePage = (response, location) ->
+    key = location.firstChild.id
+    $(location).replaceWith(newProfileTrait(response, key))
 
 editProfileTextField = (name, value) ->
-    "<form><input type='text' name='#{name}' value='#{value}'><input type='submit' value='update'></form>"
+    "<form>#{renderProfileTextField(name, value)}<input type='submit' value='update'></form>"
 
-editProfileDropdownBox = (name, values) ->
+renderProfileTextField = (name, value) ->
+    "<input type='text' id='#{name}' name='#{name}' value='#{value}'>"
+
+editProfileFileField  = (name) ->
+    "<form>#{renderProfileFileField(name)}<input type='submit' value='update'></form>"
+
+renderProfileFileField = (name) ->
+    "<input type='file' id='#{name}' name='#{name}'>"
+
+editProfileDropdownBox = (name, values, current_value) ->
+    "<form>#{renderProfileDropdownBox(name, values, current_value)}<input type='submit' value='update'></form>"
+
+renderSelections = (array, first_value) ->
+    "<option value='#{value}'>#{value}</option>" for value in array
+
+renderProfileDropdownBox = (name, values, current_value) ->
     options = renderSelections(values)
-    "<form><select name='#{name}'>#{options}</select><input type='submit' value='update'></form>"
-
-renderSelections = (array) ->
-  option = ""
-  option + "<option value='#{value}'>#{value}</option>" for value in array
+    "<select id='#{name}' name='#{name}'><option value='#{current_value}'>#{current_value}</option>#{options}</select>"
 
 
-newProfileTrait = (value) ->
-    "<div id='value'>#{value.value}</div>"
+newProfileTrait = (object, key) ->
+    "<span id='key'>#{object[key]}</div>"
+
+editifyAllProfileFields = ->
+    massEditProfileFile($('#profile_image #value'), "image", $('#profile_image_url #value').text())
+    massEditProfileField($('#profile_breed #value'), "breed", $('#profile_breed #value').text())
+    massEditProfileField($('#profile_location #value'), "location", $('#profile_location #value').text())
+    massEditProfileField($('#profile_age #value'), "age", $('#profile_age #value').text())
+    massEditProfileSelect($('#profile_size #value'), "size", $('#profile_size #value').text())
+    massEditProfileSelect($('#profile_gender #value'), "gender", $('#profile_gender #value').text())
+    massEditProfileSelect($('#profile_spayed #value'), "spayed", $('#profile_spayed #value').text())
+
+addProfileForm = ->
+    wrapProfileInForm()
+    editifyAllProfileFields()
+
+wrapProfileInForm = ->
+    $('.users_profile').wrap("<form id=mass_profile></form>")
+    $('.users_profile').append("<input type='submit' value='update'>")
 
 $ ->
-    $('input.photo').on "click", (event) ->
+    $('input.edit_all_profile').on "click", (event) ->
+      event.preventDefault();
+      profile_id = this.id
+      $(this).toggle();
+      addProfileForm()
+      listenForMassSubmit(profile_id)
+
+    $('input.image').on "click", (event) ->
         event.preventDefault()
         button = this
         profile_id = this.id
         attribute = this.className
         $(this).toggle()
-        editProfileField($('#profile_image #value'), "#{attribute}", $('#profile_image_url #value').text())
+        editProfileFile($('#profile_image #value'), "#{attribute}", $('#profile_image_url #value').text())
         listenForProfileSubmit('#profile_image', attribute, profile_id, button)
 
     $('input.breed').on "click", (event) ->
@@ -98,7 +179,7 @@ $ ->
         profile_id = this.id
         attribute = this.className
         $(this).toggle()
-        editProfileSelect($('#profile_size #value'), "#{attribute}")
+        editProfileSelect($('#profile_size #value'), "#{attribute}", $('#profile_size #value').text())
         listenForProfileSubmit('#profile_size', attribute, profile_id, button)
 
     $('input.gender').on "click", (event) ->

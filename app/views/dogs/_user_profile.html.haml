@@ -2,30 +2,38 @@
   #profile_image
     = image_tag current_dog.profile.image_url(:profile) if current_dog.profile.image?
     #value
-    = button_to "change photo", {}, { class: "photo", id: "#{current_dog.profile.id}" }
+    = button_to "change photo", {}, { class: "image", id: "#{current_dog.profile.id}", style: "display: none" }
+  = button_to "edit", {}, { class: "edit_all_profile", id: "#{current_dog.profile.id}" }
   #profile_name
     %h3= @dog.name
   #profile_breed
-    %p Breed:
-    #value= "#{@profile.breed}"
-    = button_to "update breed", {}, { class: "breed", id: "#{current_dog.profile.id}" }
+    %p
+      Breed:
+      %span#value= "#{@profile.breed}"
+    = button_to "update breed", {}, { class: "breed", id: "#{current_dog.profile.id}", style: "display: none" }
   #profile_location
-    %p Location:
-    #value= "#{@profile.location}"
-    = button_to "update location", {}, { class: "dogs_location", id: "#{current_dog.profile.id}" }
+    %p
+      Location:
+      %span#value= "#{@profile.location}"
+    = button_to "update location", {}, { class: "dogs_location", id: "#{current_dog.profile.id}", style: "display: none" }
   #profile_age
-    %p Age:
-    #value= "#{@profile.age} years old"
-    = button_to "update age", {}, { class: "age", id: "#{current_dog.profile.id}" }
+    %p
+      Age:
+      %span#value= "#{@profile.age}"
+      %span#not_value  years old
+    = button_to "update age", {}, { class: "age", id: "#{current_dog.profile.id}", style: "display: none" }
   #profile_size
-    %p Size:
-    #value= "#{@profile.size}"
-    = button_to "update size", {}, { class: "size", id: "#{current_dog.profile.id}" }
+    %p
+      Size:
+      %span#value= "#{@profile.size}"
+    = button_to "update size", {}, { class: "size", id: "#{current_dog.profile.id}", style: "display: none" }
   #profile_gender
-    %p Gender:
-    #value= "#{@profile.gender}"
-    = button_to "update gender", {}, { class: "gender", id: "#{current_dog.profile.id}" }
+    %p
+      Gender:
+      %span#value= "#{@profile.gender}"
+    = button_to "update gender", {}, { class: "gender", id: "#{current_dog.profile.id}", style: "display: none" }
   #profile_spayed
-    %p Fixed?:
-    #value= "#{@profile.spayed}"
-    = button_to "update spayed", {}, { class: "spayed", id: "#{current_dog.profile.id}" }
+    %p
+      Fixed?:
+      %span#value= "#{@profile.spayed}"
+    = button_to "update spayed", {}, { class: "spayed", id: "#{current_dog.profile.id}", style: "display: none" }
