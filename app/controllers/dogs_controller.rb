@@ -51,7 +51,9 @@ class DogsController < ApplicationController
   end
 
   def filter_search
-    p params
+    @sent_requests = current_dog.outstanding_requests.map{ |req| Dog.find(req.dog_id).username }
+    @friends = current_dog.pals.map{ |pal| pal.username }
+    @sent_requests
     @search_term = params[:search_term]
     @dogs = Dog.where('name LIKE ?', "%#{@search_term}%").all
     render layout: false
@@ -68,7 +70,10 @@ class DogsController < ApplicationController
   end
 
   def friend_request
-    Dog.find(params[:pending_pal_id]).pending_pals << current_dog
+    begin
+      Dog.find(params[:pending_pal_id]).pending_pals << current_dog
+    rescue
+    end
     redirect_to search_path
   end
 end

@@ -35,4 +35,18 @@ $(document).ready(function() {
     e.preventDefault();
     $("#search").animate({right:'-80%'})
   })
+
+
+  $(document).on("click", ".add_friend_button", function(e) {
+    e.preventDefault();
+    var id = $(this).attr('id');  
+    console.log(id);
+    var data = { pending_pal_id: id}
+    $.post('/friend_request/' + id, data, function(response) {
+      $('#' + id).replaceWith("~/");
+    })
+  })
+
+
+
 });

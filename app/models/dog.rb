@@ -2,6 +2,7 @@ class Dog < ActiveRecord::Base
   has_many :friendships, foreign_key: "dog_id", class_name: "Friendship", dependent: :destroy
   has_many :pals, through: :friendships
   has_many :pending_friendships, foreign_key: "dog_id", class_name: "PendingFriendship", dependent: :destroy
+  has_many :outstanding_requests, foreign_key: "pending_friend_id", class_name: "PendingFriendship", dependent: :destroy
   has_many :pending_pals, through: :pending_friendships
   has_one :profile
   has_many :sent_messages, foreign_key: "sender_id", class_name: "Message"
