@@ -43,7 +43,16 @@ submitMassProfileData = (data, id) ->
         type: 'PUT'
         dataType: "json"
         success: (response) ->
-          console.log(response)
+          massRenderResponse(response)
+
+massRenderResponse = (object) ->
+    $('input#image').replaceWith(newProfileTrait({"success": "success"}, "success"))
+    $('input#breed').replaceWith(newProfileTrait(object, 'breed'))
+    $('input#location').replaceWith(newProfileTrait(object, 'location'))
+    $('input#age').replaceWith(newProfileTrait(object, 'age'))
+    $('select#size').replaceWith(newProfileTrait(object, 'size'))
+    $('select#gender').replaceWith(newProfileTrait(object, 'gender'))
+    $('select#gender').replaceWith(newProfileTrait(object, 'fixed'))
 
 
 getData = ->
@@ -74,7 +83,8 @@ updateProfileAttribute = (value, profile_id, location) ->
           updateProfilePage(response, location)
 
 updateProfilePage = (response, location) ->
-    $(location).replaceWith(newProfileTrait(response))
+    key = location.firstChild.id
+    $(location).replaceWith(newProfileTrait(response, key))
 
 editProfileTextField = (name, value) ->
     "<form>#{renderProfileTextField(name, value)}<input type='submit' value='update'></form>"
@@ -99,8 +109,8 @@ renderProfileDropdownBox = (name, values, current_value) ->
     "<select id='#{name}' name='#{name}'><option value='#{current_value}'>#{current_value}</option>#{options}</select>"
 
 
-newProfileTrait = (value) ->
-    "<span id='value'>#{value.value}</div>"
+newProfileTrait = (object, key) ->
+    "<span id='key'>#{object[key]}</div>"
 
 editifyAllProfileFields = ->
     massEditProfileFile($('#profile_image #value'), "image", $('#profile_image_url #value').text())

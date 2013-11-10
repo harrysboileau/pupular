@@ -31,11 +31,11 @@ class ProfilesController < ApplicationController
   def update
     @profile = Profile.find(params[:id])
     params["value"].each do |key, value|
-      @profile.send((key+"=").to_sym, value)
-      @profile.save
-    end
+    @profile.send((key+"=").to_sym, value)
+    @profile.save
+  end
     if request.xhr?
-      render :json => params["value"].to_json
+        render :json => params["value"].to_json
     else
       redirect_to dog_path(current_dog)
     end
