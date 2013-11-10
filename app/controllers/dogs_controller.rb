@@ -38,7 +38,7 @@ class DogsController < ApplicationController
 
   def show
     @dog = Dog.find(params[:id])
-    if @dog.profile || @dog != current_dog 
+    if @dog.profile || @dog != current_dog
       @profile = @dog.profile
     else
       redirect_to new_profile_path
@@ -75,5 +75,9 @@ class DogsController < ApplicationController
     rescue
     end
     redirect_to search_path
+  end
+
+  def load_friends
+    render json: { friends: current_dog.pals.map { |pal| pal.name } }
   end
 end

@@ -12,24 +12,56 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require_tree .
+var friends_loaded = false;
+var friends = [];
 $(document).ready(function() {
   $('#search_form').on("keyup", function(e) {
       e.preventDefault();
       console.log("chill");
       var data = { search_term: $('#search_search_term').val()};
-  
+
       $.post('/search', data, function(response) {
           $("#results").html(response);
       });
   });
 
+  $('#event_friends_search_input').on('focus', function(e) {
+    if(friends_loaded)
+    {
+      return null;
+    }
+    else
+    {
+      e.preventDefault();
+      console.log("click click");
+      $.post('/load_friends', function(response){
+        friends = response.friends;
+        $('#event_friends_search_input').autocomplete({
+          source: friends
+        });
+      });
+      friends_loaded = true;
+    }
+  });
+
+  // $('#event_friends_search_input').on("keyup", function(e) {
+  //     e.preventDefault();
+  //     console.log("chill");
+  //     var data = { search_term: $('#event_friends_search_input').val()};
+
+  //     $.post('/search', data, function(response) {
+  //         $("#results").html(response);
+  //     });
+  // });
+
 
   $("#top_br_sch").click(function(e) {
     e.preventDefault();
-    $("#search").show()
+    $("#search").show();
     $("#search").animate({right:'0'});
-  })
+  });
 
   $("#go_back").click(function(e) {
     e.preventDefault();
@@ -39,14 +71,12 @@ $(document).ready(function() {
 
   $(document).on("click", ".add_friend_button", function(e) {
     e.preventDefault();
-    var id = $(this).attr('id');  
+    var id = $(this).attr('id');
     console.log(id);
     var data = { pending_pal_id: id}
     $.post('/friend_request/' + id, data, function(response) {
       $('#' + id).replaceWith("~/");
     })
   })
-
-
 
 });
