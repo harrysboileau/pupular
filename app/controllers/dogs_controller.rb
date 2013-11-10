@@ -54,7 +54,7 @@ class DogsController < ApplicationController
     @sent_requests = current_dog.outstanding_requests.map{ |req| Dog.find(req.dog_id).username }
     @friends = current_dog.pals.map{ |pal| pal.username }
     @search_term = params[:search_term]
-    @dogs = Dog.where('name LIKE ?', "%#{@search_term}%").all
+    @dogs = Dog.where('name ILIKE ? or email ILIKE ? or username ILIKE ?', "%#{@search_term}%", "%#{@search_term}%", "%#{@search_term}%").all
     render layout: false
   end
 
