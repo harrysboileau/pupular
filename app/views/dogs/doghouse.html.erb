@@ -40,8 +40,17 @@
   <% end %>
 
   <% if @events == [] && @invited_to_events == [] %>
-  <div class="instructions">
-    Instructions on creating events
+  <% if current_dog.attended_events.empty? %>
+  <div id="create_event_instruction">
+    <div class="first_time_instruction" style="float: right">
+      <%= button_to "OK", {}, { class: "proceed_create_event", style: "margin-left: 0%" } %>
+      <span> to create a walk or hangout </span><br>
+      <span class="example"> Click -> </span>
+    </div>
   </div>
+  <% end %>
+  <!-- <div class="instructions"> -->
+  <!-- Instructions on creating events -->
+  <!-- </div> -->
   <% end %>
 </div>
