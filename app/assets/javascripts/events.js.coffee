@@ -86,7 +86,6 @@ listenForEventMassSubmit = (dog_id, event_id) ->
         event.preventDefault()
         data = {}
         data["value"] = getEventData()
-        console.log(data["value"])
         submitMassProfileData(data, dog_id, event_id)
 
 getEventData = ->
