@@ -1,6 +1,7 @@
 <%= link_to 'write a message', new_dog_message_path(current_dog) %><br>
 
-<% if @inbox != [] %>
+<% if current_dog.received_messages != [] %>
+  Your received messages:
   <% @inbox.each do |x| %>
     Sender: <%= Dog.find(x.sender_id).name %><br>
     Subject:<%= x.subject %><br/>
@@ -11,3 +12,16 @@
 <% else %>
   <h2> You don't have any messages, start sending some!</h2>
 <% end %>
+
+<div id="dogs_sent_messages">
+  
+  <% if @sent_messages %>
+    Your Sent Messages:
+    <% @sent_messages.each do |message| %>
+    <% message.recipients.each do |recipient| %>
+      Sent To: <%= recipient.username %><br>
+      Subject: <%= message.subject %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

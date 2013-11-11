@@ -2,6 +2,9 @@ class MessagesController < ApplicationController
   def index
     @dog = current_dog
     @inbox = @dog.received_messages
+
+    @sent_messages = @dog.sent_messages
+    p @sent_messages
   end
 
   def new
@@ -29,7 +32,7 @@ class MessagesController < ApplicationController
     @receiver = Dog.find(params[:dog_id])
     @sender = current_dog
     @receiver.received_messages << @sender.sent_messages.create(type:params[:type],subject:params[:subject],content:params[:content])
-    if request.xhr
+    if request.xhr?
       render 'messages/index'
     else
       redirect_to dog_messages_path

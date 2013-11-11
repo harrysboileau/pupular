@@ -10,23 +10,23 @@ clearRecipientField = ->
 recipientsList = []
 
 postAllMessages = ->
-  sendMessageTo(dog) for dog in recipientsList
-  window.location = '/doghouse'
+  count = recipientsList.length
+  sendMessageTo(dog,count--) for dog in recipientsList
 
+sendMessageTo = (name, count) ->
+  getIdOf({ "data" : name }, count)
 
-sendMessageTo = (name) ->
-  getIdOf({ "data" : name })
-
-getIdOf = (dog) ->
+getIdOf = (dog, count) ->
     $.ajax
         url: "/get_id"
         data: dog
         type: 'GET'
         dataType: "json"
         success: (response) ->
-            sendMessage(response)
+            sendMessage(response, count)
 
-sendMessage = (recipient) ->
+sendMessage = (recipient, count) ->
+    console.log(recipient)
     data = getMessageDetails()
     console.log(data)
     $.ajax
@@ -34,8 +34,8 @@ sendMessage = (recipient) ->
       data: data
       type: 'POST'
       dataType: "json"
-      success: ->
-        console.log("success")
+    if count == 1
+      window.location.href = "/doghouse"
 
 getMessageDetails = ->
   messageDetails =
