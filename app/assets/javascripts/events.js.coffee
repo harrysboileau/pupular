@@ -72,8 +72,8 @@ newEventTrait = (value) ->
     "<div class='field'><div class='value'>#{value.value}</div></div>"
 
 addEventForm = (dog_id, event_id) ->
-    $('.event_details').wrap("<form id=mass_event></form>")
-    $('.event_details').append("<input type='submit' value='update'>")
+    $('.event_details').wrap("<form id='mass_event'></form>")
+    $('.event_details').append("<input id='mass_event_button' type='submit' value='update'>")
     $('#event_title .field .value').replaceWith(renderEventTextField("title", $('#event_title .field .value').text()))
     $('#event_type .field .value').replaceWith(renderEventDropdownBox("type", ["Walk", "Hangout"], $('#event_type .field .value').text()))
     $('#event_place .field .value').replaceWith(renderEventTextField("place", $('#event_place .field .value').text()))
@@ -87,6 +87,8 @@ listenForEventMassSubmit = (dog_id, event_id) ->
         data = {}
         data["value"] = getEventData()
         submitMassProfileData(data, dog_id, event_id)
+        $('.event_details').unwrap()
+        $('#mass_event_button').remove()
 
 getEventData = ->
     eventData =

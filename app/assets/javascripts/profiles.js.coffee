@@ -35,6 +35,8 @@ listenForMassSubmit = (profile_id) ->
         data = {}
         data["value"] = getData()
         submitMassProfileData(data, profile_id)
+        $('.users_profile').unwrap()
+        $('#mass_profile_button').remove()
 
 submitMassProfileData = (data, id) ->
     $.ajax
@@ -52,7 +54,7 @@ massRenderResponse = (object) ->
     $('input#age').replaceWith(newProfileTrait(object, 'age'))
     $('select#size').replaceWith(newProfileTrait(object, 'size'))
     $('select#gender').replaceWith(newProfileTrait(object, 'gender'))
-    $('select#gender').replaceWith(newProfileTrait(object, 'fixed'))
+    $('select#spayed').replaceWith(newProfileTrait(object, 'spayed'))
 
 
 getData = ->
@@ -63,7 +65,7 @@ getData = ->
         age: $('input#age').val()
         size: $('select#size').val()
         gender: $('select#gender').val()
-        spayed: $('select#gender').val()
+        spayed: $('select#spayed').val()
 
 
 submitProfile = (key, value, profile_id, location) ->
@@ -126,8 +128,8 @@ addProfileForm = ->
     editifyAllProfileFields()
 
 wrapProfileInForm = ->
-    $('.users_profile').wrap("<form id=mass_profile></form>")
-    $('.users_profile').append("<input type='submit' value='update'>")
+    $('.users_profile').wrap("<form id='mass_profile'></form>")
+    $('.users_profile').append("<input id='mass_profile_button' type='submit' value='update'>")
 
 $ ->
     $('input.edit_all_profile').on "click", (event) ->
