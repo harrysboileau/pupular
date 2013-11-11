@@ -25,6 +25,8 @@ Pupular::Application.routes.draw do
   post '/load_friends' => 'dogs#load_friends'
   post '/verify_friend' => 'dogs#verify_friend'
   post '/add_friends_to_event' => 'dogs#add_friends_to_event'
+  post '/accept_invitation' => 'dogs#accept_invitation'
+  post '/decline_invitation' => 'dogs#decline_invitation'
   root :to => 'welcome#index'
 
 end

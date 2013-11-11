@@ -11,6 +11,10 @@ class Dog < ActiveRecord::Base
   has_many :events, foreign_key: "creator_id"
   has_many :event_attendances
   has_many :attended_events, through: :event_attendances
+  has_many :sent_invitations, class_name: "Invitation", foreign_key: "dog_id", dependent: :destroy
+  has_many :received_invitations, class_name: "Invitation", foreign_key: "invited_pal_id"
+  has_many :invited_pals, through: :sent_invitations
+  has_many :pending_events, through: :received_invitations
 
   attr_accessible :email, :password, :username, :name, :password_confirmation, :image
 
