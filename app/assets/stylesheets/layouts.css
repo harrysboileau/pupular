@@ -11,6 +11,8 @@
     height:100%;
  }
 
+ form {line-height:50px;}
+
  input,textarea {padding:20px;font-size:30px;width:50%;}
 textarea {height:10%;}
 .container {

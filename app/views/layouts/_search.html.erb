@@ -2,7 +2,7 @@
 <%= form_for :search, url: search_path, html:{id: "search_form"} do |f| %>
 <%= link_to image_tag("search_icon.png"), "#", {id: "go_back"} %>
 
-<%= f.text_field :search_term, placeholder: "Search for dogs"  %>
+<%= f.text_field :search_term, placeholder: "Search for dogs", autocomplete: "off"  %>
 <% end %>
 
 <div id="results">

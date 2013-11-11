@@ -5,14 +5,23 @@
 #search_item {
   text-align:left;
   width:100%;
+  border-collapse:collapse;
 }
+
 #search_item a {
 	color:white;
 	text-decoration:none
 }
 
 #search_item td {
+	border:none;
 	border-bottom:2px dotted black;
+	height:50px;
+}
+
+#search_item tr:hover {
+	background-color:#430094;
+	border:none;
 }
 
 .search_item img {
@@ -27,5 +36,57 @@
   font-size:30px;
   color:white;
   font-weight:bold;
+}
+
+
+#search {
+  width:80%;
+  background-color:#360066;
+  height:100%;
+  position:fixed;
+  z-index:100000;
+  overflow:scroll;
+  right:-80%;
+  display:none;
+}
+
+
+#search_form {
+  position:fixed;
+  width:100%;
+  background-color:#360066;
+  height:100px;
+  overflow:hidden;
+}
+
+#search_form input {
+  width:65%;
+  float:left;
+  border-radius:30px;
+  border:none;
+}
+
+#results {
+	padding-top:100px;
+}
+
+#go_back {
+  float:left;
+  background-image: -ms-linear-gradient(top, #4E0094 0%, #360066 100%);
+
+/* Mozilla Firefox */ 
+background-image: -moz-linear-gradient(top, #4E0094 0%, #360066 100%);
+
+/* Opera */ 
+background-image: -o-linear-gradient(top, #4E0094 0%, #360066 100%);
+
+/* Webkit (Safari/Chrome 10) */ 
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #4E0094), color-stop(1, #360066));
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(top, #4E0094 0%, #360066 100%);
+
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to bottom, #4E0094 0%, #360066 100%);
 }
 
