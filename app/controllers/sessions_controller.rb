@@ -10,9 +10,9 @@ class SessionsController < ApplicationController
 
     if @dog_session.save
       if current_dog.is_registered?
-        redirect_to "/doghouse"
+        redirect_to "/doghouse" # dont hardcode urls
       else
-        redirect_to '/name'
+        redirect_to '/name' # dont hardcode urls
       end
     else
       render "new"

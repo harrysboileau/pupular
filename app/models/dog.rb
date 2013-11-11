@@ -42,7 +42,7 @@ class Dog < ActiveRecord::Base
   end
 
   def is_registered?
-    return self.username != nil && self.name != nil
+    self.username && self.name
   end
 
   def self.find_by_username_or_email(login)
@@ -50,13 +50,13 @@ class Dog < ActiveRecord::Base
   end
 
   def validates_password?
-    return self.crypted_password != nil
+    !!self.crypted_password
   end
 
   def validates_username?
-    return (self.crypted_password != nil || self.email != nil) && username == nil
+    return (self.crypted_password || self.email) && username == nil
   end
 
-  private
+  private # get rid of this since its not being used
 
 end
