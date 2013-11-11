@@ -18,10 +18,12 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    @event.send (params["value"].first[0]+"=").to_sym, params["value"].first[1]
-    @event.save
+    params["value"].each do |key, value|
+      @event.send((key+"=").to_sym, value)
+      @event.save
+    end
     if request.xhr?
-      render :json => { value: params["value"].first[1] }
+      render :json => params["value"].to_json
     else
       redirect_to dog_event_path(params[:dog_id], params[:id])
     end

@@ -1,7 +1,9 @@
 .users_event
   = render 'add_friend_table'
   .event_details
-    = button_to "edit", {}, {class: "title", id: "#{current_dog.id}", name: "#{params[:id]}"}
+    = button_to "edit", {}, {class: "edit_all_events", id: "#{current_dog.id}", name: "#{params[:id]}" }
+
+    = button_to "edit", {}, {class: "title", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
     #event_title
       %strong
         Title:
