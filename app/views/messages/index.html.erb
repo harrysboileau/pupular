@@ -13,7 +13,7 @@
   <h2> You don't have any messages, start sending some!</h2>
 <% end %>
 
-<div id="dogs_sent_messages">
+<div id="dogs_sent_messages" class="inactive" >
   
   <% if @sent_messages %>
     Your Sent Messages:
@@ -25,3 +25,6 @@
     <% end %>
   <% end %>
 </div>
+
+<br><%= link_to "inbox", {}, id: "show_inbox"  %>
+<%= link_to "sent messages", {}, id: "show_sent_messages" %>
