@@ -91,24 +91,39 @@ textarea {height:10%;}
   float:right;
 }
 
+.walk_or_hangout {
+  position:fixed;
+  width:60%;
+  height:60%;
+  left:20%;
+  border-radius:25px;
+  display:none;
+  color:white;
+}
 
-.bottom_nav_bar {
-  /* IE10 Consumer Preview */ 
+button.Walk, button.Hangout {
+  width:60%;
+  padding: 5% 0;
+  font-size: 30px;
+}
+
+.bottom_nav_bar, .walk_or_hangout {
+  /* IE10 Consumer Preview */
 background-image: -ms-linear-gradient(top, #4E0094 0%, #360066 100%);
 
-/* Mozilla Firefox */ 
+/* Mozilla Firefox */
 background-image: -moz-linear-gradient(top, #4E0094 0%, #360066 100%);
 
-/* Opera */ 
+/* Opera */
 background-image: -o-linear-gradient(top, #4E0094 0%, #360066 100%);
 
-/* Webkit (Safari/Chrome 10) */ 
+/* Webkit (Safari/Chrome 10) */
 background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #4E0094), color-stop(1, #360066));
 
-/* Webkit (Chrome 11+) */ 
+/* Webkit (Chrome 11+) */
 background-image: -webkit-linear-gradient(top, #4E0094 0%, #360066 100%);
 
-/* W3C Markup, IE10 Release Preview */ 
+/* W3C Markup, IE10 Release Preview */
 background-image: linear-gradient(to bottom, #4E0094 0%, #360066 100%);
 
 }
