@@ -19,10 +19,6 @@ class Profile < ActiveRecord::Base
     ["Male", "Female"]
   end
 
-    def self.gender_options
-    ["Male", "Female"]
-  end
-
   def not_empty?
     age != nil || (breed != nil && breed != "") || (location != nil && location != "") || spayed != nil || (size != nil && size != "") || (gender != nil && gender != "")
   end
