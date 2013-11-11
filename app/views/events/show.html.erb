@@ -1,4 +1,4 @@
-<% if params[:dog_id].to_i == current_dog.id  %>
+<% if Event.find(params[:id].to_i).creator_id == current_dog.id  %>
   <%= render 'users_event' %>
 <% else %>
   <%= render 'attendees_event' %>
