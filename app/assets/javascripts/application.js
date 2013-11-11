@@ -23,6 +23,7 @@ function inviteFriendsToEventError(errorMessage) {
 }
 
 $(document).ready(function() {
+  // Global search function (partial)
   $('#search_form').on("keyup", function(e) {
       e.preventDefault();
       var data = { search_term: $('#search_search_term').val()};
@@ -32,6 +33,7 @@ $(document).ready(function() {
       });
   });
 
+  // Autocomplete search for adding friends to events
   $('#event_friends_search_input').on('focus', function(e) {
     if(friends_loaded)
     {
@@ -51,6 +53,7 @@ $(document).ready(function() {
     }
   });
 
+  // Queueing friends to invite to events
   $(document).on("click", "#event_friends_search_button", function(e){
     e.preventDefault();
     var form = this.parentNode;
@@ -64,14 +67,19 @@ $(document).ready(function() {
         {
           friends_to_add.push(friend_input);
           $("#friends_list").append("<li>" + friend_input + "</li>");
+          inviteFriendsToEventError("");
         }
         else if (response.verification == "not_friend")
         {
           inviteFriendsToEventError("That's not one of your friends!");
         }
-        else if (response.verification == "already_attending")
+        else if (response.verification == "already_invited")
         {
           inviteFriendsToEventError("This friend was already invited!");
+        }
+        else if (response.verification == "self")
+        {
+          inviteFriendsToEventError("You're already attending!");
         }
         else
         {
@@ -86,10 +94,35 @@ $(document).ready(function() {
 
   });
 
+  // Sending invitations to queued friends
   $(document).on("click", ".invite_friends", function(e){
     e.preventDefault();
-    $.post("/add_friends_to_event", {"friends_to_add" : friends_to_add, "event_id" : this.id });
+    $.post("/add_friends_to_event", {"friends_to_add" : friends_to_add, "event_id" : this.id }, function(response){
+      if(response.errorMessage)
+      {
+
+      }
+      else
+      {
+        inviteFriendsToEventError("Pals invited!");
+        $("#friends_list").replaceWith("<ul id='friends_list'></ul>");
+      }
+    });
   });
+
+  // Accepting event invitations in Doghouse
+  // $(document).on("click", ".accept_invitation", function(e){
+  //   var event_id = this.id;
+  //   $.post("/accept_invitation", {"event_id" : event_id});
+  // });
+
+  // Declining event invitations in Doghouse
+  // $(document).on("click", ".decline_invitation", function(e){
+  //   var event_id = this.id;
+  //   $.post("/decline_invitation", {"event_id" : event_id});
+  // });
+
+
 
   // $('#event_friends_search_input').on("keyup", function(e) {
   //     e.preventDefault();

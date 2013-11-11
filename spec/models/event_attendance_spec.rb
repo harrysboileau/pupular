@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe EventAttendance do
   context "associations" do
-    it { should belong_to(:attendee) }
+    it { should belong_to(:attendees) }
     it { should belong_to(:attended_events) }
   end
 

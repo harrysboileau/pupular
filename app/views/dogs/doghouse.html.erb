@@ -19,8 +19,25 @@
       <%= link_to x.title, dog_event_path(current_dog,x.id) %><br>
     <% end %>
   <% else%>
-  <div class="instructions">
-    Instructions on creating events
-  </div>
+    You have no upcoming events!
+  <% end %>
+  <br>
+  <% if @invited_to_events != [] %>
+    Events you've been invited to:<br>
+    <% @invited_to_events.each do |invited_event| %>
+    <div class="invitation">
+      <%= link_to invited_event.title, dog_event_path(invited_event.creator_id, invited_event.id) %>
+      <%= button_to "Accept", accept_invitation_path(event_id: invited_event.id), {method: :post} %>
+      <%= button_to "Decline", decline_invitation_path(event_id: invited_event.id), {method: :post} %>
+    </div>
+    <% end %>
+  <% else %>
+    You have no pending event invitations!
+  <% end %>
+
+  <% if @events == [] && @invited_to_events == [] %>
+    <div class="instructions">
+      Instructions on creating events
+    </div>
   <% end %>
 </div>

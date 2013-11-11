@@ -12,6 +12,7 @@ class EventsController < ApplicationController
     @dog = Dog.find(params[:dog_id])
     @event = @dog.events.new(params[:event])
     @event.save!
+    @dog.attended_events << @event
     redirect_to doghouse_path
   end
 
