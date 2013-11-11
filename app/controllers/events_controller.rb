@@ -11,9 +11,14 @@ class EventsController < ApplicationController
   def create
     @dog = Dog.find(params[:dog_id])
     @event = @dog.events.new(params[:event])
-    @event.save!
-    @dog.attended_events << @event
-    redirect_to doghouse_path
+    begin
+      @event.save!
+    rescue
+      render json: {error: "Could not create event."}
+    else
+      @dog.attended_events << @event
+      render "_add_friend_table"
+    end
   end
 
   def update

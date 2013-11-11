@@ -103,6 +103,7 @@ $(document).ready(function() {
       }
       else
       {
+        // Re-direct to show event page once it lists friends.
         inviteFriendsToEventError("Pals invited!");
         $("#friends_list").replaceWith("<ul id='friends_list'></ul>");
       }
@@ -132,6 +133,23 @@ $(document).ready(function() {
     var type = $(this).attr("class");
     $("#event_type").val(type);
     $(".walk_or_hangout").fadeOut("slow");
+  });
+
+  // On submission of new event form, ask about inviting friends.
+  $(document).on("submit", "#new_event", function(e){
+    e.preventDefault();
+    var form = $(this).serialize();
+    var url = $(this).attr("action");
+    $.post(url, form, function(response){
+      if(response.error)
+      {
+        $(".errorMessage").html("<h2>Please fill out all fields!</h2>");
+      }
+      else
+      {
+        $(".container").replaceWith(response);
+      }
+    });
   });
 
   // $('#event_friends_search_input').on("keyup", function(e) {
