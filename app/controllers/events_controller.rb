@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
 
+  include EventHelper
+
   def show
     @event = Event.find(params[:id].to_i)
   end
@@ -10,6 +12,8 @@ class EventsController < ApplicationController
 
   def create
     @dog = Dog.find(params[:dog_id])
+    params[:event].parse_time_select! :start_time
+    params[:event][:date] = format_date(params[:event][:date])
     @event = @dog.events.new(params[:event])
     begin
       @event.save!
@@ -22,6 +26,8 @@ class EventsController < ApplicationController
   end
 
   def update
+    params[:event].parse_time_select! :start_time
+    params[:event][:date] = format_date(params[:event][:date])
     @event = Event.find(params[:id])
     params["value"].each do |key, value|
       @event.send((key+"=").to_sym, value)

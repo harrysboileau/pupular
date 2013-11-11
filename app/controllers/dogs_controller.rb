@@ -33,7 +33,7 @@ class DogsController < ApplicationController
 
   def doghouse
     @dog = current_dog
-    @events = @dog.attended_events.where("start_time > ?", DateTime.now.utc)
+    @events = @dog.attended_events #.where("start_time > ? and date > ?", DateTime.now.utc.strftime("%T"), DateTime.now.utc.strftime("%F"))
     @invitations = @dog.received_invitations.where(declined: false).all
     @invited_to_events = @invitations.map { |invitation| Event.find(invitation.event_id) }
   end

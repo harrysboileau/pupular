@@ -135,6 +135,9 @@ $(document).ready(function() {
     $(".walk_or_hangout").fadeOut("slow");
   });
 
+  // Makes date picker for event date field
+  $("input#event_date").datepicker();
+
   // On submission of new event form, ask about inviting friends.
   $(document).on("submit", "#new_event", function(e){
     e.preventDefault();

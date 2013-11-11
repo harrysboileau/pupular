@@ -28,6 +28,9 @@ gem 'jquery-ui-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'authlogic'
 
+# To select times for events
+gem "combined_time_select", "~> 1.0.1"
+
 group :development do
   gem 'pry'
   gem "better_errors"

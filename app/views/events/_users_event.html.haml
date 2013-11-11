@@ -32,17 +32,17 @@
         .field
           .value= @event.description
           = button_to "edit", {}, {class: "description", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
+    #event_date
+      %strong
+        Date:
+      %p
+        .field
+          .value= @event.date
+          = button_to "edit", {}, {class: "date", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
     #event_start_time
       %strong
         Start Time:
       %p
         .field
-          .value= @event.start_time
+          .value= @event.time
           = button_to "edit", {}, {class: "start_time", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
-    #event_end_time
-      %strong
-        End Time:
-      %p
-        .field
-          .value= @event.end_time
-          = button_to "edit", {}, {class: "end_time", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
