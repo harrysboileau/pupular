@@ -7,12 +7,17 @@
   background-color: #660066;
 }
 
-#search_and_add{
-  margin-left: 80%;
-  margin-top: -9%;
+#search_and_add_instruction{
+  margin-left: 60%;
+  margin-top: -14%;
 }
 
-#example{
+.example{
   margin-left: 175px;
   text-align: right;
+}
+
+#create_event_instruction{
+  margin-top: 90%;
+  margin-left: -3%;
 }
