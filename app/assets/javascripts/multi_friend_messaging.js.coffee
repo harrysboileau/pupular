@@ -34,8 +34,9 @@ sendMessage = (recipient, count) ->
       data: data
       type: 'POST'
       dataType: "json"
+    console.log(count)  
     if count == 1
-      window.location.href = "/doghouse"
+      setTimeout(window.location.href = "/doghouse", 3000)
 
 getMessageDetails = ->
   messageDetails =
