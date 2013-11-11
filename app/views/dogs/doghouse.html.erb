@@ -16,7 +16,7 @@
   Upcoming Events:<br>
   <% if @events != [] %>
     <% @events.each do |x| %>
-      <%= link_to x.title, dog_event_path(current_dog,x.id) %><br>
+      <%= link_to x.title, dog_event_path(current_dog,x.id) if (event.start_date - DateTime.now) > 0 %><br>
     <% end %>
   <% else%>
     You have no upcoming events!
