@@ -1,12 +1,16 @@
 
 <div id="friend_requests">
   <% if current_dog.pending_pals != [] %>
-    <% current_dog.pending_pals.each do |pal| %>
-      <%= pal.name %>  <%= button_to "accept", add_friend_path(pal.id) %> <%= button_to "reject", reject_friend_path(pal.id) %>
-    <% end %>
+  <% current_dog.pending_pals.each do |pal| %>
+  <%= pal.name %>  <%= button_to "accept", add_friend_path(pal.id) %> <%= button_to "reject", reject_friend_path(pal.id) %>
+  <% end %>
   <% else %>
-  <div class="instruction">
-    Instructions on adding friends
+  <div id="search_and_add">
+    <div class="first_time_instruction">
+      <span id="example"> Click -> </span>
+      <br><span> to search and add pals </span>
+      <%= button_to "OK", {}, { class: "proceed" } %>
+    </div>
   </div>
   <% end %>
 </div>
@@ -15,29 +19,29 @@
 <div id="current_events">
   Upcoming Events:<br>
   <% if @events != [] %>
-    <% @events.each do |x| %>
-      <%= link_to x.title, dog_event_path(current_dog,x.id) %><br>
-    <% end %>
+  <% @events.each do |x| %>
+  <%= link_to x.title, dog_event_path(current_dog,x.id) %><br>
+  <% end %>
   <% else%>
-    You have no upcoming events!
+  You have no upcoming events!
   <% end %>
   <br>
   <% if @invited_to_events != [] %>
-    Events you've been invited to:<br>
-    <% @invited_to_events.each do |invited_event| %>
-    <div class="invitation">
-      <%= link_to invited_event.title, dog_event_path(invited_event.creator_id, invited_event.id) %>
-      <%= button_to "Accept", accept_invitation_path(event_id: invited_event.id), {method: :post} %>
-      <%= button_to "Decline", decline_invitation_path(event_id: invited_event.id), {method: :post} %>
-    </div>
-    <% end %>
+  Events you've been invited to:<br>
+  <% @invited_to_events.each do |invited_event| %>
+  <div class="invitation">
+    <%= link_to invited_event.title, dog_event_path(invited_event.creator_id, invited_event.id) %>
+    <%= button_to "Accept", accept_invitation_path(event_id: invited_event.id), {method: :post} %>
+    <%= button_to "Decline", decline_invitation_path(event_id: invited_event.id), {method: :post} %>
+  </div>
+  <% end %>
   <% else %>
-    You have no pending event invitations!
+  You have no pending event invitations!
   <% end %>
 
   <% if @events == [] && @invited_to_events == [] %>
-    <div class="instructions">
-      Instructions on creating events
-    </div>
+  <div class="instructions">
+    Instructions on creating events
+  </div>
   <% end %>
 </div>
