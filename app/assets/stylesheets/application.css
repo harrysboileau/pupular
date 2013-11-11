@@ -36,7 +36,7 @@ textarea {height:10%;}
   margin:auto;
   width:80%;
   text-align:left;
-  height:150%;
+  /*height:150%;*/
   padding-top:150px;
-  padding-bottom:50px;
+  padding-bottom:150px;
 }

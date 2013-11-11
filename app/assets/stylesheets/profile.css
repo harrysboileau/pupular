@@ -12,11 +12,16 @@
 .friends_profile img {
   border-radius:100%;
   margin-top:10%;
+  padding-bottom: 100px;
 }
 
 .friend_button {
   text-align:center;
   margin:auto;
+  position:absolute;
+  bottom:10%;
+  left:10%;
+  width:80%;
 }
 
 

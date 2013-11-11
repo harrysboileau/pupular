@@ -14,7 +14,7 @@
        <% elsif @friends.include?(dog.username) %>
        FRIEND
        <% else %>
-       <%= button_to "+", friend_request_path(dog.id), class: "add_friend_button", id: dog.id %>
+       <%= link_to "+", friend_request_path(dog.id), class: "add_friend_button", id: dog.id %>
        <% end %>
 <td>
 </tr>

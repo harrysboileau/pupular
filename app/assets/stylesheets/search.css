@@ -6,7 +6,7 @@
 
 #search_item a {
   color:white;
-  text-decoration:none
+  text-decoration:none;
 }
 
 #search_item td {
@@ -24,12 +24,12 @@
   float:left;
 }
 
-
 #search {
   width:80%;
   background-color:#360066;
   height:100%;
   position:fixed;
+  top:0px;
   z-index:100000;
   overflow:scroll;
   right:-80%;

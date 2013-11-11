@@ -36,7 +36,7 @@
 }
 
 .bottom_nav_bar ul li img {
-  margin-top:5%;
+  margin-top:15%;
   opacity:.4;
 }
 
@@ -92,12 +92,15 @@ background-image: linear-gradient(to bottom, #4E0094 0%, #360066 100%);
 
 .walk_or_hangout {
   position:fixed;
-  width:60%;
-  height:60%;
+  width:50%;
   left:20%;
+  top:20%;
   border-radius:25px;
   display:none;
   color:white;
+  padding:5%;
+  text-align:center;
+  box-shadow:0px 0px 10px #474747;
 }
 
 button.Walk, button.Hangout {
