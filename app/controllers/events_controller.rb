@@ -12,12 +12,13 @@ class EventsController < ApplicationController
     @dog = Dog.find(params[:dog_id])
     @event = @dog.events.new(params[:event])
     begin
+      # wrap this in an activerecord transaction
       @event.save!
-    rescue
+      @dog.attended_events << @event
+    rescue # it'd be ideal to specify the type of exception you want to catch
       render json: {error: "Could not create event."}
     else
-      @dog.attended_events << @event
-      render "_add_friend_table"
+      render "_add_friend_table" # render :partial => "add_friend_table"
     end
   end
 

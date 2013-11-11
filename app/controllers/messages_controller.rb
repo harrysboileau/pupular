@@ -6,15 +6,15 @@ class MessagesController < ApplicationController
 
   def new
     @dog = current_dog
-    
+
     @message_id = (params[:message_id]).to_i
     if @message_id > 0
       @message_to_reply = Message.find(@message_id)
       @dog_to_reply = Dog.find(@message_to_reply.sender_id)
       @dog_username_to_reply = @dog_to_reply.username
-      render '_reply'
+      render '_reply' # render :partial => "reply"
     else
-      render '_new'
+      render '_new' # render :partial => "new"
     end
   end
 
@@ -22,12 +22,14 @@ class MessagesController < ApplicationController
 
   def create
     @receiver_name = params[:message][:dog_id]
-    @receiver_name  
+    @receiver_name # WHAT IS THIS?
     @receiver = Dog.find_by_username(@receiver_name)
-    @receiver
+    @receiver # WHAT IS THIS?
     @sender = current_dog
 
-    @receiver.received_messages << @sender.sent_messages.create(type:"Personal",subject:params[:message][:subject],content:params[:message][:content])
+    @receiver.received_messages << @sender.sent_messages.create(type:"Personal",
+                                                                subject: params[:message][:subject],
+                                                                content:params[:message][:content])
     redirect_to doghouse_path(current_dog)
   end
 

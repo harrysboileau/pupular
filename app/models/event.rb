@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
 
   attr_accessible :description, :location, :title, :type, :start_time, :end_time
 end
+
 class Hangout < Event
 end
 
