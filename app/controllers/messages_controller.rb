@@ -18,17 +18,22 @@ class MessagesController < ApplicationController
     end
   end
 
-
+  def get_id
+    dog = Dog.find_by_username_or_email(params["data"])
+    if request.xhr?
+      render json: {dog_id: dog.id }
+    end
+  end
 
   def create
-    @receiver_name = params[:message][:dog_id]
-    @receiver_name  
-    @receiver = Dog.find_by_username(@receiver_name)
-    @receiver
+    @receiver = Dog.find(params[:dog_id])
     @sender = current_dog
-
-    @receiver.received_messages << @sender.sent_messages.create(type:"Personal",subject:params[:message][:subject],content:params[:message][:content])
-    redirect_to doghouse_path(current_dog)
+    @receiver.received_messages << @sender.sent_messages.create(type:params[:type],subject:params[:subject],content:params[:content])
+    if request.xhr
+      render 'messages/index'
+    else
+      redirect_to dog_messages_path
+    end        
   end
 
   def destroy

@@ -3,11 +3,14 @@
 <%= form_for :message, url:dog_messages_path(current_dog) do |f| %>
 <%= f.label :subject, "Subject" %><br/>
 <%= f.text_field :subject, placeholder: "Message Subject" %><br>
-<%= f.label :dog_id, "Recipient" %><br/>
-<%= f.text_field :dog_id, placeholder: "Who's the message to?" %><br>
+  <%= form_tag do %>
+    <%= label_tag :dog_id, "Recipient" %><br/>
+    <%= text_field_tag :dog_id, nil, placeholder: "Who's the message to?" %><br>
+    <%= submit_tag "+", id: "multi_friend_message_add" %>
+  <% end %>
 <%= f.label :content, "Message" %><br/>
 <%= f.text_area :content, placeholder: "What would you like to say?" %><br>
-<%= f.submit 'throw a bone', class:"call_to_action"%>
+<%= f.submit 'throw a bone', { class:"call_to_action", id:"message_submit"}%>
 <% end %>
 
 </div>
