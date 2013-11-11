@@ -10,12 +10,16 @@ class Profile < ActiveRecord::Base
 
 
   mount_uploader :image, ImageUploader
-  
+
   def self.size_options
     ["Toy", "Small", "Medium", "Large", "Extra-large"]
   end
 
   def self.gender_options
+    ["Male", "Female"]
+  end
+
+    def self.gender_options
     ["Male", "Female"]
   end
 

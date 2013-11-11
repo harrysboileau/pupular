@@ -6,9 +6,9 @@
 <td><%= image_tag dog.profile.image_url(:thumb) if dog.profile.image? %></td>
 <% else %>
 <td></td>
-<% end %>
+<% end %></%>
 <td><%= link_to "#{dog.name}", dog_path(dog) %></td>
-<td id="#{dog.id}">
+<td style="text-align:right" id="#{dog.id}">
        <% if @sent_requests.include?(dog.username)%>
        SENT
        <% elsif @friends.include?(dog.username) %>

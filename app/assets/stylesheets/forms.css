@@ -1,0 +1,38 @@
+#sign_in_form {
+  margin:auto;
+  text-align:left;
+  width:80%;
+}
+
+#sign_in_form h1 {
+
+  font-size:50px;
+  margin-top:0px;
+  color:#360066;
+  font-weight:bold;
+  font-family:"Comic Sans MS", sans-serif;
+
+}
+
+#filler {
+  position:relative;
+  padding:20px;
+}
+
+
+#image_field {
+  position:absolute;
+  top:0px;
+  left:0px;
+  opacity:0;
+  z-index:10000;
+}
+
+#upload_button {
+  position:absolute;
+  top:10px;
+  left:0px;
+  background-color:#474747;
+  color:#e8e8e8;
+  padding:5px 20px;
+}

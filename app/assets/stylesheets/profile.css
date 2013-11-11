@@ -1,0 +1,68 @@
+.users_profile, .friends_profile {
+  background-color:#e8e8e8;
+  padding-bottom:200px;
+}
+
+.friends_profile {
+  text-align:center;
+  position:relative;
+  margin:auto;
+}
+
+.friends_profile img {
+  border-radius:100%;
+  margin-top:10%;
+}
+
+.friend_button {
+  text-align:center;
+  margin:auto;
+}
+
+
+.label {
+  color:#360066;
+}
+
+h3{
+  font-size:60px;
+
+  width:50%;
+  margin:auto;
+  margin-top:5%;
+  margin-bottom:0;
+}
+
+.edit_all_profile {
+  font-size:30px;
+  font-family:Arial;
+  width:75%;
+  height:75px;
+  font-weight:normal;
+  -moz-border-radius:8px;
+  -webkit-border-radius:8px;
+  border-radius:8px;
+  border:1px solid #dcdcdc;
+  padding:6px 27px;
+  text-decoration:none;
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #4f0094), color-stop(100%, #360066) );
+  background:-moz-linear-gradient( center top, #4f0094 5%, #360066 100% );
+  background:-ms-linear-gradient( top, #4f0094 5%, #360066 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4f0094', endColorstr='#360066');
+  background-color:#4f0094;
+  color:#ffffff;
+  display:inline-block;
+}.call_to_action:hover {
+  background:-webkit-gradient( linear, left top, left bottom, color-stop(5%, #360066), color-stop(100%, #4f0094) );
+  background:-moz-linear-gradient( center top, #360066 5%, #4f0094 100% );
+  background:-ms-linear-gradient( top, #360066 5%, #4f0094 100% );
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#360066', endColorstr='#4f0094');
+  background-color:#360066;
+}.call_to_action:active {
+  position:relative;
+  top:1px;
+}
+}
+
+.add_friend_button {
+}
