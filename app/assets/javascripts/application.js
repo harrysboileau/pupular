@@ -42,7 +42,6 @@ $(document).ready(function() {
     else
     {
       e.preventDefault();
-      console.log("click click");
       $.post('/load_friends', function(response){
         friends = response.friends;
         $('#event_friends_search_input').autocomplete({
@@ -122,7 +121,18 @@ $(document).ready(function() {
   //   $.post("/decline_invitation", {"event_id" : event_id});
   // });
 
+  // Fading in hangout/walk button on New Event page
+  $(".walk_or_hangout").fadeIn("slow");
 
+  // On click of Walk/Hangout buttons, update hidden field (for event type) value
+  // appropriately and fade out the walk_or_hangout div
+
+  $(document).on("click", ".walk_or_hangout button", function(e){
+    e.preventDefault();
+    var type = $(this).attr("class");
+    $("#event_type").val(type);
+    $(".walk_or_hangout").fadeOut("slow");
+  });
 
   // $('#event_friends_search_input').on("keyup", function(e) {
   //     e.preventDefault();
@@ -143,19 +153,19 @@ $(document).ready(function() {
 
   $("#go_back").click(function(e) {
     e.preventDefault();
-    $("#search").animate({right:'-80%'})
+    $("#search").animate({right:'-80%'});
     // IntervalTime thing it $("#search").hide();
-  })
+  });
 
 
   $(document).on("click", ".add_friend_button", function(e) {
     e.preventDefault();
     var id = $(this).attr('id');
     console.log(id);
-    var data = { pending_pal_id: id}
+    var data = { pending_pal_id: id};
     $.post('/friend_request/' + id, data, function(response) {
       $('#' + id).replaceWith("~/");
-    })
+    });
   })
 
 });

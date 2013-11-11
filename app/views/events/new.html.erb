@@ -1,5 +1,16 @@
+<div class="walk_or_hangout">
+  Are you making a:
+  <br><br>
+  <button class="Walk">Walk</button>
+  <br><br>
+  or
+  <br><br>
+  <button class="Hangout">Hangout</button>
+  <br>
+</div>
 <%= form_for [current_dog, @event] do |f| %>
-<%= f.text_field :type, placeholder: "Type (Walk or Hangout)" %><br>
+
+<%= f.hidden_field :type, value: nil %>
 <%= f.text_field :title, placeholder: "Event Title" %><br>
 <%= f.text_field :location, placeholder: "Event Location" %><br>
 Start time:<%= f.datetime_select :start_time %><br/>
