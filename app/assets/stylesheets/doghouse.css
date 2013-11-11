@@ -1,0 +1,23 @@
+.first_time_instruction{
+  width: 300px;
+  position: absolute;
+  z-index: 501;
+  height: 100px;
+  border: solid 1px black;
+  background-color: #660066;
+}
+
+#search_and_add_instruction{
+  margin-left: 60%;
+  margin-top: -14%;
+}
+
+.example{
+  margin-left: 175px;
+  text-align: right;
+}
+
+#create_event_instruction{
+  margin-top: 90%;
+  margin-left: -3%;
+}
