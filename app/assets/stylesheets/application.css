@@ -13,3 +13,30 @@
  *= require_tree .
  */
 
+ html {
+  height:100%;
+ }
+
+ body {
+  padding:0px;
+  margin:0px;
+  font-family:arial;
+  text-align:center;
+    font-size:30px;
+    height:100%;
+ }
+
+ form {line-height:50px;}
+
+ input,textarea {padding:20px;font-size:30px;width:80%;}
+textarea {height:10%;}
+
+
+.container {
+  margin:auto;
+  width:80%;
+  text-align:left;
+  /*height:150%;*/
+  padding-top:150px;
+  padding-bottom:150px;
+}

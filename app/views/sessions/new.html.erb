@@ -1,4 +1,5 @@
-Sign-In form
+<div id="sign_in_form">
+<h1>Welcome Back</h1>
 
 <%= form_for :dog_session, { url: "/sessions", method: "post" } do |f| %>
 
@@ -14,13 +15,14 @@ Sign-In form
     </div>
   <% end %>
 
-<%= f.label "Email or Username" %>
-<%= f.text_field :username %>
+<%= f.label "Email or Username" %><br/>
+<%= f.text_field :username, placeholder: "Username" %>
 <br>
-<%= f.label "Password" %>
-<%= f.password_field (:password) %>
+<%= f.label "Password" %><br/>
+<%= f.password_field (:password), placeholder: "Password" %>
 <br>
 <br>
-<%= f.submit "Sign In" %>
+<%= f.submit "Log In", class: "call_to_action" %>
 
 <% end %>
+</div>

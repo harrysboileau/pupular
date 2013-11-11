@@ -1,14 +1,27 @@
 .friends_profile
-  = button_to "+", friend_request_path(@dog.id), class: "add_friend_button", id: @dog.id unless (current_dog.pals.include?(@dog) || @dog.pending_pals.include?(current_dog) )
+
   -if @dog.profile
     = image_tag @dog.profile.image_url(:profile) if @dog.profile.image?
     -@profile = @dog.profile
     %h3= @dog.name
-    %p= "Breed: #{@profile.breed}"
-    %p= "Location: #{@profile.location}"
-    %p= "Age: #{@profile.age} years old"
-    %p= "Size: #{@profile.size}"
-    %p= "Gender: #{@profile.gender}"
-    %p= "Fixedx`?: #{@profile.spayed}"
+    %p
+      #{@profile.breed}
+      = button_to "Add Friend", friend_request_path(@dog.id), class: "add_friend_button friend_button", id: @dog.id unless (current_dog.pals.include?(@dog) || @dog.pending_pals.include?(current_dog) )
+
+    %p
+      .label Location:
+      #{@profile.location}
+    %p
+      .label Age:
+      #{@profile.age} years old
+    %p
+      .label Size:
+      #{@profile.size}
+    %p
+      .label Gender:
+      #{@profile.gender}
+    %p
+      .label Fixed?:
+      #{@profile.spayed}
   -else
     %h4= "Sorry #{@dog.name} hasn't filled out her profile yet"

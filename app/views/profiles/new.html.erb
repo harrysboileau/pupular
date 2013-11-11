@@ -1,4 +1,6 @@
-Make your profile or <%= link_to "skip", doghouse_path %>
+<div id="sign_in_form">
+<h1>Make your profile <%= link_to "skip", doghouse_path %>
+</h1>
 <%= current_dog.profile %>
 <%= form_for @profile, :html => {:multipart => true} do |f| %>
 
@@ -14,19 +16,31 @@ Make your profile or <%= link_to "skip", doghouse_path %>
   </div>
 <% end %>
 
-<%= f.file_field :image %><br>
+<%= f.label "Breed" %><br/>
 <%= f.text_field :breed, {placeholder: "Breed"} %><br>
+<%= f.label "Location" %><br/>
 <%= f.text_field :location, {placeholder: "Location"} %><br>
+<%= f.label "Age" %><br/>
 <%= f.number_field :age, {placeholder: "Age"} %><br>
-
+<%= f.label "Size:" %><br/>
 <%= f.select :size, Profile.size_options, { prompt: "Select a size" } %><br>
+<%= f.label "Gender:" %><br/>
 <%= f.select :gender, Profile.gender_options, { prompt: "Select a gender" } %><br>
 
 
-<%= f.label :spayed, "Fixed?" %>
-<%= f.radio_button :spayed, true %><%=f.label :spayed, "Yes" %>
-<%= f.radio_button :spayed, false %><%=f.label :spayed, "No" %><br>
-<%= f.submit "MAKE PROFILE" %>
+<%= f.label :spayed, "Fixed?" %><br/>
+<%= f.select :spayed, [['Yes', true], ['No',false]] %><br/>
+<div id="filler">
+<div id="image_field">
+<%= f.file_field :image %>
+</div>
+<div id="upload_button">
+  Upload Photo
+</div>
+</div>
+<br/>
+<%= f.submit "Make Profile", class: "call_to_action" %>
 
 
 <% end %>
+</div>
