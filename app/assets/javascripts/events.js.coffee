@@ -74,12 +74,12 @@ newEventTrait = (value) ->
 addEventForm = (dog_id, event_id) ->
     $('.event_details').wrap("<form id='mass_event'></form>")
     $('.event_details').append("<input id='mass_event_button' type='submit' value='update'>")
-    $('#event_title .field .value').replaceWith(renderEventTextField("title", $('#event_title .field .value').text()))
-    $('#event_type .field .value').replaceWith(renderEventDropdownBox("type", ["Walk", "Hangout"], $('#event_type .field .value').text()))
-    $('#event_place .field .value').replaceWith(renderEventTextField("place", $('#event_place .field .value').text()))
-    $('#event_description .field .value').replaceWith(renderEventTextBox("description", $('#event_description .field .value').text()))
-    $('#event_start_time .field .value').replaceWith(renderEventTimeDisplay("start_time", $('#event_start_time .field .value').text()))
-    $('#event_end_time .field .value').replaceWith(renderEventTimeDisplay("end_time", $('#event_end_time .field .value').text()))
+    $('#event_title .value').replaceWith(renderEventTextField("title", $('#event_title .value').text()))
+    $('#event_type .value').replaceWith(renderEventDropdownBox("type", ["Walk", "Hangout"], $('#event_type .value').text()))
+    $('#event_place .value').replaceWith(renderEventTextField("place", $('#event_place .value').text()))
+    $('#event_description .value').replaceWith(renderEventTextBox("description", $('#event_description .value').text()))
+    $('#event_start_time .value').replaceWith(renderEventTimeDisplay("start_time", $('#event_start_time .value').text()))
+    $('#event_end_time .value').replaceWith(renderEventTimeDisplay("end_time", $('#event_end_time .value').text()))
 
 listenForEventMassSubmit = (dog_id, event_id) ->
     $('#mass_event').on "submit", (event) ->
@@ -134,7 +134,7 @@ $ ->
         dog_id = this.id
         event_id = this.name
         $(this).toggle()
-        editEventField($('#event_title .field .value'), 'title', $('#event_title .field .value').text())
+        editEventField($('#event_title .value'), 'title', $('#event_title .value').text())
         listenForEventSubmit('#event_title', 'title', dog_id, event_id, button)
 
     $('input.type').on "click", (event) ->
@@ -143,7 +143,7 @@ $ ->
         dog_id = this.id
         event_id = this.name
         $(this).toggle()
-        editEventSelect($('#event_type .field .value'), 'type')
+        editEventSelect($('#event_type .value'), 'type')
         listenForEventSubmit('#event_type', 'type', dog_id, event_id, button)
 
     $('input.location').on "click", (event) ->
@@ -152,7 +152,7 @@ $ ->
         dog_id = this.id
         event_id = this.name
         $(this).toggle()
-        editEventField($('#event_place .field .value'), 'location', $('#event_place .field .value').text())
+        editEventField($('#event_place .value'), 'location', $('#event_place .value').text())
         listenForEventSubmit('#event_place', 'location', dog_id, event_id, button)
 
     $('input.description').on "click", (event) ->
@@ -161,7 +161,7 @@ $ ->
         dog_id = this.id
         event_id = this.name
         $(this).toggle()
-        editEventBox($('#event_description .field .value'), 'description', $('#event_description .field .value').text())
+        editEventBox($('#event_description .value'), 'description', $('#event_description .value').text())
         listenForEventSubmit('#event_description', 'description', dog_id, event_id, button)
 
     $('input.start_time').on "click", (event) ->
@@ -170,7 +170,7 @@ $ ->
         dog_id = this.id
         event_id = this.name
         $(this).toggle()
-        editEventTime($('#event_start_time .field .value'), 'start_time', $('#event_start_time .field .value').text())
+        editEventTime($('#event_start_time .value'), 'start_time', $('#event_start_time .value').text())
         listenForEventSubmit('#event_start_time', 'start_time', dog_id, event_id, button)
 
     $('input.end_time').on "click", (event) ->
@@ -179,5 +179,5 @@ $ ->
         dog_id = this.id
         event_id = this.name
         $(this).toggle()
-        editEventTime($('#event_end_time .field .value'), 'end_time', $('#event_end_time .field .value').text())
+        editEventTime($('#event_end_time .value'), 'end_time', $('#event_end_time .value').text())
         listenForEventSubmit('#event_end_time', 'end_time', dog_id, event_id, button)
