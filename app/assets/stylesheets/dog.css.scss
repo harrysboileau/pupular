@@ -3,16 +3,29 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #search_item {
-  background-color:grey;
   text-align:left;
   width:100%;
+}
+#search_item a {
+	color:white;
+	text-decoration:none
+}
+
+#search_item td {
+	border-bottom:2px dotted black;
 }
 
 .search_item img {
   float:left;
 }
 
-.button {
-
+.add_friend_button {
   float:right;
+  background-color:#41db00;
+  border-radius:20px;
+  line-height:20px;
+  font-size:30px;
+  color:white;
+  font-weight:bold;
 }
+

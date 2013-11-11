@@ -4,6 +4,8 @@
   <title>Pupular</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+<meta name="viewport"  user-scalable=no"/>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -11,17 +13,21 @@
   <% if current_dog && current_dog.is_registered? %>
     <%= render "layouts/top_navigation" %>
     <%= render "layouts/search" %>
-  
+    <div class="container">
 
 
+  <% else %>
 
+
+      <div class="landing_container">
 
   <% end %>
-  <div class="container">
+
     <%= yield %>
   </div>
   <% if current_dog && current_dog.is_registered? %>
     <%= render "layouts/bottom_navigation" %>
+
   <% end %>
 
 
