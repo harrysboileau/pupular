@@ -1,17 +1,21 @@
+exports = this
+exports.tally = 0
+
 addFriendTo = (array) ->
   name = getRecipientName()
   array.push(name)
 
 getRecipientName = ->
-  return $('input#dog_id').val()
+  return $('input#message_friends_search_input').val()
 
 clearRecipientField = ->
-  $('input#dog_id').val("")
+  $('input#message_friends_search_input').val("")
 recipientsList = []
 
 postAllMessages = ->
   count = recipientsList.length
-  sendMessageTo(dog,count--) for dog in recipientsList
+  sendMessageTo(dog,count) for dog in recipientsList
+
 
 sendMessageTo = (name, count) ->
   getIdOf({ "data" : name }, count)
@@ -26,17 +30,15 @@ getIdOf = (dog, count) ->
             sendMessage(response, count)
 
 sendMessage = (recipient, count) ->
-    console.log(recipient)
     data = getMessageDetails()
-    console.log(data)
     $.ajax
       url: "/dogs/#{recipient["dog_id"]}/messages"
       data: data
       type: 'POST'
       dataType: "json"
-    console.log(count)  
-    if count == 1
-      setTimeout(window.location.href = "/doghouse", 3000)
+    exports.tally++
+    if exports.tally == count
+      window.location = "/dogs/#{recipient["current_dog_id"]}/messages"
 
 getMessageDetails = ->
   messageDetails =
@@ -44,12 +46,13 @@ getMessageDetails = ->
     content: $('textarea#message_content').val()
     type: "Personal"
 
-
 $ ->
   $('#multi_friend_message_add').on "click", (event) ->
     event.preventDefault()
     addFriendTo(recipientsList)
+    value = $('input#message_friends_search_input').val()
     clearRecipientField()
+    $('#friends_to_message').append(value + '<br>')
 
   $('input#message_submit.call_to_action').on "click", (event) ->
     event.preventDefault()
