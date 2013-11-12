@@ -5,10 +5,20 @@ class Event < ActiveRecord::Base
   has_many :invitations
   has_many :invited_pals, through: :invitations
 
-  validates_presence_of :creator_id, :title, :description, :location, :type, :start_time, :end_time
+  validates_presence_of :creator_id, :title, :description, :location, :type, :start_time, :date
   validates :type, inclusion: { in: ["Walk", "Hangout"], message:"%{value} is not a type" }
 
-  attr_accessible :description, :location, :title, :type, :start_time, :end_time
+  attr_accessible :description, :location, :title, :type, :start_time, :date
+
+  def time
+    hour = self.start_time.strftime("%H").to_i
+    if hour < 12
+      self.start_time.strftime("%H:%M AM")
+    else
+      hour -= 12
+      hour.to_s + (self.start_time.strftime(":%M PM"))
+    end
+  end
 end
 class Hangout < Event
 end

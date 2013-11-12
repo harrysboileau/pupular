@@ -3,39 +3,32 @@
     %tr#event_title
       %td
         %strong Title:
-      / .field
       %td.value= @event.title
       %td= button_to "edit", {}, {class: "title", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
     %tr#event_type
       %td
-        %strong type:
-      / .field
+        %strong Type:
       %td.value= @event.type
       %td= button_to "edit", {}, {class: "type", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
     %tr#event_place
       %td
         %strong Place:
-      / .field
       %td.value= @event.location
       %td= button_to "edit", {}, {class: "location", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
     %tr#event_description
       %td
         %strong Description:
-      / .field
       %td.value= @event.description
       %td= button_to "edit", {}, {class: "description", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
+    %tr#event_date
+      %td
+        %strong Date:
+      %td.value= @event.date
+      %td= button_to "edit", {}, {class: "date", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
     %tr#event_start_time
       %td
         %strong Start Time:
-      / .field
-      %td.value= @event.start_time
+      %td.value= @event.time
       %td= button_to "edit", {}, {class: "start_time", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
-    %tr#event_end_time
-      %td
-        %strong End Time:
-      / .field
-      %td.value= @event.end_time
-      %td= button_to "edit", {}, {class: "end_time", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
-
-  = button_to "edit", {}, {class: "edit_all_events", id: "#{current_dog.id}", name: "#{params[:id]}" }
-  = render 'add_friend_table'
+= button_to "edit", {}, {class: "edit_all_events", id: "#{current_dog.id}", name: "#{params[:id]}" }
+= render 'add_friend_table'

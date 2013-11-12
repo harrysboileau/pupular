@@ -5,7 +5,7 @@ editEventBox = (location, name, value) ->
     location.replaceWith(editEventTextBox(name, value))
 
 editEventTime = (location, name, value) ->
-    location.replaceWith(editEventTimeDisplay(name, time))
+    location.replaceWith(editEventStartTimeDisplay(name, time))
 
 convertEventDatetime = (value) ->
     "#{value[0..9]}T#{value[11..18]}"
@@ -61,12 +61,12 @@ renderSelections = (array) ->
     string = ""
     string + "<option value='#{value}'>#{value}</option>" for value in array
 
-editEventTimeDisplay = (name, value) ->
-    "<form>#{renderEventTimeDisplay(name, value)}<input type='submit' value='update'></form>"
+editEventStartTimeDisplay = (name, value) ->
+    "<form>#{renderEventStartTimeDisplay(name, value)}<input type='submit' value='update'></form>"
 
-renderEventTimeDisplay = (name, value) ->
-    time = convertEventDatetime(value)
-    "<input  id='#{name}'  type='datetime-local' name='#{name}' value='#{time}'>"
+renderEventStartTimeDisplay = (name, value) ->
+    time = value
+    "<select id='event_start_time_5i' name='event[start_time(5i)]'>#{renderSelections}</select>"
 
 newEventTrait = (value) ->
     "<div class='field'><div class='value'>#{value.value}</div></div>"
@@ -78,10 +78,11 @@ addEventForm = (dog_id, event_id) ->
     $('#event_type .value').replaceWith(renderEventDropdownBox("type", ["Walk", "Hangout"], $('#event_type .value').text()))
     $('#event_place .value').replaceWith(renderEventTextField("place", $('#event_place .value').text()))
     $('#event_description .value').replaceWith(renderEventTextBox("description", $('#event_description .value').text()))
-    $('#event_start_time .value').replaceWith(renderEventTimeDisplay("start_time", $('#event_start_time .value').text()))
-    $('#event_end_time .value').replaceWith(renderEventTimeDisplay("end_time", $('#event_end_time .value').text()))
+    $('#event_date .value').replaceWith(renderEventTextField("date", $("#event_date .value").text()))
+    $('input#date').datepicker();
+    $('#event_start_time .value').replaceWith(renderEventDropdownBox("time", ["05:00", "05:30", "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"], $('#event_start_time .value').text()))
 
-listenForEventMassSubmit = (dog_id, event_id) ->
+listenForEventMassSubmit = (dog_id, event_id, button) ->
     $('#mass_event').on "submit", (event) ->
         event.preventDefault()
         data = {}
@@ -89,6 +90,7 @@ listenForEventMassSubmit = (dog_id, event_id) ->
         submitMassProfileData(data, dog_id, event_id)
         $('.event_details').unwrap()
         $('#mass_event_button').remove()
+        $(button).toggle()
 
 getEventData = ->
     eventData =
@@ -96,8 +98,8 @@ getEventData = ->
         type: $('select#type').val()
         location: $('input#place').val()
         description: $('textarea#description').val()
-        start_time: $('input#start_time').val()
-        end_time: $('input#end_time').val()
+        date: $('input#date').val()
+        start_time: $('select#time').val()
 
 submitMassProfileData = (data, dog_id, event_id) ->
     $.ajax
@@ -113,8 +115,8 @@ renderMassEventUpdate = (response) ->
     $('select#type').replaceWith(newMassEventTrait("type", response))
     $('input#place').replaceWith(newMassEventTrait("location", response))
     $('textarea#description').replaceWith(newMassEventTrait("description", response))
-    $('input#start_time').replaceWith(newMassEventTrait("start_time", response))
-    $('input#end_time').replaceWith(newMassEventTrait("end_time", response))
+    $('input#date').replaceWith(newMassEventTrait("date", response))
+    $('select#time').replaceWith(newMassEventTrait("start_time", response))
 
 newMassEventTrait = (key, value) ->
     "<div class='field'><div class='key'>#{value[key]}</div></div>"
@@ -126,7 +128,7 @@ $ ->
         event_id = this.name
         $(this).toggle();
         addEventForm()
-        listenForEventMassSubmit(dog_id, event_id)
+        listenForEventMassSubmit(dog_id, event_id, this)
 
     $('input.title').on "click", (event) ->
         event.preventDefault()

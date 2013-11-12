@@ -17,10 +17,20 @@
 <%= f.text_field :title, placeholder: "Event Title" %><br>
 <%= f.label :location, "Location"%><br/>
 <%= f.text_field :location, placeholder: "Event Location" %><br>
+<%=f.label :date %><br>
+<%=f.text_field :date %><br>
 <%= f.label :start_time, "Start Time"%><br/>
-<%= f.datetime_select :start_time %><br/>
-<%= f.label :end_time, "End Time"%><br/>
-<%= f.datetime_select :end_time %><br/>
+<%= f.time_select :start_time,
+  :combined => true,
+  :default => (Time.at((((Time.now.to_i+900)/1800).round)*1800)),
+  :minute_interval => 30,
+  :time_separator => "",
+  :start_hour => 5,
+  :start_minute => 0,
+  :end_hour => 23,
+  :end_minute => 30
+%>
+<br/>
 <%= f.label :description, "Description"%><br/>
 
 <%= f.text_area :description, placeholder: "Event Description" %><br>
