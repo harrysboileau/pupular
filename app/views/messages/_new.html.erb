@@ -5,9 +5,11 @@
 <%= f.text_field :subject, placeholder: "Message Subject" %><br>
   <%= form_tag do %>
     <%= label_tag :dog_id, "Recipient" %><br/>
-    <%= text_field_tag :dog_id, nil, placeholder: "Who's the message to?" %><br>
+    <%= text_field_tag :dog_id, nil, {id:"message_friends_search_input", placeholder: "Who's the message to?"} %><br>
     <%= submit_tag "+", id: "multi_friend_message_add" %>
   <% end %>
+  <div id='friends_to_message'>
+  </div>
 <%= f.label :content, "Message" %><br/>
 <%= f.text_area :content, placeholder: "What would you like to say?" %><br>
 <%= f.submit 'throw a bone', { class:"call_to_action", id:"message_submit"}%>

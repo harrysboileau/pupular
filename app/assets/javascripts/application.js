@@ -33,6 +33,22 @@ $(document).ready(function() {
       });
   });
 
+  $('#message_friends_search_input').on('focus', function(e){
+    if(friends_loaded){
+      return null;
+    }
+    else{
+      e.preventDefault();
+      $.post('/load_friends', function(response){
+        friends = response.friends;
+        $('#message_friends_search_input').autocomplete({
+          source: friends
+        });
+      });
+      friends_loaded = true;
+    }
+  });
+
   // Autocomplete search for adding friends to events
   $('#event_friends_search_input').on('focus', function(e) {
     if(friends_loaded)

@@ -22,9 +22,9 @@ class MessagesController < ApplicationController
   end
 
   def get_id
-    dog = Dog.find_by_username_or_email(params["data"])
+    dog = Dog.find_by_name(params["data"])
     if request.xhr?
-      render json: {dog_id: dog.id }
+      render json: {dog_id: dog.id, current_dog_id: current_dog.id }
     end
   end
 
@@ -33,7 +33,7 @@ class MessagesController < ApplicationController
     @sender = current_dog
     @receiver.received_messages << @sender.sent_messages.create(type:params[:type],subject:params[:subject],content:params[:content])
     if request.xhr?
-      render 'messages/index'
+      render :nothing => true
     else
       redirect_to dog_messages_path
     end        
