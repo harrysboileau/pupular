@@ -124,7 +124,7 @@ class DogsController < ApplicationController
   end
 
   def camera
-
+    @qr = Qr.new
   end
 
   def qr
@@ -132,15 +132,13 @@ class DogsController < ApplicationController
 
   def decode
 
-    name = "qr_pic.jpeg"
-    directory = "public/uploads"
-    path = File.join(directory, name)
-    url = ""
-    File.open(path, "wb") do |f|
-      f.write(params[:qr_pic].read)
-    end
-    url = ZXing.decode path
-    redirect_to url
+    @qr = Qr.create(params[:qr])
+
+    path = 'public/uploads/qr/image/profile_something.jpg'
+
+    decoded_image = ZBar::Image.from_jpeg(File.read(path)).process
+
+    redirect_to decoded_image[0].data
   end
 
 end

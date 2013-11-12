@@ -1,4 +1,4 @@
-<%= form_tag '/decode', multipart: true do %>
-<%= file_field_tag "qr_pic", {accept: "image/*"} %>
+<%= form_for @qr, {html: {:multipart => true}, url: '/decode', multipart: true } do %>
+<%= file_field :qr, :image, {accept: "image/*"} %>
 <%=submit_tag%>
 <% end %>
