@@ -1,0 +1,49 @@
+.first_time_instructions{
+  padding:30px;
+  background-color:#e8e8e8;
+  box-shadow:0px 0px 20px #474747;
+  border-radius:10px;
+  color:#360066;
+  position:relative;
+  text-align:left;
+  border:1px dotted #474747;
+  font-size:30px;
+
+
+}
+
+.first_time_instructions a {
+  padding:10px;
+  background-color:#474747;
+  border-radius:100%;
+  color:white;
+  text-decoration:none;
+  margin-left:50px;
+
+
+}
+
+#search_and_add_instructions{
+  position:fixed;
+
+  top:10%;
+  right:10%;
+  text-align:left;
+}
+
+#search_and_add_instructions a{
+  top:2px;
+  left:2px;
+}
+
+#create_event_instructions{
+  position:fixed;
+  bottom:10%;
+  padding:100px;
+  left:0%;
+}
+
+#create_event_instructions a{
+  bottom:2px;
+  left:1px;
+}

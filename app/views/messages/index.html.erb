@@ -1,13 +1,47 @@
 <%= link_to 'write a message', new_dog_message_path(current_dog) %><br>
+<%= link_to "inbox", {}, id: "show_inbox"  %>
+<%= link_to "sent messages", {}, id: "show_sent_messages" %><br>
 
-<% if @inbox != [] %>
+<div id="dog_inbox">
+<% if current_dog.received_messages != [] %>
+  Your received messages:
+  <table>
+    <tr>
+      <td><strong>Sender</strong></td>
+      <td><strong>Subject</strong></td>
+      <td><strong>Message</strong></td>
+    </tr>
   <% @inbox.each do |x| %>
-    Sender: <%= Dog.find(x.sender_id).name %><br>
-    Subject:<%= x.subject %><br/>
-    Message:<%= x.content %><br/>
-    <%= link_to "Reply to Message", new_dog_message_path(message_id: x.id) %>
-    <%= button_to "Delete Message", dog_message_path(x.sender_id, x.id), { method: :delete } %>
-  <% end %>
+    <tr>
+    <td><%= Dog.find(x.sender_id).name %></td>
+    <td><%= x.subject %></td>
+    <td><%= x.content %></td>
+    <td><%= link_to "Reply to Message", new_dog_message_path(message_id: x.id) %></td>
+    <td><%= link_to "Delete Message", dog_message_path(x.sender_id, x.id), { method: :delete } %></td>
+  </tr>
+<% end %>
+</table>
 <% else %>
   <h2> You don't have any messages, start sending some!</h2>
 <% end %>
+</div>
+
+<div id="dogs_sent_messages" class="not_active">  
+  <% if @sent_messages %>
+    <table>
+      <tr>
+        <td><strong>Sent To</strong></td>
+        <td><strong>Subject</strong></td>
+      </tr>
+    <% @sent_messages.each do |message| %>
+    <% message.recipients.each do |recipient| %>
+    <tr>
+      <td><%= recipient.username %></td>
+      <td><%= message.subject %></td>
+    </tr>
+      <% end %>
+    <% end %>
+  </table>
+  <% end %>
+</div>
+

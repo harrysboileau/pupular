@@ -2,7 +2,7 @@
   %ul
     %li=link_to image_tag("house_icon.gif"), doghouse_path, id: "btm_br_home"
     %li=link_to image_tag("message_icon.gif"), dog_messages_path(current_dog), id: "btm_br_msg"
-    %li=link_to "event", new_dog_event_path(current_dog), id: "btm_br_evt"
+    %li=link_to image_tag("event_icon.gif"), new_dog_event_path(current_dog), id: "btm_br_evt"
     %li=link_to image_tag("profile_icon.gif"), dog_path(current_dog), id: "btm_br_prf"
     %li=link_to image_tag("logout_icon.gif"), signout_path, id: "btm_br_lgt"
 

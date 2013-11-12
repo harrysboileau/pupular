@@ -16,6 +16,8 @@ Pupular::Application.routes.draw do
   get '/search' => 'dogs#search'
   post '/search' => 'dogs#filter_search'
 
+  get '/get_id' => 'messages#get_id'
+
   post '/add_friend/:pending_pal_id' => 'dogs#add_friend', as: :add_friend
   post '/reject_friend/:pending_pal_id' => 'dogs#reject_friend', as: :reject_friend
   resources :sessions, only: [:new, :create, :destroy]

@@ -37,7 +37,6 @@
 
 .bottom_nav_bar ul li img {
   margin-top:15%;
-  opacity:.4;
 }
 
 .top_nav_bar{
@@ -49,6 +48,11 @@
   color:white;
   line-height:100px;
 }
+
+.fixfixed .top_nav_bar, 
+.fixfixed .bottom_nav_bar { 
+    position: absolute; 
+} 
 
 #top_br_sch{
   clear:none;
