@@ -1,48 +1,34 @@
 .users_event
-  = render 'add_friend_table'
-  .event_details
-    = button_to "edit", {}, {class: "edit_all_events", id: "#{current_dog.id}", name: "#{params[:id]}" }
-
-    = button_to "edit", {}, {class: "title", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
-    #event_title
-      %strong
-        Title:
-      %p
-        .field
-          .value= @event.title
-          = button_to "edit", {}, {class: "title", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
-    #event_type
-      %strong
-        type:
-      %p
-        .field
-          .value= @event.type
-          = button_to "edit", {}, {class: "type", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
-    #event_place
-      %strong
-        Place:
-      %p
-        .field
-          .value= @event.location
-          = button_to "edit", {}, {class: "location", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
-    #event_description
-      %strong
-        Description:
-      %p
-        .field
-          .value= @event.description
-          = button_to "edit", {}, {class: "description", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
-    #event_date
-      %strong
-        Date:
-      %p
-        .field
-          .value= @event.date
-          = button_to "edit", {}, {class: "date", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
-    #event_start_time
-      %strong
-        Start Time:
-      %p
-        .field
-          .value= @event.time
-          = button_to "edit", {}, {class: "start_time", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
+  %table.event_details
+    %tr#event_title
+      %td
+        %strong Title:
+      %td.value= @event.title
+      %td= button_to "edit", {}, {class: "title", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
+    %tr#event_type
+      %td
+        %strong Type:
+      %td.value= @event.type
+      %td= button_to "edit", {}, {class: "type", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
+    %tr#event_place
+      %td
+        %strong Place:
+      %td.value= @event.location
+      %td= button_to "edit", {}, {class: "location", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
+    %tr#event_description
+      %td
+        %strong Description:
+      %td.value= @event.description
+      %td= button_to "edit", {}, {class: "description", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
+    %tr#event_date
+      %td
+        %strong Date:
+      %td.value= @event.date
+      %td= button_to "edit", {}, {class: "date", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
+    %tr#event_start_time
+      %td
+        %strong Start Time:
+      %td.value= @event.time
+      %td= button_to "edit", {}, {class: "start_time", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
+= button_to "edit", {}, {class: "edit_all_events", id: "#{current_dog.id}", name: "#{params[:id]}" }
+= render 'add_friend_table'

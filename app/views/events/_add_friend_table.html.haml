@@ -1,9 +1,9 @@
 .add_friends
   %h4
     Add Friends to Event
-  = form_tag "/error", id: "event_friends_search" do
+  = form_tag "/error", id: "vbs_search" do
     = text_field_tag(:event_friends_search_input)
-    = submit_tag :event_friends_search_button, { value: "+", id: "event_friends_search_button" }
+    = submit_tag :event_friends_search_button, { value: "+", id: "event_friends_search_button", class:"add_friend_to_event" }
   %br
   #adding_friends_error
   %ul#friends_list

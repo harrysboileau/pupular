@@ -26,13 +26,12 @@ class EventsController < ApplicationController
   end
 
   def update
-    params[:event].parse_time_select! :start_time
-    params[:event][:date] = format_date(params[:event][:date])
     @event = Event.find(params[:id])
     params["value"].each do |key, value|
       @event.send((key+"=").to_sym, value)
       @event.save
     end
+    params["value"]["start_time"] = @event.time
     if request.xhr?
       render :json => params["value"].to_json
     else
