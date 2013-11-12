@@ -5,7 +5,6 @@ class ProfilesController < ApplicationController
   end
 
   def create
-
     @profile = Profile.new(params[:profile])
     if @profile.not_empty?
       if current_dog.profile = @profile

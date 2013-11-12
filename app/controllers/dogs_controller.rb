@@ -123,4 +123,22 @@ class DogsController < ApplicationController
     redirect_to doghouse_path
   end
 
+  def camera
+    @qr = Qr.new
+  end
+
+  def qr
+  end
+
+  def decode
+
+    @qr = Qr.create(params[:qr])
+
+    path = 'public/uploads/qr/image/profile_something.jpg'
+
+    decoded_image = ZBar::Image.from_jpeg(File.read(path)).process
+
+    redirect_to decoded_image[0].data
+  end
+
 end
