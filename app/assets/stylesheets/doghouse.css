@@ -8,7 +8,7 @@
   text-align:left;
   border:1px dotted #474747;
   font-size:30px;
-
+  display:none;
 
 }
 
@@ -46,4 +46,15 @@
 #create_event_instructions a{
   bottom:2px;
   left:1px;
+}
+
+
+
+#current_events {
+  margin:auto;
+  width:80%;
+  overflow:scroll;
+  text-align:center;
+  height:500px;
+  background-color:#e8e8e8;
 }

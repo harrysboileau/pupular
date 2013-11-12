@@ -18,9 +18,9 @@
 
 
 
-
 <div id="current_events">
-  Upcoming Events:<br>
+ <h1>Upcoming Events</h1>
+
   <% if @events != [] %>
   <% @events.each do |x| %>
   <%= link_to x.title, dog_event_path(current_dog,x.id) %><br>
