@@ -123,4 +123,24 @@ class DogsController < ApplicationController
     redirect_to doghouse_path
   end
 
+  def camera
+
+  end
+
+  def qr
+  end
+
+  def decode
+
+    name = "qr_pic.jpeg"
+    directory = "public/uploads"
+    path = File.join(directory, name)
+    url = ""
+    File.open(path, "wb") do |f|
+      f.write(params[:qr_pic].read)
+    end
+    url = ZXing.decode path
+    redirect_to url
+  end
+
 end

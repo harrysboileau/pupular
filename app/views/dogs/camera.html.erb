@@ -1,0 +1,4 @@
+<%= form_tag '/decode', multipart: true do %>
+<%= file_field_tag "qr_pic", {accept: "image/*"} %>
+<%=submit_tag%>
+<% end %>

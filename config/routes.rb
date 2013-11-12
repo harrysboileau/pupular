@@ -3,6 +3,7 @@ Pupular::Application.routes.draw do
   resources :dogs do
     resources :events
     resources :messages
+    get '/qr' => 'dogs#qr'
   end
 
   resources :profiles, :only => [:new, :create, :edit, :update]
@@ -29,6 +30,8 @@ Pupular::Application.routes.draw do
   post '/add_friends_to_event' => 'dogs#add_friends_to_event'
   post '/accept_invitation' => 'dogs#accept_invitation'
   post '/decline_invitation' => 'dogs#decline_invitation'
+  get '/camera' => 'dogs#camera'
+  post '/decode' => 'dogs#decode'
   root :to => 'welcome#index'
 
 end
