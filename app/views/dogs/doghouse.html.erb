@@ -8,7 +8,7 @@
   <% if current_dog.pals.empty? && current_dog.outstanding_requests.empty? %>
   <div id="search_and_add_instructions">
     <div class="first_time_instructions">
-      To Search & Add Friends -->
+      To find friends, click the magnifying glass above.
       <%= link_to "OK", {}, { class: "proceed_search_and_add" } %>
     </div>
   </div>
@@ -46,7 +46,7 @@
   <% if current_dog.attended_events.empty? %>
   <div id="create_event_instructions">
     <div class="first_time_instructions" >
-                 To Create Walks & Hangouts --v
+                 To create walks & hangouts, click the paw below.
 
       <%= link_to "OK", {}, { class: "proceed_create_event" }%>
     </div>

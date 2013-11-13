@@ -1,6 +1,9 @@
 class ProfilesController < ApplicationController
 
   def new
+    if params[:format]
+      @is_new = true
+    end
     @profile = Profile.new
   end
 
@@ -13,7 +16,11 @@ class ProfilesController < ApplicationController
       end
     end
 
-    redirect_to doghouse_path
+    if params[:is_new]
+      redirect_to doghouse_path
+    else
+      redirect_to dog_path(current_dog)
+    end
   end
 
   def update
