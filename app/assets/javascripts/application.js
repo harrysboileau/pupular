@@ -212,7 +212,7 @@ $(document).ready(function() {
     console.log(id);
     var data = { pending_pal_id: id};
     $.post('/friend_request/' + id, data, function(response) {
-      $('#' + id).replaceWith("~/");
+      $('#' + id).replaceWith("SENT");
     });
   })
 
