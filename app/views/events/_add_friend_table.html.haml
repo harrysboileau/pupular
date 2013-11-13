@@ -1,5 +1,5 @@
 .add_friends
-  %h4
+  %h2
     Add Friends to Event
   = form_tag "/error", id: "vbs_search" do
     = text_field_tag(:event_friends_search_input)
@@ -8,4 +8,4 @@
   #adding_friends_error
   %ul#friends_list
 
-  %button.invite_friends{id: @event.id} Invite Pals
+  %button.invite_friends{id: @event.id, class: "call_to_action"} Invite Pals

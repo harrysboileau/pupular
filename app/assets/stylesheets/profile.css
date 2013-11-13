@@ -1,6 +1,8 @@
 .users_profile, .friends_profile {
   background-color:#e8e8e8;
   padding-bottom:200px;
+  text-align: center;
+  font-size: 70px;
 }
 
 .friends_profile {
@@ -19,14 +21,16 @@
   text-align:center;
   margin:auto;
   position:absolute;
-  bottom:10%;
+  bottom:5%;
   left:10%;
   width:80%;
+  height:6%;
 }
 
 
 .label {
   color:#360066;
+  padding-bottom: 30px;
 }
 
 h3{
@@ -70,4 +74,5 @@ h3{
 }
 
 .add_friend_button {
+  height: 300px;
 }
