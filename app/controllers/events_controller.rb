@@ -16,12 +16,14 @@ class EventsController < ApplicationController
     params[:event][:date] = format_date(params[:event][:date])
     @event = @dog.events.new(params[:event])
     begin
-      @event.save!
+      @event.transaction do
+        @event.save!
+        @dog.attended_events << @event
+      end
     rescue
       render json: {error: "Could not create event."}
     else
-      @dog.attended_events << @event
-      render "_add_friend_table"
+      render :partial => "add_friend_table"
     end
   end
 

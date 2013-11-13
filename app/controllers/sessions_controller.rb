@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+
+  skip_before_filter :require_login
+
   def new
     @dog_session = DogSession.new
   end
@@ -10,9 +13,9 @@ class SessionsController < ApplicationController
 
     if @dog_session.save
       if current_dog.is_registered?
-        redirect_to "/doghouse"
+        redirect_to doghouse_path
       else
-        redirect_to '/name'
+        redirect_to name_path
       end
     else
       render "new"

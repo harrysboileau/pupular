@@ -1,5 +1,7 @@
 class DogsController < ApplicationController
 
+  skip_before_filter :require_login, only: [:new, :savehuman, :name, :create]
+
   def new
     @dog = Dog.new
   end
@@ -17,7 +19,7 @@ class DogsController < ApplicationController
     if current_dog
       @dog = current_dog
     else
-      @dog = Dog.new(email: "Something went wrong")
+      redirect_to new_dog_path
     end
   end
 
@@ -25,7 +27,7 @@ class DogsController < ApplicationController
     @dog = current_dog
 
     if @dog.update_attributes(params[:dog])
-      redirect_to new_profile_path
+      redirect_to new_profile_path("new")
     else
       render "name"
     end
@@ -34,8 +36,7 @@ class DogsController < ApplicationController
   def doghouse
     @dog = current_dog
     @events = @dog.attended_events #.where("start_time > ? and date > ?", DateTime.now.utc.strftime("%T"), DateTime.now.utc.strftime("%F"))
-    @invitations = @dog.received_invitations.where(declined: false).all
-    @invited_to_events = @invitations.map { |invitation| Event.find(invitation.event_id) }
+    @invited_to_events = @dog.invited_to_events
   end
 
   def show
@@ -53,10 +54,10 @@ class DogsController < ApplicationController
   end
 
   def filter_search
-    @sent_requests = current_dog.outstanding_requests.map{ |req| Dog.find(req.dog_id).username }
-    @friends = current_dog.pals.map{ |pal| pal.username }
+    @sent_requests = current_dog.sent_requests
+    @friends = current_dog_pals_usernames
     @search_term = params[:search_term]
-    @dogs = Dog.where('name ILIKE ? or email ILIKE ? or username ILIKE ?', "%#{@search_term}%", "%#{@search_term}%", "%#{@search_term}%").all
+    @dogs = Dog.search(@search_term)
     render layout: false
   end
 
@@ -71,10 +72,7 @@ class DogsController < ApplicationController
   end
 
   def friend_request
-    begin
-      Dog.find(params[:pending_pal_id]).pending_pals << current_dog
-    rescue
-    end
+    Dog.find(params[:pending_pal_id]).pending_pals << current_dog
     redirect_to search_path
   end
 
@@ -97,7 +95,7 @@ class DogsController < ApplicationController
   end
 
   def add_friends_to_event
-    # event = Event.find(params[:event_id])
+    # add error handling and also get yelled at by abi for having comments in master branch code
     params[:friends_to_add].each do |pal_name|
       invitation = Invitation.new
       invitation.dog_id = current_dog.id
@@ -109,36 +107,38 @@ class DogsController < ApplicationController
   end
 
   def accept_invitation
-    @event = Event.find(params[:event_id])
-    @event.attendees << current_dog
-    @invitation = Invitation.find_by_event_id_and_invited_pal_id(params[:event_id], current_dog.id)
-    @invitation.destroy
+    event = Event.find(params[:event_id])
+    event.attendees << current_dog
+    invitation = Invitation.find_by_event_id_and_invited_pal_id(params[:event_id], current_dog.id)
+    invitation.destroy
     redirect_to doghouse_path
   end
 
   def decline_invitation
-    @invitation = Invitation.find_by_event_id_and_invited_pal_id(params[:event_id], current_dog.id)
-    @invitation.declined = true
-    @invitation.save
+    invitation = Invitation.find_by_event_id_and_invited_pal_id(params[:event_id], current_dog.id)
+    invitation.declined = true
+    invitation.save
     redirect_to doghouse_path
-  end
-
-  def camera
-    @qr = Qr.new
   end
 
   def qr
   end
 
-  def decode
+  # Below code preserved to detail in-app QR decoding process.
 
-    @qr = Qr.create(params[:qr])
+  # def camera
+  #   @qr = Qr.new
+  # end
 
-    path = 'public/uploads/qr/image/profile_something.jpg'
+  # def decode
 
-    decoded_image = ZBar::Image.from_jpeg(File.read(path)).process
+  #   @qr = Qr.create(params[:qr])
 
-    redirect_to decoded_image[0].data
-  end
+  #   path = 'public/uploads/qr/image/profile_something.jpg'
+
+  #   decoded_image = ZBar::Image.from_jpeg(File.read(path)).process
+
+  #   redirect_to decoded_image[0].data
+  # end
 
 end

@@ -9,15 +9,16 @@ class MessagesController < ApplicationController
 
   def new
     @dog = current_dog
-    
+
     @message_id = (params[:message_id]).to_i
     if @message_id > 0
       @message_to_reply = Message.find(@message_id)
+      @subject_reply = "re: " + @message_to_reply.subject
       @dog_to_reply = Dog.find(@message_to_reply.sender_id)
-      @dog_username_to_reply = @dog_to_reply.username
-      render '_reply'
-    else
-      render '_new'
+      @dog_username_to_reply = @dog_to_reply.name
+      # render partial: 'reply'
+    # else
+      # render partial: 'new'
     end
   end
 
@@ -31,12 +32,14 @@ class MessagesController < ApplicationController
   def create
     @receiver = Dog.find(params[:dog_id])
     @sender = current_dog
-    @receiver.received_messages << @sender.sent_messages.create(type:params[:type],subject:params[:subject],content:params[:content])
+    @receiver.received_messages << @sender.sent_messages.create(type:params[:type],
+                                                                subject:params[:subject],
+                                                                content:params[:content])
     if request.xhr?
       render :nothing => true
     else
       redirect_to dog_messages_path
-    end        
+    end
   end
 
   def destroy

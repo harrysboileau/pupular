@@ -1,13 +1,12 @@
 <div id="sign_in_form">
-<h1>Sign Up!<h1>
+<h1>Human Info<h1>
 
-<h4>Submit your human info</h4>
 <!-- , {url: "/name", method: "post"} -->
 <%= form_for @dog, { url: "/name" } do |f| %>
 
 <% if @dog.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@dog.errors.count, "error") %> prohibited this dog from being saved:</h2>
+      <h2><%= pluralize(@dog.errors.count, "error") %> prohibited this owner's information from being saved:</h2>
 
       <ul>
       <% @dog.errors.full_messages.each do |msg| %>
@@ -23,7 +22,7 @@
 <%= f.label :password_confirmation, "Password Confirmation" %><br/>
 
 <%= f.password_field :password_confirmation, {placeholder: "Re-type password"} %><br><br>
-<%= f.submit "Create Dog", class: "call_to_action"%>
+<%= f.submit "Next  ", class: "call_to_action"%>
 
 <% end %>
 </div>

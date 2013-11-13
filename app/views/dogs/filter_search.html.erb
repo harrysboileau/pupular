@@ -3,7 +3,7 @@
 <% @dogs.each do |dog| %>
 <tr>
 <% if dog.profile %>
-<td><%= image_tag dog.profile.image_url(:thumb) if dog.profile.image? %></td>
+<td><%= image_tag dog.profile.image_url(:search) if dog.profile.image? %></td>
 <% else %>
 <td></td>
 <% end %></%>
@@ -14,7 +14,9 @@
        <% elsif @friends.include?(dog.username) %>
        FRIEND
        <% else %>
-       <%= link_to "+", friend_request_path(dog.id), class: "add_friend_button", id: dog.id %>
+       <% if dog != current_dog %>
+        <%= link_to "+", friend_request_path(dog.id), class: "add_friend_button", id: dog.id %>
+       <% end %>
        <% end %>
 <td>
 </tr>

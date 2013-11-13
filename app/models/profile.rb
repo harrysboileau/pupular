@@ -20,6 +20,14 @@ class Profile < ActiveRecord::Base
   end
 
   def not_empty?
-    age != nil || (breed != nil && breed != "") || (location != nil && location != "") || spayed != nil || (size != nil && size != "") || (gender != nil && gender != "")
+    age || (breed && breed.present?) || (location.present?) || spayed || size.present? || gender.present?
+  end
+
+  def fixed
+    if spayed
+      "Yes"
+    else
+      "No"
+    end
   end
 end

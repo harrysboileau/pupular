@@ -21,7 +21,7 @@ massEditProfileSelect = (location, name, value) ->
 pickSelections = (name) ->
       return ["Toy", "Small", "Medium", "Large", "Extra-large"] if name == "size"
       return ["Male", "Female"] if name == "gender"
-      return [true, false] if name == "spayed"
+      return ["Yes", "No"] if name == "spayed"
 
 listenForProfileSubmit = (location, key, profile_id, button) ->
     $("#{location} form").on 'submit', (event) ->
@@ -30,7 +30,7 @@ listenForProfileSubmit = (location, key, profile_id, button) ->
         submitProfile(key, this.firstChild.value, profile_id, this)
 
 listenForMassSubmit = (profile_id) ->
-    $("form#mass_profile").on 'submit', (event) ->
+    $("form.mass_profile").on 'submit', (event) ->
         event.preventDefault()
         data = {}
         data["value"] = getData()
@@ -59,7 +59,7 @@ massRenderResponse = (object) ->
 
 getData = ->
     profileData =
-        image: $('input#image').val()
+        image: $('input#profile_image').val()
         breed: $('input#breed').val()
         location: $('input#location').val()
         age: $('input#age').val()
@@ -98,7 +98,8 @@ editProfileFileField  = (name) ->
     "<form>#{renderProfileFileField(name)}<input type='submit' value='update'></form>"
 
 renderProfileFileField = (name) ->
-    "<input type='file' id='#{name}' name='#{name}'>"
+    "<div id='filler'><div id='image_field'><input id='profile_image' name='profile[image]' type='file'></div><div id='upload_button'>
+  Upload Photo</div></div>"
 
 editProfileDropdownBox = (name, values, current_value) ->
     "<form>#{renderProfileDropdownBox(name, values, current_value)}<input type='submit' value='update'></form>"
@@ -128,7 +129,7 @@ addProfileForm = ->
     editifyAllProfileFields()
 
 wrapProfileInForm = ->
-    $('.users_profile').wrap("<form id='mass_profile'></form>")
+    $('.users_profile').wrap("<form class='mass_profile' id='sign_in_form'></form>")
     $('.users_profile').append("<input id='mass_profile_button' type='submit' value='update'>")
 
 $ ->

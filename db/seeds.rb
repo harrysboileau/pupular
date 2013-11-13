@@ -7,11 +7,16 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 require 'faker'
-100.times do 
+
+100.times do
 	username = Faker::Internet.user_name
 	password = "password"
 	name = Faker::Name.name
 	email = Faker::Internet.email
-
-	Dog.create(username: username, email: email, password: password, name: name ) 
+	dog = Dog.create(username: username, email: email, password: password, name: name )
+  profile = Profile.new(breed:"Mutt", location:"Chicago", age:8, size:"Medium", gender:"Male", spayed:true)
+  profile.image.store!(File.open(File.join(Rails.root.join('app', 'assets', 'images'), 'molar_bear.jpg')))
+  dog.profile = profile
+  profile.save
 end
+
