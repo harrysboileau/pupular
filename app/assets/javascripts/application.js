@@ -119,7 +119,7 @@ $(document).ready(function() {
     $.post("/add_friends_to_event", {"friends_to_add" : friends_to_add, "event_id" : this.id }, function(response){
       if(response.errorMessage)
       {
-
+         // are you just going to leave this blank... ? dont do that, please
       }
       else
       {

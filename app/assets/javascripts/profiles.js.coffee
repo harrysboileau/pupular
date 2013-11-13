@@ -1,3 +1,5 @@
+# please namespace these...
+
 editProfileField = (location, name, value) ->
     location.replaceWith(editProfileTextField(name, value))
 
