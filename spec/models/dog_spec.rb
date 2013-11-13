@@ -14,6 +14,10 @@ describe Dog do
     it { should have_many(:received_messages)}
     it { should have_many(:events)}
     it { should have_many(:attended_events)}
+    it { should have_many(:sent_invitations)}
+    it { should have_many(:received_invitations)}
+    it { should have_many(:invited_pals)}
+    it { should have_many(:pending_events)}
   end
 
   context "validations" do
@@ -53,18 +57,6 @@ describe Dog do
   end
 
   context "methods" do
-    describe "#is_registered?" do
-      before(:each) do
-        @dog = dog
-      end
-
-      it "will return appropriate values" do
-        dog1 = Dog.find(@dog.id)
-        expect(dog1.is_registered?).to eq(true)
-        dog2 = Dog.create(attributes_for(:dog, username: nil, name: nil))
-        expect(dog2.is_registered?).to eq(false)
-      end
-    end
 
     describe "#accept_pal" do
       before(:each) do
@@ -85,8 +77,6 @@ describe Dog do
       end
     end
     describe "#deny_pal" do
-      let(:dog) { Dog.create(attributes_for(:dog)) }
-      let(:pal) { Dog.create(attributes_for(:dog)) }
       before(:each) do
         @dog = dog
         @pal = pal
@@ -106,5 +96,42 @@ describe Dog do
       end
     end
 
+    describe "#is_registered?" do
+      before(:each) do
+        @dog = dog
+      end
+
+      it "will return true if username and name are valid" do
+        expect(@dog.is_registered?).to be_true
+      end
+
+      it "will return false if username is not valid" do
+        dog = Dog.create(attributes_for(:dog, username: nil))
+        expect(dog.is_registered?).to_not be_true
+      end
+
+      it "will return false if name is not valid" do
+        dog = Dog.create(attributes_for(:dog, name: nil))
+        expect(dog.is_registered?).to_not be_true
+      end
+    end
+
+    describe "#find_by_username_or_email(login)" do
+      before(:each) do
+        @dog = Dog.create(attributes_for(:dog, username: "username", email: "email@example.com"))
+      end
+
+      it "will return the correct user if passed the username" do
+        expect(Dog.find_by_username_or_email("username")).to eq(@dog)
+      end
+
+      it "will return the correct user if passed the username" do
+        expect(Dog.find_by_username_or_email("email@example.com")).to eq(@dog)
+      end
+
+      it "will return nil if username or email do not exist" do
+        expect(Dog.find_by_username_or_email("")).to be_nil
+      end
+    end
   end
 end
