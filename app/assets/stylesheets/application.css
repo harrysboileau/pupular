@@ -44,3 +44,23 @@ textarea {height:10%;}
 .not_active {
   display: none;
 }
+
+#qr_display {
+  background-color: black;
+  position:fixed;
+  width:65%;
+  left:12.5%;
+  top:10%;
+  border-radius:25px;
+  display:none;
+  color:white;
+  padding:5%;
+  text-align:center;
+}
+
+#qr_image {
+  display: hidden;
+  height: 500px;
+  width: 500px;
+  position: relative;
+}

@@ -165,6 +165,17 @@ $(document).ready(function() {
   //     });
   // });
 
+  // Reveals QR code when icon is clicked and fades out on second click
+  $("#top_br_qr").click(function(e){
+    e.preventDefault();
+    $.get('/qr', function(response){
+      $("#qr_display").html(response);
+      $("#qr_display").fadeIn(800);
+      $(document).on("click", function(){
+        $("#qr_display").fadeOut(800);
+      });
+    });
+  });
 
   $("#top_br_sch").click(function(e) {
     e.preventDefault();
