@@ -17,6 +17,23 @@
 var friends_loaded = false;
 var friends = [];
 var friends_to_add = [];
+var geo_lat;
+var geo_long;
+var lat;
+var lng;
+
+    if (navigator.geolocation) 
+    {
+
+      navigator.geolocation.getCurrentPosition(function (position){
+       geo_lat = position.coords.latitude;
+       geo_long = position.coords.longitude;
+      });
+    }
+    else 
+    {
+      document.write("no geo");
+    }
 
 function inviteFriendsToEventError(errorMessage) {
   $("#adding_friends_error").text(errorMessage);
@@ -157,9 +174,26 @@ $(document).ready(function() {
   // On submission of new event form, ask about inviting friends.
   $(document).on("submit", "#new_event", function(e){
     e.preventDefault();
-    var form = $(this).serialize();
-    var url = $(this).attr("action");
+
+    var bounds = (geo_lat) + "," + (geo_long) + "|" + (geo_lat) + "," + (geo_long);
+    var address = $("#event_location").val().split(' ').join('+');
+    var data_url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + address + "&bounds=" + bounds + "&sensor=true";
+    $.getJSON(data_url, function( data ) {
+          lat = data.results[0].geometry.location.lat;
+          lng = data.results[0].geometry.location.lng;
+          $("#event_long").val(lng);
+          $("#event_lat").val(lat);
+
+
+
+    var form = $("form#new_event").serialize();
+    console.log(form);
+    var url = $("#new_event").attr("action");
+    console.log(url);
+ 
+
     $.post(url, form, function(response){
+      console.log("WHAT");
       if(response.error)
       {
         $(".errorMessage").html("<h2>Please fill out all fields!</h2>");
@@ -169,17 +203,19 @@ $(document).ready(function() {
         $(".container").replaceWith(response);
       }
     });
+    });
+   });
+
+  $('#event_friends_search_input').on("keyup", function(e) {
+      e.preventDefault();
+      console.log("chill");
+      var data = { search_term: $('#event_friends_search_input').val()};
+
+      $.post('/search', data, function(response) {
+          $("#results").html(response);
+      });
   });
 
-  // $('#event_friends_search_input').on("keyup", function(e) {
-  //     e.preventDefault();
-  //     console.log("chill");
-  //     var data = { search_term: $('#event_friends_search_input').val()};
-
-  //     $.post('/search', data, function(response) {
-  //         $("#results").html(response);
-  //     });
-  // });
 
   // Reveals QR code when icon is clicked and fades out on second click
   $("#top_br_qr").click(function(e){

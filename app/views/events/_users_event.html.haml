@@ -1,4 +1,9 @@
 .users_event
+  %span#lat.loc= @event.lat
+  %span#long.loc= @event.long
+
+
+  = render 'show_map' 
   %table.event_details
     %tr#event_title
       %td
@@ -13,7 +18,7 @@
     %tr#event_place
       %td
         %strong Place:
-      %td.value= @event.location
+      %td#location.value= @event.location
       %td= button_to "edit", {}, {class: "location", id: "#{current_dog.id}", name: "#{params[:id]}", style: "display: none"}
     %tr#event_description
       %td
