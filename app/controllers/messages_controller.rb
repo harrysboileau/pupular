@@ -4,7 +4,7 @@ class MessagesController < ApplicationController
     @inbox = @dog.received_messages
 
     @sent_messages = @dog.sent_messages
-    p @sent_messages
+    p @sent_messages # remove this
   end
 
   def new

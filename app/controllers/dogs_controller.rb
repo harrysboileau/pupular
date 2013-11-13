@@ -36,17 +36,16 @@ class DogsController < ApplicationController
   def doghouse
     @dog = current_dog
     @events = @dog.attended_events #.where("start_time > ? and date > ?", DateTime.now.utc.strftime("%T"), DateTime.now.utc.strftime("%F"))
-    @invited_to_events = @dog.invited_to_events
+    @invited_to_events = @dog.invited_to_events # why is it even neecssary to reassign this? just use @dog.invited_to_guests in the view
   end
 
   def show
     @dog = Dog.find(params[:id])
-    if @dog.profile || @dog != current_dog
+    if @dog.profile || @dog != current_dog # should this be an AND or an OR ?
       @profile = @dog.profile
     else
       redirect_to new_profile_path
     end
-
   end
 
   def search
@@ -95,11 +94,11 @@ class DogsController < ApplicationController
   end
 
   def add_friends_to_event
-    # add error handling and also get yelled at by abi for having comments in master branch code
+    # add error handling and also get yelled at by abi for having comments in master branch code #+!
     params[:friends_to_add].each do |pal_name|
       invitation = Invitation.new
-      invitation.dog_id = current_dog.id
-      invitation.invited_pal_id = Dog.find_by_name(pal_name).id
+      invitation.dog = current_dog
+      invitation.invited_pal = Dog.find_by_name(pal_name)
       invitation.event_id = params[:event_id]
       invitation.save
     end

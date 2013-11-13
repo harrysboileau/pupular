@@ -15,6 +15,8 @@ class EventsController < ApplicationController
     params[:event].parse_time_select! :start_time
     params[:event][:date] = format_date(params[:event][:date])
     @event = @dog.events.new(params[:event])
+
+    # move this to the model:
     begin
       @event.transaction do
         @event.save!
@@ -29,6 +31,7 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
+    # move this to the model:
     params["value"].each do |key, value|
       @event.send((key+"=").to_sym, value)
       @event.save
