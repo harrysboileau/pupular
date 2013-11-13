@@ -1,9 +1,8 @@
 class ProfilesController < ApplicationController
 
   def new
-    if params[:format]
-      @is_new = true
-    end
+    @is_new = true if params[:format] # instead of this, in the view you could do @profile.new_record?
+
     @profile = Profile.new
   end
 
