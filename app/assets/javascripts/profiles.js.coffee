@@ -21,7 +21,7 @@ massEditProfileSelect = (location, name, value) ->
 pickSelections = (name) ->
       return ["Toy", "Small", "Medium", "Large", "Extra-large"] if name == "size"
       return ["Male", "Female"] if name == "gender"
-      return [true, false] if name == "spayed"
+      return ["Yes", "No"] if name == "spayed"
 
 listenForProfileSubmit = (location, key, profile_id, button) ->
     $("#{location} form").on 'submit', (event) ->

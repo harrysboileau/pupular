@@ -38,5 +38,5 @@
   #profile_spayed
     %p
       .label Fixed?:<Br/>
-      %span#value= "#{@profile.spayed}"
+      %span#value= "#{@profile.fixed}"
     = button_to "update spayed", {}, { class: "spayed", id: "#{current_dog.profile.id}", style: "display: none" }

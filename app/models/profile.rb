@@ -22,4 +22,12 @@ class Profile < ActiveRecord::Base
   def not_empty?
     age || (breed && breed.present?) || (location.present?) || spayed || size.present? || gender.present?
   end
+
+  def fixed
+    if spayed
+      "Yes"
+    else
+      "No"
+    end
+  end
 end
