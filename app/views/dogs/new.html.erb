@@ -1,7 +1,6 @@
 <div id="sign_in_form">
-<h1>Sign Up!<h1>
+<h1>Human Info<h1>
 
-<h4>Submit your human info</h4>
 <!-- , {url: "/name", method: "post"} -->
 <%= form_for @dog, { url: "/name" } do |f| %>
 
@@ -23,7 +22,7 @@
 <%= f.label :password_confirmation, "Password Confirmation" %><br/>
 
 <%= f.password_field :password_confirmation, {placeholder: "Re-type password"} %><br><br>
-<%= f.submit "Create Dog", class: "call_to_action"%>
+<%= f.submit "Next  ", class: "call_to_action"%>
 
 <% end %>
 </div>

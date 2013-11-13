@@ -48,7 +48,7 @@ editEventTextBox = (name, value) ->
     "<form>#{renderEventTextBox(name,value)}<input type='submit' value='update'></form>"
 
 renderEventTextBox = (name, value) ->
-    "<textarea id='#{name}' row='10' cols='30' name='#{name}'>#{value}</textarea>"
+    "<textarea id='#{name}' row='30' cols='50' name='#{name}'>#{value}</textarea>"
 
 editEventDropdownBox = (name, values, original_value) ->
     "<form>#{renderEventDropdownBox(name, values, original_value)}<input type='submit' value='update'></form>"

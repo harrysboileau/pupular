@@ -2,6 +2,7 @@
   text-align:left;
   width:100%;
   border-collapse:collapse;
+  font-size:60px;
 }
 
 #search_item a {
@@ -12,13 +13,17 @@
 #search_item td {
   border:none;
   border-bottom:2px dotted black;
-  height:50px;
+  height:200px;
+  width:33%;
+
 }
 
 #search_item tr:hover {
   background-color:#430094;
   border:none;
 }
+
+
 
 .search_item img {
   float:left;

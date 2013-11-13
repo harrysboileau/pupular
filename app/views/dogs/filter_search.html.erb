@@ -3,7 +3,7 @@
 <% @dogs.each do |dog| %>
 <tr>
 <% if dog.profile %>
-<td><%= image_tag dog.profile.image_url(:thumb) if dog.profile.image? %></td>
+<td><%= image_tag dog.profile.image_url(:search) if dog.profile.image? %></td>
 <% else %>
 <td></td>
 <% end %></%>

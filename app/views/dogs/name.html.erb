@@ -1,8 +1,5 @@
-<div id="sign_up_form">
-<h1>Sign Up!</h1>
-
-<h4>Submit your dog info</h4>
-
+<div id="sign_in_form">
+<h1>Pup Info</h1>
 <%= form_for @dog, {url: '/dogs', method: "post"} do |f| %>
 <% if @dog.errors.any? %>
     <div id="error_explanation">

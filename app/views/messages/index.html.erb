@@ -1,5 +1,5 @@
-<%= link_to 'write a message', new_dog_message_path(current_dog) %><br>
-<%= link_to "inbox", {}, id: "show_inbox"  %>
+<%= link_to 'write a message', new_dog_message_path(current_dog), class: 'call_to_action' %><br>
+<%= link_to "inbox", {}, id: "show_inbox" %>
 <%= link_to "sent messages", {}, id: "show_sent_messages" %><br>
 
 <div id="dog_inbox">
@@ -26,7 +26,7 @@
 <% end %>
 </div>
 
-<div id="dogs_sent_messages" class="not_active">  
+<div id="dogs_sent_messages" class="not_active">
   <% if @sent_messages %>
     <table>
       <tr>
