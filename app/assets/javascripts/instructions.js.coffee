@@ -1,5 +1,5 @@
 removeFromScreen = (button) ->
-  instruction = button.parentElement.parentElement.parentElement
+  instruction = button.parentElement.parentElement
   instruction.remove()
 
 $ ->

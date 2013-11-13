@@ -32,7 +32,8 @@ gem 'authlogic'
 # To select times for events
 gem "combined_time_select", "~> 1.0.1"
 
-gem 'zbar'
+# Uncomment in tandem with dogs controller code to enable in-app QR decoding
+# gem 'zbar'
 
 
 group :development do

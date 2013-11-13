@@ -25,7 +25,7 @@ class DogsController < ApplicationController
     @dog = current_dog
 
     if @dog.update_attributes(params[:dog])
-      redirect_to new_profile_path
+      redirect_to new_profile_path("new")
     else
       render "name"
     end
@@ -119,22 +119,24 @@ class DogsController < ApplicationController
     redirect_to doghouse_path
   end
 
-  def camera
-    @qr = Qr.new
-  end
-
   def qr
   end
 
-  def decode
+  # Below code preserved to detail in-app QR decoding process.
 
-    @qr = Qr.create(params[:qr])
+  # def camera
+  #   @qr = Qr.new
+  # end
 
-    path = 'public/uploads/qr/image/profile_something.jpg'
+  # def decode
 
-    decoded_image = ZBar::Image.from_jpeg(File.read(path)).process
+  #   @qr = Qr.create(params[:qr])
 
-    redirect_to decoded_image[0].data
-  end
+  #   path = 'public/uploads/qr/image/profile_something.jpg'
+
+  #   decoded_image = ZBar::Image.from_jpeg(File.read(path)).process
+
+  #   redirect_to decoded_image[0].data
+  # end
 
 end
