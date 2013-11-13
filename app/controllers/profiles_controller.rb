@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
 
   def new
-    @is_new = true if params[:format] # instead of this, in the view you could do @profile.new_record?
+    @is_new = true if params[:format] # instead of this unnecessary instance var, in the view you could do @profile.new_record?
 
     @profile = Profile.new
   end
@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
       end
     end
 
-    if params[:is_new]
+    if params[:is_new] # find a way to refactor this
       redirect_to doghouse_path
     else
       redirect_to dog_path(current_dog)

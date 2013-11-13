@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  # make your code style consistent, there are newlines below class delcarations in other files
   def index
     @dog = current_dog
     @inbox = @dog.received_messages

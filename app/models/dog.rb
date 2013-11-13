@@ -64,6 +64,7 @@ class Dog < ActiveRecord::Base
   end
 
   def invited_to_events
+    # can we do this using sql or AR associations instead of array filtering
     self.invitations.map { |invitation| Event.find(invitation.event_id) }
   end
 

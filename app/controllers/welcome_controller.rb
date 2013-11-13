@@ -3,8 +3,6 @@ class WelcomeController < ApplicationController
   skip_before_filter :require_login
 
   def index
-    if current_dog
-      redirect_to doghouse_path
-    end
+    redirect_to doghouse_path if current_dog
   end
 end

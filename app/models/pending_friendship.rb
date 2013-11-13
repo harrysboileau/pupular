@@ -8,13 +8,14 @@ class PendingFriendship < ActiveRecord::Base
 
   def approve!
     friendship = Friendship.new
-    friendship.dog_id = self.dog_id
-    friendship.friend_id = self.pending_friend_id
+    friendship.dog = dog
+    friendship.friend = pending_friend
     friendship.save!
     friendship = Friendship.new
-    friendship.dog_id = self.pending_friend_id
-    friendship.friend_id = self.dog_id
+    friendship.dog = pending_friend
+    friendship.friend = dog
     friendship.save!
-    self.destroy
+    self.destroy # I wouldnt recommend destroying. Instead have a boolean column
+                 # :processed or :completed that you toggle to deactivate pending friendships
   end
 end

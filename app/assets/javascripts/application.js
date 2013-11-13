@@ -14,6 +14,10 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require_tree .
+
+// move code out of this file and into its own file; its best to keep the manifest file empty of css
+
+// highly recommend namespaceing these.... eg var myGlobals = {friends_loaded: false, ...}
 var friends_loaded = false;
 var friends = [];
 var friends_to_add = [];
@@ -23,7 +27,7 @@ function inviteFriendsToEventError(errorMessage) {
 }
 
 $(document).ready(function() {
-  // Global search function (partial)
+  // Global search function (partial)    // ???????????
   $('#search_form').on("keyup", function(e) {
       e.preventDefault();
       var data = { search_term: $('#search_search_term').val()};
@@ -52,7 +56,7 @@ $(document).ready(function() {
   // Autocomplete search for adding friends to events
   $('#event_friends_search_input').on('focus', function(e) {
     if(friends_loaded)
-    {
+    { // why do you use new lines before open curly brackets in conditionals but not for functions, eg liune 57?
       return null;
     }
     else
@@ -69,12 +73,12 @@ $(document).ready(function() {
   });
 
   // Queueing friends to invite to events
-  $(document).on("click", "#event_friends_search_button", function(e){
+  $(document).on("click", "#event_friends_search_button", function(e){ // dont listen in on document, listen
     e.preventDefault();
     var form = this.parentNode;
     var friend_input = $(form).find("#event_friends_search_input").val();
     var event_id = $(".invite_friends").attr("id");
-    console.log(event_id);
+    console.log(event_id); // dont leave debugging code!
     if( $.inArray(friend_input, friends_to_add) == -1 )
     {
       $.post("/verify_friend", {"friend_name": friend_input, "event_id": event_id}, function(response){
