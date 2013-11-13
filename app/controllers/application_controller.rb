@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_dog
+  before_filter :require_login
 
   private
 
@@ -20,5 +21,11 @@ class ApplicationController < ActionController::Base
 
   def current_dog_pals_usernames
     current_dog.pals.map { |pal| pal.username }
+  end
+
+  def require_login
+    if !current_dog
+      redirect_to root_url
+    end
   end
 end
