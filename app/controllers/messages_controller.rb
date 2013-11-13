@@ -13,11 +13,12 @@ class MessagesController < ApplicationController
     @message_id = (params[:message_id]).to_i
     if @message_id > 0
       @message_to_reply = Message.find(@message_id)
+      @subject_reply = "re: " + @message_to_reply.subject
       @dog_to_reply = Dog.find(@message_to_reply.sender_id)
-      @dog_username_to_reply = @dog_to_reply.username
-      render partial: 'reply'
-    else
-      render partial: 'new'
+      @dog_username_to_reply = @dog_to_reply.name
+      # render partial: 'reply'
+    # else
+      # render partial: 'new'
     end
   end
 

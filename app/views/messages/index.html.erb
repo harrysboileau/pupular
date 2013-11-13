@@ -1,10 +1,10 @@
 <%= link_to 'write a message', new_dog_message_path(current_dog), class: 'call_to_action' %><br>
-<%= link_to "inbox", {}, id: "show_inbox" %>
-<%= link_to "sent messages", {}, id: "show_sent_messages" %><br>
-
+<div id="inboxes">
+<div id="show_inbox_div"><%= link_to "inbox", {}, id: "show_inbox" %></div>
+<div id="show_sent_div"><%= link_to "sent messages", {}, id: "show_sent_messages" %><br></div>
+</div>
 <div id="dog_inbox">
 <% if current_dog.received_messages != [] %>
-  Your received messages:
   <table>
     <tr>
       <td><strong>Sender</strong></td>
@@ -16,8 +16,8 @@
     <td><%= Dog.find(x.sender_id).name %></td>
     <td><%= x.subject %></td>
     <td><%= x.content %></td>
-    <td><%= link_to "Reply to Message", new_dog_message_path(message_id: x.id) %></td>
-    <td><%= link_to "Delete Message", dog_message_path(x.sender_id, x.id), { method: :delete } %></td>
+    <td id="reply"><%= link_to "Reply", new_dog_message_path(message_id: x.id) %></td>
+    <td id="delete"><%= link_to "Delete", dog_message_path(x.sender_id, x.id), { method: :delete } %></td>
   </tr>
 <% end %>
 </table>

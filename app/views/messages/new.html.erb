@@ -2,10 +2,12 @@
 <h1>Write a message:</h1>
 <%= form_for :message, url:dog_messages_path(current_dog) do |f| %>
 <%= f.label :subject, "Subject" %><br/>
-<%= f.text_field :subject, placeholder: "Message Subject" %><br>
+<% subject_reply = @subject_reply if @message_id > 0 %>
+<%= f.text_field :subject, {placeholder: "Message Subject", value: subject_reply } %><br>
   <%= form_tag do %>
     <%= label_tag :dog_id, "Recipient" %><br/>
-    <%= text_field_tag :dog_id, nil, {id:"message_friends_search_input", placeholder: "Who's the message to?"} %><br>
+    <% reply_name = @dog_username_to_reply if @dog_to_reply %>
+    <%= text_field_tag :dog_id, nil, {value: reply_name, id:"message_friends_search_input", placeholder: "Who's the message to?"} %><br>
     <%= submit_tag "+", id: "multi_friend_message_add" %>
   <% end %>
   <div id='friends_to_message'>
