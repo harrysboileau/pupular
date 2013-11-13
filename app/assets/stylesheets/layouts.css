@@ -49,10 +49,10 @@
   line-height:100px;
 }
 
-.fixfixed .top_nav_bar, 
-.fixfixed .bottom_nav_bar { 
-    position: absolute; 
-} 
+.fixfixed .top_nav_bar,
+.fixfixed .bottom_nav_bar {
+    position: absolute;
+}
 
 #top_br_sch{
   clear:none;
@@ -79,6 +79,15 @@ background-image: linear-gradient(to bottom, #4E0094 0%, #360066 100%);
   width:100px;
   top:0px;
   right:0px;
+}
+
+#top_br_qr {
+  clear: none;
+  position: absolute;
+  height:100px;
+  width:100px;
+  top:0px;
+  right:100px;
 }
 
 #top_br_logo{
