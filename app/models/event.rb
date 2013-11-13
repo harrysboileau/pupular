@@ -20,6 +20,7 @@ class Event < ActiveRecord::Base
     end
   end
 end
+
 class Hangout < Event
 end
 
