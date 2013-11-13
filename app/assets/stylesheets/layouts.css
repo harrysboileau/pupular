@@ -97,6 +97,11 @@ background-image: linear-gradient(to bottom, #4E0094 0%, #360066 100%);
   width:40%;
 }
 
+#top_br_logo a{
+  color:white;
+  text-decoration: none;
+}
+
 .top_nav_bar {
   background-color:#360066;
 }
