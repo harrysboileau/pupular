@@ -1,0 +1,60 @@
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDPeCrDEz2-QZS48er_gI_TPfE4odUpD8I&sensor=true	">
+</script>
+
+<script>
+function initialize()
+{
+var mapProp = {
+  center:new google.maps.LatLng(0,0),
+  zoom:14,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+var map=new google.maps.Map(document.getElementById("googleMap")
+  ,mapProp);
+
+  google.maps.event.addListener(map, 'click', function(event) {
+    placeMarker(event.latLng);
+    var lat =  event.latLng.ob
+    var long = event.latLng.pb
+    document.getElementById("event_location").value = ""+ lat +
+    "," + long + "";
+
+
+  });
+ 
+ if (navigator.geolocation) 
+ 	{
+
+     navigator.geolocation.getCurrentPosition(function (position) 
+     	{
+         initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+         map.setCenter(initialLocation);
+     	});
+ 	}
+
+  else 
+  {
+  	map.setCenter(new google.maps.LatLng(40,80));
+  	document.write("loser")
+  }
+
+
+
+
+function placeMarker(location) {
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map,
+  });
+  var infowindow = new google.maps.InfoWindow({
+    content: 'Latitude: ' + location.lat() + '<br>Longitude: ' + location.lng()
+  });
+  infowindow.open(map,marker);
+}
+}
+
+</script>
+
+<div id="googleMap" style="width:500px;height:500px"></div>
+<script>google.maps.event.addDomListener(window, 'load', initialize);</script>
+

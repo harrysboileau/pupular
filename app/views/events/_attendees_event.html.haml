@@ -1,4 +1,9 @@
 .attendees_event
+  %span#lat.loc= @event.lat
+  %span#long.loc= @event.long
+
+
+  = render 'show_map' 
   %strong
     Title:
   %p

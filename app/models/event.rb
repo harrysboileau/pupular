@@ -8,7 +8,7 @@ class Event < ActiveRecord::Base
   validates_presence_of :creator_id, :title, :description, :location, :type, :start_time, :date
   validates :type, inclusion: { in: ["Walk", "Hangout"], message:"%{value} is not a type" }
 
-  attr_accessible :description, :location, :title, :type, :start_time, :date
+  attr_accessible :description, :location, :title, :type, :start_time, :date, :lat, :long
 
   def time
     hour = self.start_time.strftime("%H").to_i

@@ -10,14 +10,18 @@
 </div>
 <div id="sign_in_form">
 <h1>Create Event</h1>
+
 <%= form_for [current_dog, @event] do |f| %>
 
 <%= f.hidden_field :type, value: nil %>
 <%= f.label :title, "Title"%><br/>
 <%= f.text_field :title, placeholder: "Event Title" %><br>
-<%= f.label :location, "Location"%><br/>
-<%= f.text_field :location, placeholder: "Event Location" %><br>
+<%= f.label :location, "Location" %><br>
+<%= f.text_field :location, placeholder: "Address" %><br>
 <%=f.label :date %><br>
+<%= f.hidden_field :lat  %><br>
+<%= f.hidden_field :long %><br>
+
 <%=f.text_field :date %><br>
 <%= f.label :start_time, "Start Time"%><br/>
 <%= f.time_select :start_time,
@@ -35,6 +39,6 @@
 
 <%= f.text_area :description, placeholder: "Event Description" %><br>
 <div class="errorMessage"></div>
-<%= f.submit 'bark with me', class: "call_to_action" %>
+<%= f.submit 'bark with me', {class: "call_to_action", id: "new_event_button"}  %>
 <% end %>
 </div>
