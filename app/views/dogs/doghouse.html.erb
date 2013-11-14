@@ -1,26 +1,14 @@
 
-<div id="current_events">
-
 <div id="friend_requests">
   <% if current_dog.pending_pals != [] %>
-  <table class="friends" style="overflow:hidden">
-  <% @request = current_dog.pending_pals.first %>
-  <tr>
-    <% if @request.profile  %>
-    <td><%= image_tag @request.profile.image_url(:thumb) %></td>
-    <% else %>
-    <td>*</td>
-    <% end %>
-    <td><%= @request.name %> </td>
-    <td><%= button_to "+", add_friend_path(@request.id), {id: "doghouse_actions"} %>
-  <%= button_to "-", reject_friend_path(@request.id), {id: "doghouse_actions"}  %></td>
-  </tr>
-  </table>
+  <% current_dog.pending_pals.each do |pal| %>
+  <%= pal.name %>  <%= button_to "+", add_friend_path(pal.id) %> <%= button_to "-", reject_friend_path(pal.id) %>
+  <% end %>
   <% else %>
   <% if current_dog.pals.empty? && current_dog.outstanding_requests.empty? %>
   <div id="search_and_add_instructions">
     <div class="first_time_instructions">
-      To find friends, click the magnifying glass above.
+      To Search & Add Friends -->
       <%= link_to "OK", {}, { class: "proceed_search_and_add" } %>
     </div>
   </div>
@@ -30,43 +18,35 @@
 
 
 
- <h1>Upcoming Events</h1>
+<div id="current_events">
+
+  <h1>Upcoming Play Dates:</h1>
   <% if @events != [] %>
-  <div class="events">
-  <table >
+  <div id="events">
   <% @events.each do |x| %>
   <% @creator = Dog.find(x.creator_id) %>
-  <tr>
-        <% if @creator.profile  %>
-
-    <td><%= image_tag @creator.profile.image_url(:thumb) %></td>
-    <% else %>
-    <td>
-      *
-    </td>
-    <% end %>
-    <td><%= link_to x.title, dog_event_path(current_dog,x.id) %></td>
-    <td><%= time_ago_in_words(x.date) %></td>
-  </tr>
+  <% if @creator.profile %>
+  <%= image_tag @creator.profile.image_url(:thumb) %>
   <% end %>
+  <%= link_to x.title, dog_event_path(current_dog,x.id) %><br/>
+  <% end %>
+  </div>
+
   <% else%>
   You have no upcoming events!
   <% end %>
-  </table>
 </div>
+
   <br>
   <% if @invited_to_events != [] %>
-  <h1>Invitations</h1>
-  <table class="invites">
+  <h1 class="header">You're Invited To:</h1>
   <% @invited_to_events.each do |invited_event| %>
-  <tr>
-  <td> <%= invited_event.creator.name %> </td>
-  <td> <%= link_to invited_event.title, dog_event_path(invited_event.creator_id, invited_event.id) %></td>
-  <td><%= button_to "+", accept_invitation_path(event_id: invited_event.id), {id: "doghouse_actions"} %>
-  <%= button_to "-", decline_invitation_path(event_id: invited_event.id), {id: "doghouse_actions"} %></td>
-  </tr>
+  <div id="invitations">
+    <%= link_to invited_event.title, dog_event_path(invited_event.creator_id, invited_event.id) %>
+    <%= button_to "+", accept_invitation_path(event_id: invited_event.id), {method: :post} %>
+    <%= button_to "-", decline_invitation_path(event_id: invited_event.id), {method: :post} %>
+  </div>
   <% end %>
-  </table>
   <% else %>
   You have no pending event invitations!
   <% end %>
@@ -75,7 +55,7 @@
   <% if current_dog.attended_events.empty? %>
   <div id="create_event_instructions">
     <div class="first_time_instructions" >
-                 To create walks & hangouts, click the paw below.
+                 To Create Walks & Hangouts --v
 
       <%= link_to "OK", {}, { class: "proceed_create_event" }%>
     </div>
@@ -85,5 +65,3 @@
   <!-- Instructions on creating events -->
   <!-- </div> -->
   <% end %>
-</div>
-</div>

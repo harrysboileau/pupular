@@ -8,7 +8,6 @@
   text-align:left;
   border:1px dotted #474747;
   font-size:30px;
-
 }
 
 .first_time_instructions a {
@@ -44,76 +43,53 @@
   left:1px;
 }
 
+#friend_requests {
+  background-color:#e8e8e8;
+  border-radius:20px;
+  padding:10px;
 
-#current_events {
-  margin:auto;
-  text-align:center;
+}
+#events {
+  height:350px;
+  overflow:scroll;
+}
 
-  width:100%;
-  top:10%;
+#invitations {
+  background-color:#e8e8e8;
+  display:block;
+  border-radius:20px;
 }
 
 
-#current_events a {
+#invitations input {
+  
+}
+#current_events {
+  margin-top:5%;
+}
+
+#current_events a, #invitations a {
   text-decoration:none;
 }
-
 
 #current_events h1 {
   color:#360066;
-  margin:30px;
-  display:block;
-}
-
-#current_events table {
-  text-decoration:none;
-  color:#360066;
-  background-color:#e8e8e8;
-  border:1px solid #360066;
-  margin:auto;
-  text-align:left;
-  overflow:scroll;
-  width:100%;
   font-size:50px;
-  border-radius:10px;
+  text-align:center;
 }
-
-#current_events td {
-  padding:20px;
-  border-bottom:1px dotted #360066;
-}
-
 
 #current_events img {
   border-radius:100%;
 }
 
-
-#friend_requests img {
-  border-radius:20%;
-}
-
-#doghouse_actions  {
-  border:none;
-  background-color:none;
-}
-
-
-.events td {
-  width:33%;
-  text-align:center;
-
-}
-
-.invites td {
-    width:33%;
+.header{
+  color:#360066;
+  font-size:50px;
+  margin-top:0px;
   text-align:center;
 }
 
-.friends  td{
-  width:33%;
-  text-align:center;q
-}
+
 
 
 
