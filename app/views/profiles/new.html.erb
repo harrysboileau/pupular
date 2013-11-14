@@ -1,8 +1,6 @@
 <div id="skip"><%= link_to "skip", doghouse_path %></div>
 
 <div id="sign_in_form">
-<h1>Make your profile <%= link_to "skip", doghouse_path %>
-</h1>
 
 <%= current_dog.profile %>
 <%= form_for @profile, :html => {:multipart => true} do |f| %>
