@@ -20,10 +20,10 @@
  body {
   padding:0px;
   margin:0px;
-  font-family:arial;
+  font-family:'American Typewriter', Courier, 'Courier New';
   text-align:center;
-    font-size:30px;
-    height:100%;
+  font-size:30px;
+  height:100%;
  }
 
  form {line-height:50px;}

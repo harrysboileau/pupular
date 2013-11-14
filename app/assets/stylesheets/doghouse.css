@@ -46,18 +46,20 @@
 #friend_requests {
   background-color:#e8e8e8;
   border-radius:20px;
-  padding:10px;
+  font-size:45px;
 
 }
 #events {
-  height:350px;
+  height:280px;
   overflow:scroll;
+  font-size:50px;
 }
 
 #invitations {
   background-color:#e8e8e8;
   display:block;
   border-radius:20px;
+  font-size:45px;
 }
 
 
@@ -76,6 +78,7 @@
   color:#360066;
   font-size:50px;
   text-align:center;
+  margin-top:50px;
 }
 
 #current_events img {
@@ -85,7 +88,7 @@
 .header{
   color:#360066;
   font-size:50px;
-  margin-top:0px;
+  margin-top:50px;
   text-align:center;
 }
 

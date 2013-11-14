@@ -1,9 +1,8 @@
 
 <div id="friend_requests">
   <% if current_dog.pending_pals != [] %>
-  <% current_dog.pending_pals.each do |pal| %>
-  <%= pal.name %>  <%= button_to "+", add_friend_path(pal.id) %> <%= button_to "-", reject_friend_path(pal.id) %>
-  <% end %>
+  <% @sender = current_dog.pending_pals.first %>
+  <%= @sender.name %>  <%= button_to "+", add_friend_path(@sender.id) %> <%= button_to "-", reject_friend_path(@sender.id) %>
   <% else %>
   <% if current_dog.pals.empty? && current_dog.outstanding_requests.empty? %>
   <div id="search_and_add_instructions">
@@ -40,13 +39,12 @@
   <br>
   <% if @invited_to_events != [] %>
   <h1 class="header">You're Invited To:</h1>
-  <% @invited_to_events.each do |invited_event| %>
+  <% @invite = @invited_to_events.first %>
   <div id="invitations">
-    <%= link_to invited_event.title, dog_event_path(invited_event.creator_id, invited_event.id) %>
-    <%= button_to "+", accept_invitation_path(event_id: invited_event.id), {method: :post} %>
-    <%= button_to "-", decline_invitation_path(event_id: invited_event.id), {method: :post} %>
+    <%= link_to @invite.title, dog_event_path(@invite.creator_id, @invite.id) %>
+    <%= button_to "+", accept_invitation_path(event_id: @invite.id), {method: :post} %>
+    <%= button_to "-", decline_invitation_path(event_id: @invite.id), {method: :post} %>
   </div>
-  <% end %>
   <% else %>
   You have no pending event invitations!
   <% end %>
