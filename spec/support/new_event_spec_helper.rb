@@ -8,7 +8,7 @@ module NewEventSpecHelper
     event = attributes_for(:event)
     fill_in "event_title", with: event[:title]
     fill_in "event_location", with: event[:location]
-    fill_in "event_date", with: "11/06/2013"
+    fill_in "event_date", with: "12/20/2013"
     fill_in "event_description", with: event[:description]
   end
 
@@ -19,13 +19,15 @@ module NewEventSpecHelper
   end
 
   def create_hangout_event
-    find('button.Hangout').click
+    click_button "Hangout"
+    click_button "Hangout"
     fill_out_event
     submit
   end
 
   def create_walk_event
-    find('button.Walk').click
+    click_button "Walk"
+    click_button "Walk"
     fill_out_event
     submit
   end

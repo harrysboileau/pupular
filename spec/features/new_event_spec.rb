@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "NewMessage" do
+feature "NewEvent" do
   scenario "New Message screen has an option for the type of walk" do
     go_to_new_event
     expect(page).to have_content("Are you making a:")

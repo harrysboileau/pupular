@@ -13,29 +13,30 @@ clearRecipientField = ->
 recipientsList = []
 
 postAllMessages = ->
+  message_details = getMessageDetails()
   count = recipientsList.length
-  sendMessageTo(dog,count) for dog in recipientsList
+  sendMessageTo(dog, count, message_details ) for dog in recipientsList
 
 
-sendMessageTo = (name, count) ->
-  getIdOf({ "data" : name }, count)
+sendMessageTo = (name, count, message_details) ->
+  getIdOf({ "data" : name }, count, message_details)
 
-getIdOf = (dog, count) ->
+getIdOf = (dog, count, message_details) ->
     $.ajax
         url: "/get_id"
         data: dog
         type: 'GET'
         dataType: "json"
         success: (response) ->
-            sendMessage(response, count)
+            sendMessage(response, count, message_details)
 
-sendMessage = (recipient, count) ->
-    data = getMessageDetails()
+sendMessage = (recipient, count, message_details) ->
     $.ajax
       url: "/dogs/#{recipient["dog_id"]}/messages"
-      data: data
+      data: message_details
       type: 'POST'
       dataType: "json"
+      success: (response) ->
     exports.tally++
     if exports.tally == count
       window.location = "/dogs/#{recipient["current_dog_id"]}/messages"
@@ -54,6 +55,6 @@ $ ->
     clearRecipientField()
     $('#friends_to_message').append(value + '<br>')
 
-  $('input#message_submit.call_to_action').on "click", (event) ->
+  $('#message_submit').on "click", (event) ->
     event.preventDefault()
     postAllMessages()

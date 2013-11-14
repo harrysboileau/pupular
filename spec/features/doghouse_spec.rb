@@ -4,8 +4,8 @@ feature 'Doghouse' do
 
   scenario "new dog will have instructions to find friends and create events" do
     sign_up
-    expect(page).to have_content("To Search & Add Friends")
-    expect(page).to have_content("To Create Walks & Hangouts")
+    expect(page.find('body')).to have_content("click the magnifying glass above")
+    expect(page.find('body')).to have_content("walks & hangouts, click the paw below.")
   end
 
   scenario "user can navigate to the messages page from the bottom navbar" do
@@ -35,13 +35,13 @@ feature 'Doghouse' do
   scenario "dog can click button to hide search instructions", js: true do
     sign_up
     page.find(".proceed_search_and_add").click
-    expect(page).to_not have_content("To Search & Add Friends")
+    expect(page).to_not have_content("To find friends")
   end
 
   scenario "dog can click button to hide event instructions", js: true do
     sign_up
     page.find(".proceed_create_event").click
-    expect(page).to_not have_content("To Create Walks & Hangouts")
+    expect(page).to_not have_content("To create walks & hangouts")
   end
 
   scenario "dog can not see itself in the friend's list", js: true do
@@ -75,7 +75,7 @@ scenario "dog can see a friend from the search bar via username", js: true do
     pal = create(:dog, name: "pal_tester")
     open_search_bar
     fill_in "search_search_term", with: pal.name
-    page.find(".add_friend_button").click
-    expect(pal.pending_pals).to have(1).outstanding_requests
+    click_link "+"
+    expect(pal.pending_pals).to include(Dog.find_by_name("tester"))
   end
 end

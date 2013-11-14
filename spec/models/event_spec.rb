@@ -33,5 +33,15 @@ describe Event do
       walk.save
       expect(Event.find(walk.id)).to be_a(Walk)
     end
+
+    it "will display AM if time is before noon" do
+      event = Event.create(attributes_for(:event, start_time: "2013-11-14 09:00:00 -0600"))
+      expect(event.time).to match(/AM/)
+    end
+
+    it "will display PM if time is after noon" do
+      event = Event.create(attributes_for(:event, start_time: "2013-11-14 21:00:00 -0600"))
+      expect(event.time).to match(/PM/)
+    end
   end
 end

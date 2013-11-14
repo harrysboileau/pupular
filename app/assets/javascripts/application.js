@@ -91,7 +91,6 @@ $(document).ready(function() {
     var form = this.parentNode;
     var friend_input = $(form).find("#event_friends_search_input").val();
     var event_id = $(".invite_friends").attr("id");
-    console.log(event_id);
     if( $.inArray(friend_input, friends_to_add) == -1 )
     {
       $.post("/verify_friend", {"friend_name": friend_input, "event_id": event_id}, function(response){
@@ -187,13 +186,10 @@ $(document).ready(function() {
 
 
     var form = $("form#new_event").serialize();
-    console.log(form);
     var url = $("#new_event").attr("action");
-    console.log(url);
- 
+
 
     $.post(url, form, function(response){
-      console.log("WHAT");
       if(response.error)
       {
         $(".errorMessage").html("<h2>Please fill out all fields!</h2>");
@@ -208,7 +204,6 @@ $(document).ready(function() {
 
   $('#event_friends_search_input').on("keyup", function(e) {
       e.preventDefault();
-      console.log("chill");
       var data = { search_term: $('#event_friends_search_input').val()};
 
       $.post('/search', data, function(response) {
@@ -245,7 +240,6 @@ $(document).ready(function() {
   $(document).on("click", ".add_friend_button", function(e) {
     e.preventDefault();
     var id = $(this).attr('id');
-    console.log(id);
     var data = { pending_pal_id: id};
     $.post('/friend_request/' + id, data, function(response) {
       $('#' + id).replaceWith("SENT");

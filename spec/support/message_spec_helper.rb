@@ -20,7 +20,7 @@ module MessageSpecHelper
   end
 
   def sent_message
-    pal = create(:dog)
+    pal = create(:dog, name: "receiver")
     sign_up
     message = create_message
     deliver(message, pal.name)
@@ -36,10 +36,11 @@ module MessageSpecHelper
     Dog.find_by_name("tester").sent_messages.create(attributes_for(:message, type: "Personal"))
   end
 
-  def fill_in_message(message, pals=[create(:dog)])
+  def fill_in_message(message, pals=[create(:dog).name])
     fill_in "message_subject", with: message[:subject]
     pals.each do |pal|
-      fill_in "message_friends_search_input", with: pal[:name]
+      fill_in "message_friends_search_input", with: pal
+      page.find('#message_friends_search_input').native.send_keys(:return)
       find("input#multi_friend_message_add").click
     end
     fill_in "message_content", with: message[:content]
