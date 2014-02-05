@@ -1,3 +1,5 @@
+# itd be great if you could namespace all of these methods that currently pollute the global namespace...
+
 editEventField = (location, name, value) ->
     location.replaceWith(editEventTextField(name, value))
 

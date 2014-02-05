@@ -20,14 +20,11 @@ class Profile < ActiveRecord::Base
   end
 
   def not_empty?
+    # why do you need to do this? why cant you just use activerecord validations?
     age || (breed && breed.present?) || (location.present?) || spayed || size.present? || gender.present?
   end
 
   def fixed
-    if spayed
-      "Yes"
-    else
-      "No"
-    end
+    spayed? ? "Yes" : "No"
   end
 end

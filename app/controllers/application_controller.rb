@@ -16,16 +16,14 @@ class ApplicationController < ActionController::Base
   end
 
   def current_dog_pals_names
-    current_dog.pals.map { |pal| pal.name }
+    @current_dog_pals_names ||= current_dog.pals.map { |pal| pal.name }
   end
 
   def current_dog_pals_usernames
-    current_dog.pals.map { |pal| pal.username }
+    @current_dog_pals_usernames ||= current_dog.pals.map { |pal| pal.username }
   end
 
   def require_login
-    if !current_dog
-      redirect_to root_url
-    end
+    redirect_to root_url unless current_dog
   end
 end

@@ -10,6 +10,7 @@ class Event < ActiveRecord::Base
 
   attr_accessible :description, :location, :title, :type, :start_time, :date, :lat, :long
 
+  # this method scares me, can you refactor it for redability?
   def time
     hour = self.start_time.strftime("%H").to_i
     if hour < 12
@@ -21,6 +22,7 @@ class Event < ActiveRecord::Base
   end
 end
 
+# it'd be better to move these classes into their own files
 class Hangout < Event
 end
 
