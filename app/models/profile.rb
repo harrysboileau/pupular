@@ -11,6 +11,7 @@ class Profile < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  # These should probably be constants instead of methods.
   def self.size_options
     ["Toy", "Small", "Medium", "Large", "Extra-large"]
   end
@@ -19,10 +20,13 @@ class Profile < ActiveRecord::Base
     ["Male", "Female"]
   end
 
+  # o lawd
   def not_empty?
     age || (breed && breed.present?) || (location.present?) || spayed || size.present? || gender.present?
   end
 
+  # should probably use decorators and extract this logic to a profile decorator
+  # (and maybe above also)
   def fixed
     if spayed
       "Yes"

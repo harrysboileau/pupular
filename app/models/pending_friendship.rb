@@ -6,6 +6,8 @@ class PendingFriendship < ActiveRecord::Base
   validates_uniqueness_of :pending_friend_id, scope: :dog_id
 
 
+  # Way too long + nigh duplicated code. Extract to one method
+  # we can call twice. Can we use create! instead of new/save?
   def approve!
     friendship = Friendship.new
     friendship.dog_id = self.dog_id

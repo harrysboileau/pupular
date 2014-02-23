@@ -2,6 +2,7 @@
 
   -if @dog.profile
     = image_tag @dog.profile.image_url(:profile) if @dog.profile.image?
+    // move this to controller so we can use @profile in the image_tag line
     -@profile = @dog.profile
     %h3= @dog.name
     %p

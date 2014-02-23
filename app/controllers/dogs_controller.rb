@@ -17,6 +17,8 @@ class DogsController < ApplicationController
 
   def name
     if current_dog
+      # the below line is repeated 5 times in the code so far -- we should think
+      # about a way to extract or automate it (low priority)
       @dog = current_dog
     else
       redirect_to new_dog_path
@@ -35,6 +37,7 @@ class DogsController < ApplicationController
 
   def doghouse
     @dog = current_dog
+    # remove commented code
     @events = @dog.attended_events #.where("start_time > ? and date > ?", DateTime.now.utc.strftime("%T"), DateTime.now.utc.strftime("%F"))
     @invited_to_events = @dog.invited_to_events
   end
@@ -48,6 +51,10 @@ class DogsController < ApplicationController
     end
 
   end
+
+  # this controller has way too much responsibility
+  # need to put search, friend, and invitation logic into
+  # their own controllers
 
   def search
     @dogs = Dog.all
@@ -83,6 +90,8 @@ class DogsController < ApplicationController
   def verify_friend
     pal_to_check = Dog.find_by_name(params[:friend_name])
     event = Event.find(params[:event_id])
+
+    # extract to method for readability
     if event.invited_pals.include?(pal_to_check)
       render json: { verification: "already_invited"}
     elsif current_dog_pals_names.include?(params[:friend_name])
@@ -95,6 +104,11 @@ class DogsController < ApplicationController
   end
 
   def add_friends_to_event
+
+    # get yelled at by myself for having comments in master branch code and look
+    # into what error handling we need and extract the logic inside the block
+    # to its own method for readability
+
     # add error handling and also get yelled at by abi for having comments in master branch code
     params[:friends_to_add].each do |pal_name|
       invitation = Invitation.new
@@ -107,14 +121,19 @@ class DogsController < ApplicationController
   end
 
   def accept_invitation
+
+    #moar moar methods
     event = Event.find(params[:event_id])
+    # e.g. event.add_attendee(dag)
     event.attendees << current_dog
+    # e.g. invitation = found_invitation (and extract logic to private method)
     invitation = Invitation.find_by_event_id_and_invited_pal_id(params[:event_id], current_dog.id)
     invitation.destroy
     redirect_to doghouse_path
   end
 
   def decline_invitation
+    # extract first line (as requested above) and use update attributes to replace other two lines
     invitation = Invitation.find_by_event_id_and_invited_pal_id(params[:event_id], current_dog.id)
     invitation.declined = true
     invitation.save
@@ -123,6 +142,8 @@ class DogsController < ApplicationController
 
   def qr
   end
+
+  # we should delete this at some point
 
   # Below code preserved to detail in-app QR decoding process.
 

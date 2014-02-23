@@ -10,6 +10,8 @@ class Event < ActiveRecord::Base
 
   attr_accessible :description, :location, :title, :type, :start_time, :date, :lat, :long
 
+  # review for potential refactor -- this is to format time appropriately
+  # for 12 hour display when ruby uses a 24 hour system.
   def time
     hour = self.start_time.strftime("%H").to_i
     if hour < 12
@@ -21,6 +23,7 @@ class Event < ActiveRecord::Base
   end
 end
 
+# remove until necessary?
 class Hangout < Event
 end
 
