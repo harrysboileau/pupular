@@ -1,4 +1,5 @@
 class Dog < ActiveRecord::Base
+  # let's alphabetize and put has_one above many
   has_many :friendships, foreign_key: "dog_id", class_name: "Friendship", dependent: :destroy
   has_many :pals, through: :friendships
   has_many :pending_friendships, foreign_key: "dog_id", class_name: "PendingFriendship", dependent: :destroy
@@ -56,6 +57,7 @@ class Dog < ActiveRecord::Base
   end
 
   def validates_username?
+    # username.nil?
     return (self.crypted_password || self.email ) && username == nil
   end
 
@@ -64,10 +66,13 @@ class Dog < ActiveRecord::Base
   end
 
   def invited_to_events
+    # can't an invitation just hold the event it's for?
+    # so this can simplify to .map(&:event)
     self.invitations.map { |invitation| Event.find(invitation.event_id) }
   end
 
   def sent_requests
+    # see above -- a request should probably know the dog it's for
     self.outstanding_requests.map{ |req| Dog.find(req.dog_id).username }
   end
 

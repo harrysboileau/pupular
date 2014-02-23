@@ -9,6 +9,9 @@
 
   #profile_name
     %h3= @dog.name
+  // There's so much repetition below. How can we clean it up?
+  // Decorator that gives the haml for each attribute?
+  // Partial that changes label/class etc. to appropriate for the attribute we pass in?
   #profile_breed
     %p
       .label Breed:<br/>
