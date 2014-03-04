@@ -7,7 +7,6 @@ module Pupular
         attr_accessor(*attrs)
         @attributes = attrs
       end
-
     end
 
     def initialize(attrs={})
@@ -20,9 +19,8 @@ module Pupular
       end
     end
 
-    def assign(attr, value)
+    def assign(attr, value=nil)
       self.send("#{attr}=", value)
     end
-
   end
 end
