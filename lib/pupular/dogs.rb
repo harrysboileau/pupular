@@ -5,10 +5,10 @@ module Pupular
     end
 
     class DogService
-
       def initialize
         self.collection = Pupular::Collection::Dogs
       end
     end
+
   end
 end
